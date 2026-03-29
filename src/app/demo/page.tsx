@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function DemoPage() {
   const demoLinks = [
@@ -105,9 +106,7 @@ export default function DemoPage() {
 
         <div className="mt-12 text-center">
           <div className="inline-flex items-center gap-3 px-4 py-2 bg-white rounded-full border border-[#E2E8F0] text-sm text-[#64748B]">
-            <div className="w-6 h-6 rounded-md bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-              <span className="text-white text-[8px] font-bold">AR</span>
-            </div>
+            <Image src="/images/logo.png" alt="App Revista" width={24} height={24} className="rounded-md" />
             Condomínio Demo: Residencial Jardim das Flores
           </div>
         </div>

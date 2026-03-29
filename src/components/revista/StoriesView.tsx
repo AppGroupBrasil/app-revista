@@ -132,7 +132,7 @@ export default function StoriesView({ edition, condo, sections, getCategoryInfo 
                 }} />
                 <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }}
                   className="relative z-10">
-                  <div className="w-20 h-20 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center text-3xl font-bold mb-6 mx-auto border-2 border-white/20">AR</div>
+                  <Image src="/images/logo.png" alt="App Revista" width={80} height={80} className="rounded-2xl mb-6 mx-auto" />
                   <div className="inline-block px-3 py-1 rounded-full text-xs font-semibold mb-4 border border-white/30"
                     style={{ backgroundColor: `${condo.accentColor}44` }}>
                     Edição #{edition.editionNumber}
@@ -195,7 +195,7 @@ export default function StoriesView({ edition, condo, sections, getCategoryInfo 
                 style={{ background: `linear-gradient(180deg, ${condo.themeColor}, #000)` }}>
                 <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }}
                   className="relative z-10">
-                  <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center text-2xl font-bold mb-4 mx-auto border-2 border-white/20">AR</div>
+                  <Image src="/images/logo.png" alt="App Revista" width={64} height={64} className="rounded-xl mb-4 mx-auto" />
                   <h2 className="text-2xl font-bold mb-2">Obrigado! 🙌</h2>
                   <p className="text-white/60 text-sm max-w-xs mb-6">
                     Essa edição foi preparada com carinho pelo {condo.name}

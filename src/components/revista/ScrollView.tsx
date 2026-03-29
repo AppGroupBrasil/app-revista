@@ -121,7 +121,7 @@ export default function ScrollView({ edition, condo, sections, getCategoryInfo }
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
           className="rounded-2xl shadow-2xl overflow-hidden text-white text-center p-12 mb-8"
           style={{ background: `linear-gradient(135deg, ${condo.themeColor}, ${condo.themeColor}dd)` }}>
-          <div className="w-16 h-16 rounded-xl bg-white/10 flex items-center justify-center text-2xl font-bold mb-4 mx-auto border-2 border-white/20">AR</div>
+          <Image src="/images/logo.png" alt="App Revista" width={64} height={64} className="rounded-xl mb-4 mx-auto" />
           <h2 className="text-2xl font-bold mb-2">Obrigado pela leitura!</h2>
           <p className="text-white/70 max-w-sm mx-auto mb-6">Esta revista foi criada com carinho pela administração do {condo.name}</p>
           <div className="space-y-1 text-sm text-white/60">

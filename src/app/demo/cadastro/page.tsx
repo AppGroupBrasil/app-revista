@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 type Perfil = null | 'sindico' | 'administradora';
 
@@ -35,9 +36,7 @@ export default function CadastroPage() {
       <header className="bg-white/80 backdrop-blur border-b border-[#E2E8F0]">
         <div className="max-w-5xl mx-auto px-4 min-h-18 flex items-center justify-between">
           <Link href="/" className="flex items-start gap-2">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-              <span className="text-white font-bold text-xs">AR</span>
-            </div>
+            <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-lg" />
             <div className="flex flex-col">
               <span className="text-lg font-bold bg-gradient-to-r from-[#1E3A5F] to-[#D4AF37] bg-clip-text text-transparent leading-none">APP REVISTA</span>
               <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-[#1E3A5F] leading-none">Condominio</span>
@@ -131,9 +130,7 @@ export default function CadastroPage() {
                   onClick={() => setPerfil('administradora')}
                   className="relative bg-white rounded-2xl border-2 border-[#D4AF37] p-8 text-left hover:shadow-xl hover:shadow-[#D4AF37]/10 transition-all group shadow-lg shadow-[#D4AF37]/5"
                 >
-                  <div className="absolute top-0 right-0 bg-[#D4AF37] text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">
-                    POPULAR
-                  </div>
+
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1E3A5F] to-[#2A5A8F] flex items-center justify-center mb-5 shadow-lg shadow-[#1E3A5F]/20">
                     <span className="text-3xl">🏢</span>
                   </div>

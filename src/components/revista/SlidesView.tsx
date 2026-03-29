@@ -74,7 +74,7 @@ export default function SlidesView({ edition, condo, sections, getCategoryInfo }
                 <div className="w-full h-full flex flex-col items-center justify-center text-white text-center p-8 sm:p-14"
                   style={{ background: `linear-gradient(135deg, ${condo.themeColor}, ${condo.themeColor}aa, #0B0B1A)` }}>
                   <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2 }}>
-                    <div className="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center text-2xl font-bold mb-6 mx-auto border border-white/20">AR</div>
+                    <Image src="/images/logo.png" alt="App Revista" width={64} height={64} className="rounded-2xl mb-6 mx-auto" />
                     <div className="inline-block px-4 py-1 rounded-full text-xs font-semibold mb-4 border border-white/20 bg-white/5">
                       Edição #{edition.editionNumber} · {edition.month} {edition.year}
                     </div>

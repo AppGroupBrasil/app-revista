@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { demoRequests } from '@/data/demo';
 import InstallPrompt from '@/components/InstallPrompt';
 
@@ -59,7 +60,7 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
             <Link href="/demo/morador" className="text-white/70 hover:text-white transition-colors">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             </Link>
-            <div className="w-8 h-8 rounded-md bg-[#D4AF37] flex items-center justify-center text-xs font-bold">AR</div>
+            <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-md" />
           </div>
           <h1 className="text-lg font-bold">Acompanhar Solicitação</h1>
           <p className="text-xs text-white/60">Código: {request.trackingCode}</p>

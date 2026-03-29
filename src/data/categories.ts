@@ -297,7 +297,7 @@ export const plans = [
   {
     type: 'administradora' as const,
     name: 'Plano Administradora',
-    price: 199,
+    price: 299,
     features: [
       'Condomínios ilimitados',
       'Todas as 25+ categorias',

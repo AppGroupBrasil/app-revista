@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 
 interface InstallPromptProps {
   /** Trigger to show the prompt (e.g., after completing a task) */
@@ -112,9 +113,7 @@ export default function InstallPrompt({ show, onDismiss, context = 'geral' }: In
               <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] p-5 text-white">
                 <div className="flex items-center gap-3">
                   <div className="w-14 h-14 rounded-xl bg-white/10 backdrop-blur flex items-center justify-center border border-white/20">
-                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-                      <span className="text-white font-bold text-sm">AR</span>
-                    </div>
+                    <Image src="/images/logo.png" alt="App Revista" width={40} height={40} className="rounded-lg" />
                   </div>
                   <div>
                     <h3 className="font-bold text-lg leading-tight">{msg.title}</h3>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { categories } from '@/data/categories';
 import { demoCondominium, demoEdition, demoRequests } from '@/data/demo';
 import { MagazineSection } from '@/types';
@@ -117,9 +118,7 @@ export default function PainelSindicoPage() {
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center gap-3">
               <Link href="/demo" className="flex items-start gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-                  <span className="text-white font-bold text-xs">AR</span>
-                </div>
+                <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-lg" />
                 <div className="hidden sm:flex flex-col">
                   <span className="text-lg font-bold gradient-text leading-none">APP REVISTA</span>
                   <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-[#1E3A5F] leading-none">Condominio</span>

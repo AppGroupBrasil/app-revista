@@ -28,12 +28,6 @@ const ecosystemApps = [
   },
 ];
 
-const ecosystemBenefits = [
-  { icon: '🚀', text: '1 aplicativo novo lançado todo mês*' },
-  { icon: '🎨', text: '1 aplicativo 100% customizado ao seu gosto' },
-  { icon: '∞', text: 'Recorrência por toda vida' },
-];
-
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
   visible: (i: number) => ({
@@ -51,9 +45,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-start gap-2">
-              <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-                <span className="text-white font-bold text-sm">AR</span>
-              </div>
+              <Image src="/images/logo.png" alt="App Revista" width={36} height={36} className="rounded-lg" />
               <div className="flex flex-col">
                 <span className="text-xl font-bold gradient-text leading-none">APP REVISTA</span>
                 <span className="mt-1 block text-[14px] font-bold uppercase tracking-[0.3em] text-[#1E3A5F] leading-none">Condominio</span>
@@ -162,9 +154,7 @@ export default function HomePage() {
                           <div className="text-xs text-white/70">Edição #3 · Março 2026</div>
                         </div>
                       </div>
-                      <div className="w-10 h-10 rounded-lg bg-[#D4AF37] flex items-center justify-center">
-                        <span className="text-xs font-bold text-white">AR</span>
-                      </div>
+                      <Image src="/images/logo.png" alt="App Revista" width={40} height={40} className="rounded-lg" />
                     </div>
                     <div className="text-2xl font-bold mb-1">Condomínio em Destaque</div>
                     <div className="text-sm text-white/80">Confira as novidades e realizações deste mês</div>
@@ -363,11 +353,7 @@ export default function HomePage() {
                     : 'border-[#E2E8F0]'
                 }`}
               >
-                {plan.type === 'administradora' && (
-                  <div className="absolute top-0 right-0 bg-[#D4AF37] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                    POPULAR
-                  </div>
-                )}
+
                 <div className="p-8">
                   <h3 className="text-xl font-bold text-[#1E293B] mb-2">{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-6">
@@ -446,49 +432,94 @@ export default function HomePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
+      {/* Apresentação Comercial */}
+      <section className="py-20 bg-[#0F172A]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="relative overflow-hidden rounded-[32px] bg-[#123A7B] px-6 py-12 text-center shadow-[0_30px_80px_rgba(15,23,42,0.18)] sm:px-10 lg:px-16"
+            variants={fadeUp}
+            className="text-center max-w-3xl mx-auto"
           >
-            <div className="absolute -top-14 right-0 h-44 w-44 rounded-full bg-[#1F5AA9]/35 blur-3xl" />
-            <div className="absolute -bottom-10 left-8 h-36 w-36 rounded-full bg-[#34D96F]/15 blur-3xl" />
-            <div className="relative">
-              <h2 className="mx-auto max-w-4xl text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Gostou dos nossos sistemas?{' '}
-                <span className="text-[#31E26E]">Seja nosso sócio</span> e tenha ganhos de até <span className="text-[#31E26E]">50%</span> em recorrência.
-              </h2>
-
-              <div className="mx-auto mt-10 grid max-w-4xl gap-4 md:grid-cols-2">
-                {ecosystemBenefits.map((benefit, index) => (
-                  <div
-                    key={benefit.text}
-                    className={`rounded-[22px] border border-white/10 bg-white/10 px-6 py-6 text-left backdrop-blur-sm ${
-                      index === 0 ? 'md:col-span-2 md:mx-auto md:w-[62%]' : ''
-                    }`}
-                  >
-                    <div className="flex items-center justify-center gap-4 text-center md:justify-start md:text-left">
-                      <span className="text-3xl leading-none">{benefit.icon}</span>
-                      <p className="text-lg font-semibold text-white">{benefit.text}</p>
-                    </div>
-                  </div>
-                ))}
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#D4AF37]/10 text-[#D4AF37] text-xs font-semibold rounded-full mb-6">
+              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg>
+              Apresentação Comercial
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+              Conheça o sistema <span className="text-[#D4AF37]">completo</span>
+            </h2>
+            <p className="text-lg text-[#94A3B8] mb-8">
+              Veja nossa apresentação comercial com todas as funcionalidades, categorias, perfis de acesso e planos. Ideal para compartilhar com a diretoria ou gerar um PDF profissional.
+            </p>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4">
+              <Link
+                href="/apresentacao"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#D4AF37] to-[#CA8A04] text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-[#D4AF37]/30 transition-all"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg>
+                Ver Apresentação
+              </Link>
+              <div className="flex items-center gap-6 text-sm text-[#94A3B8]">
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  10 slides
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  Gera PDF
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  Compartilhável
+                </div>
               </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-              <div className="mt-10">
-                <a
-                  href="mailto:contato@apprevista.com.br?subject=Quero%20ser%20s%C3%B3cio%20APP%20REVISTA"
-                  className="inline-flex items-center justify-center rounded-[20px] bg-[#2FD567] px-8 py-4 text-lg font-bold text-white shadow-[0_20px_40px_rgba(47,213,103,0.35)] transition-all hover:scale-[1.02] hover:bg-[#22C55E]"
-                >
-                  <svg className="mr-3 h-6 w-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                    <path d="M4 5h16a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7a2 2 0 012-2z" stroke="currentColor" strokeWidth="2" />
-                    <path d="M3 7l9 6 9-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  Entre em contato e saiba mais
-                </a>
+      {/* Conheça Nosso Contrato */}
+      <section className="py-20 bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+              Conheça nosso <span className="gradient-text">contrato</span>
+            </h2>
+            <p className="text-lg text-[#64748B] mb-8">
+              Transparência total. Sem fidelidade, sem multa, sem letra miúda.
+              Leia nosso contrato completo antes de contratar.
+            </p>
+            <div className="inline-flex flex-col sm:flex-row items-center gap-4">
+              <Link
+                href="/contrato"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white rounded-xl font-semibold hover:shadow-lg hover:shadow-[#1E3A5F]/30 transition-all"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                Ler Contrato Completo
+              </Link>
+              <div className="flex items-center gap-6 text-sm text-[#64748B]">
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  Sem fidelidade
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  Sem multa
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                  7 dias grátis
+                </div>
               </div>
             </div>
           </motion.div>
@@ -501,10 +532,11 @@ export default function HomePage() {
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">AR</span>
+                <Image src="/images/logo.png" alt="App Revista" width={36} height={36} className="rounded-lg" />
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold">APP REVISTA</span>
+                  <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#94A3B8] leading-none">Condomínio</span>
                 </div>
-                <span className="text-xl font-bold">APP REVISTA</span>
               </div>
               <p className="text-sm text-[#94A3B8] max-w-sm">
                 Plataforma de revistas digitais para condomínios, escolas, hospitais e empresas.
@@ -518,6 +550,7 @@ export default function HomePage() {
                 <li><a href="#categorias" className="hover:text-white transition-colors">Categorias</a></li>
                 <li><a href="#planos" className="hover:text-white transition-colors">Planos</a></li>
                 <li><Link href="/demo" className="hover:text-white transition-colors">Demo</Link></li>
+                <li><Link href="/apresentacao" className="hover:text-white transition-colors">Apresentação</Link></li>
               </ul>
             </div>
             <div>

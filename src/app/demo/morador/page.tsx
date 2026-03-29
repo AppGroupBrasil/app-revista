@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import { demoCondominium } from '@/data/demo';
 import InstallPrompt from '@/components/InstallPrompt';
 import { saveDemoClassified } from '@/lib/demoClassifieds';
@@ -177,7 +178,7 @@ export default function MoradorPage() {
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             </Link>
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-md bg-[#D4AF37] flex items-center justify-center text-xs font-bold">AR</div>
+              <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-md" />
               <Link href="/" className="px-3 py-1 text-xs font-medium text-white/70 bg-white/10 rounded-lg hover:bg-white/20 hover:text-white transition-all">
                 Sair
               </Link>

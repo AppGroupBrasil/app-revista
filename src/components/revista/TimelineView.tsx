@@ -137,7 +137,7 @@ export default function TimelineView({ edition, condo, sections, getCategoryInfo
         {/* Footer */}
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
           className="mt-12 text-center">
-          <div className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-lg font-bold mx-auto mb-3 text-white/30 border border-white/10">AR</div>
+          <Image src="/images/logo.png" alt="App Revista" width={48} height={48} className="rounded-xl mx-auto mb-3" />
           <div className="text-xs text-white/20">Powered by APP REVISTA</div>
         </motion.div>
       </div>

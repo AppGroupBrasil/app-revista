@@ -106,8 +106,7 @@ export default function FlipView({ edition, condo, sections, getCategoryInfo }: 
                             <div className="font-bold text-lg">{condo.name}</div>
                           </div>
                         </div>
-                        <div className="w-12 h-12 rounded-xl flex items-center justify-center font-bold text-sm border-2 border-white/30"
-                          style={{ backgroundColor: condo.accentColor }}>AR</div>
+                        <Image src="/images/logo.png" alt="App Revista" width={48} height={48} className="rounded-xl" />
                       </div>
                     </div>
                     <div className="relative text-center flex-1 flex flex-col items-center justify-center">
@@ -214,7 +213,7 @@ export default function FlipView({ edition, condo, sections, getCategoryInfo }: 
               {page.type === 'back' && (
                 <div className="rounded-2xl shadow-2xl overflow-hidden text-white flex flex-col items-center justify-center text-center p-12"
                   style={{ minHeight: '70vh', background: `linear-gradient(135deg, ${condo.themeColor}, ${condo.themeColor}dd)` }}>
-                  <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-3xl font-bold mb-6 border-2 border-white/20">AR</div>
+                  <Image src="/images/logo.png" alt="App Revista" width={80} height={80} className="rounded-2xl mb-6" />
                   <h2 className="text-3xl font-bold mb-3">Obrigado pela leitura!</h2>
                   <p className="text-white/70 max-w-sm mb-8">Esta revista foi criada com carinho pela administração do {condo.name}</p>
                   <div className="space-y-2 text-sm text-white/60">
