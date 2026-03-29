@@ -1,0 +1,19 @@
+# Dependencies
+node_modules
+npm-debug.log*
+
+# Build output
+.next
+
+# Development
+.env*.local
+.vscode
+.git
+.gitignore
+
+# Scripts (build-time only)
+scripts/
+
+# Misc
+*.md
+LICENSE

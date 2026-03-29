@@ -1,0 +1,24 @@
+{
+  "name": "APP REVISTA - Condomínio",
+  "short_name": "App Revista",
+  "description": "Sua revista digital do condomínio. Chamados, classificados, caronas e muito mais.",
+  "start_url": "/demo/morador",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1E3A5F",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

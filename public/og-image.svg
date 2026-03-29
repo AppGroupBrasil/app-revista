@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1B2D"/>
+      <stop offset="100%" style="stop-color:#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#D4AF37"/>
+      <stop offset="100%" style="stop-color:#F0D060"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="0" y="580" width="1200" height="50" fill="url(#accent)" opacity="0.15"/>
+  <rect x="80" y="160" width="80" height="80" rx="16" fill="url(#accent)"/>
+  <text x="120" y="215" font-family="Arial, sans-serif" font-size="40" font-weight="bold" fill="#0F1B2D" text-anchor="middle">AR</text>
+  <text x="180" y="210" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" dx="10">APP REVISTA</text>
+  <text x="80" y="310" font-family="Arial, sans-serif" font-size="32" fill="#D4AF37">Revista Digital do Condomínio</text>
+  <text x="80" y="370" font-family="Arial, sans-serif" font-size="22" fill="#8899AA">Comunicação moderna para condomínios.</text>
+  <text x="80" y="405" font-family="Arial, sans-serif" font-size="22" fill="#8899AA">Informativos, chamados, classificados e muito mais.</text>
+  <rect x="80" y="460" width="260" height="50" rx="25" fill="url(#accent)"/>
+  <text x="210" y="492" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#0F1B2D" text-anchor="middle">Começar Agora</text>
+  <text x="80" y="600" font-family="Arial, sans-serif" font-size="16" fill="#556677">apprevista.com.br</text>
+  <line x1="80" y1="260" x2="600" y2="260" stroke="#D4AF37" stroke-width="2" opacity="0.4"/>
+</svg>

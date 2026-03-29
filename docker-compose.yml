@@ -1,0 +1,31 @@
+services:
+  apprevista-web:
+    build: .
+    image: apprevista-nextjs:latest
+    container_name: apprevista-web
+    restart: unless-stopped
+    networks:
+      - coolify
+    labels:
+      traefik.enable: "true"
+      traefik.docker.network: coolify
+      traefik.http.middlewares.apprevista-redirect-https.redirectscheme.scheme: https
+      traefik.http.middlewares.apprevista-redirect-www.redirectregex.permanent: "true"
+      traefik.http.middlewares.apprevista-redirect-www.redirectregex.regex: ^https://www\\.apprevista\\.com\\.br/(.*)
+      traefik.http.middlewares.apprevista-redirect-www.redirectregex.replacement: https://apprevista.com.br/$${1}
+      traefik.http.routers.apprevista-http.entrypoints: http
+      traefik.http.routers.apprevista-http.middlewares: apprevista-redirect-https
+      traefik.http.routers.apprevista-http.rule: Host(`apprevista.com.br`) || Host(`www.apprevista.com.br`)
+      traefik.http.routers.apprevista-https.entrypoints: https
+      traefik.http.routers.apprevista-https.priority: "1"
+      traefik.http.routers.apprevista-https.rule: Host(`apprevista.com.br`) || Host(`www.apprevista.com.br`)
+      traefik.http.routers.apprevista-https.tls.certresolver: letsencrypt
+      traefik.http.routers.apprevista-www.entrypoints: https
+      traefik.http.routers.apprevista-www.middlewares: apprevista-redirect-www
+      traefik.http.routers.apprevista-www.rule: Host(`www.apprevista.com.br`)
+      traefik.http.routers.apprevista-www.tls: "true"
+      traefik.http.services.apprevista.loadbalancer.server.port: "3000"
+
+networks:
+  coolify:
+    external: true

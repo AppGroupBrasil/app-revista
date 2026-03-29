@@ -1,0 +1,29 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="900" rx="48" fill="#F0FDF4"/>
+  <rect x="70" y="70" width="1060" height="760" rx="40" fill="#FFFFFF" stroke="#BBF7D0" stroke-width="8"/>
+  <text x="110" y="150" fill="#16A34A" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700">SUSTENTABILIDADE</text>
+  <text x="110" y="235" fill="#14532D" font-family="Arial, Helvetica, sans-serif" font-size="70" font-weight="700">Condomínio Verde</text>
+  <text x="110" y="292" fill="#4B5563" font-family="Arial, Helvetica, sans-serif" font-size="30">Energia limpa, água consciente e mais áreas verdes</text>
+  <rect x="110" y="360" width="300" height="320" rx="32" fill="#DCFCE7"/>
+  <rect x="445" y="360" width="300" height="320" rx="32" fill="#ECFCCB"/>
+  <rect x="780" y="360" width="240" height="320" rx="32" fill="#D1FAE5"/>
+  <circle cx="260" cy="470" r="74" fill="#22C55E"/>
+  <path d="M228 470C252 438 296 430 318 444C304 484 266 516 224 514C216 498 218 484 228 470Z" fill="#14532D"/>
+  <path d="M260 520V610" stroke="#166534" stroke-width="16" stroke-linecap="round"/>
+  <text x="160" y="640" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Jardins e compostagem</text>
+  <circle cx="595" cy="470" r="74" fill="#84CC16"/>
+  <g transform="translate(595 470)">
+    <circle r="26" fill="#FACC15"/>
+    <path d="M0 -54V-90M0 54V90M54 0H90M-54 0H-90M38 -38L64 -64M-38 38L-64 64M38 38L64 64M-38 -38L-64 -64" stroke="#EAB308" stroke-width="14" stroke-linecap="round"/>
+  </g>
+  <rect x="520" y="560" width="150" height="50" rx="14" fill="#166534"/>
+  <rect x="555" y="515" width="80" height="50" rx="10" fill="#22C55E"/>
+  <text x="505" y="640" fill="#3F6212" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Energia solar</text>
+  <path d="M825 600C825 535 878 482 943 482C1008 482 1061 535 1061 600V612H825V600Z" fill="#93C5FD"/>
+  <path d="M865 612H1021L985 675H901L865 612Z" fill="#60A5FA"/>
+  <path d="M930 482C930 430 962 390 1002 374C1014 396 1011 431 989 457C974 474 954 482 930 482Z" fill="#22C55E"/>
+  <text x="832" y="640" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">Reuso de água</text>
+  <text x="110" y="760" fill="#166534" font-family="Arial, Helvetica, sans-serif" font-size="28">18% menos consumo de água</text>
+  <text x="465" y="760" fill="#3F6212" font-family="Arial, Helvetica, sans-serif" font-size="28">30% da energia nas áreas comuns</text>
+  <text x="815" y="760" fill="#0F766E" font-family="Arial, Helvetica, sans-serif" font-size="28">82% de adesão à coleta seletiva</text>
+</svg>
