@@ -31,7 +31,7 @@ services:
     container_name: apprevista-api
     restart: unless-stopped
     env_file: ./api/.env
-    networks: [coolify, supabase_default]
+    networks: [coolify]
     labels:
       traefik.enable: 'true'
       traefik.docker.network: coolify
@@ -46,6 +46,4 @@ services:
 
 networks:
   coolify:
-    external: true
-  supabase_default:
     external: true
