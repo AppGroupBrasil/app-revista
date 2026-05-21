@@ -123,6 +123,10 @@ function Editor({ condoId, edicaoId }: { condoId: string; edicaoId: string }) {
                 </button>
               </header>
 
+              <div className="px-5 pt-4 pb-2 text-xs text-text-light bg-surface-alt/60 border-b border-border">
+                💡 {hintAdicionar(cat.id)}
+              </div>
+
               {secoes.length === 0 && (
                 <div className="p-5 text-sm text-text-muted text-center">Nenhuma seção desta categoria nesta edição.</div>
               )}
@@ -233,6 +237,21 @@ function SecaoModal({ condoId, edicaoId, categoria, secao, onClose, onSaved }: {
       </motion.form>
     </motion.div>
   );
+}
+
+function hintAdicionar(c: Categoria): string {
+  return ({
+    mensagem_sindico:        'Clique em "+ Adicionar" para incluir a mensagem do síndico desta edição.',
+    realizacoes:             'Clique em "+ Adicionar" para registrar cada realização (uma por seção).',
+    aquisicoes:              'Clique em "+ Adicionar" para cada nova aquisição (equipamento, mobiliário, etc.).',
+    ocorrencias_finalizadas: 'Clique em "+ Adicionar" para finalizar e publicar cada ocorrência resolvida.',
+    manutencoes_finalizadas: 'Clique em "+ Adicionar" para registrar cada manutenção concluída.',
+    comunicados:             'Clique em "+ Adicionar" para cada novo comunicado aos moradores.',
+    dicas:                   'Clique em "+ Adicionar" para incluir uma nova dica (uma por seção).',
+    telefones_uteis:         'Clique em "+ Adicionar" para cada contato útil (uma seção por categoria de contato).',
+    eventos:                 'Clique em "+ Adicionar" para cada evento (festa, assembleia, mutirão, etc.).',
+    galeria_imagens:         'Clique em "+ Adicionar" para criar galerias temáticas com várias fotos.',
+  } as const)[c];
 }
 
 function hintPorCategoria(c: Categoria): string {
