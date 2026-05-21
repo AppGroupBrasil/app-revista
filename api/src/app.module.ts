@@ -11,6 +11,7 @@ import { DiarioModule } from './diario/diario.module';
 import { KpisModule } from './kpis/kpis.module';
 import { AvaliacoesModule } from './avaliacoes/avaliacoes.module';
 import { UploadsModule } from './uploads/uploads.module';
+import { RevistaModule } from './revista/revista.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -26,6 +27,7 @@ import { HealthController } from './health.controller';
     KpisModule,
     AvaliacoesModule,
     UploadsModule,
+    RevistaModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
