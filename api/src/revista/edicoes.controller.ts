@@ -74,7 +74,8 @@ export class EdicoesController {
     @Body() dto: AtualizarEdicaoDto,
   ) {
     await assertCondoAccess(this.sql, req.user, condoId);
-    const updates: Record<string, unknown> = { ...dto };
+    const updates: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(dto)) if (v !== undefined) updates[k] = v;
     if (dto.publicada === true) updates.publicada_em = new Date();
     if (Object.keys(updates).length === 0) return { ok: true };
     const [e] = await this.sql`

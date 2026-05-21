@@ -94,7 +94,8 @@ export class AvaliacoesAdminController {
     @Body() dto: ModerarDto,
   ) {
     await assertCondoAccess(this.sql, req.user, condoId);
-    const updates: Record<string, unknown> = { ...dto, moderado_em: new Date(), moderado_por: req.user.sub };
+    const updates: Record<string, unknown> = { moderado_em: new Date(), moderado_por: req.user.sub };
+    for (const [k, v] of Object.entries(dto)) if (v !== undefined) updates[k] = v;
     const [a] = await this.sql`
       UPDATE avaliacoes SET ${this.sql(updates)}
       WHERE id = ${id} AND condominio_id = ${condoId}

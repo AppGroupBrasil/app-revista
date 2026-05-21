@@ -82,7 +82,8 @@ export class SecoesController {
   ) {
     await assertCondoAccess(this.sql, req.user, condoId);
     await this.assertEdicao(condoId, edicaoId);
-    const updates: Record<string, unknown> = { ...dto };
+    const updates: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(dto)) if (v !== undefined) updates[k] = v;
     if (dto.fotos !== undefined) updates.fotos = this.sql.json(dto.fotos as any);
     if (dto.dados !== undefined) updates.dados = this.sql.json(dto.dados as any);
     if (Object.keys(updates).length === 0) return { ok: true };

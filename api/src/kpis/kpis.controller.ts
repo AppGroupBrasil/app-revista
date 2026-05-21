@@ -60,7 +60,8 @@ export class KpisController {
     @Body() dto: AtualizarKpiDto,
   ) {
     await assertCondoAccess(this.sql, req.user, condoId);
-    const updates: Record<string, unknown> = { ...dto };
+    const updates: Record<string, unknown> = {};
+    for (const [k, v] of Object.entries(dto)) if (v !== undefined) updates[k] = v;
     if (Object.keys(updates).length === 0) return { ok: true };
     const [k] = await this.sql`
       UPDATE kpis SET ${this.sql(updates)}
