@@ -39,7 +39,7 @@ export class UploadsController {
         'Content-Type': file.mimetype,
         'Cache-Control': 'public, max-age=31536000',
       },
-      body: file.buffer,
+      body: new Uint8Array(file.buffer),
     });
     if (!r.ok) {
       const txt = await r.text();
