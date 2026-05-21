@@ -6,6 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { CondominiosModule } from './condominios/condominios.module';
 import { ProvisioningModule } from './provisioning/provisioning.module';
+import { MasterModule } from './master/master.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -16,6 +17,7 @@ import { HealthController } from './health.controller';
     AuthModule,
     CondominiosModule,
     ProvisioningModule,
+    MasterModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
