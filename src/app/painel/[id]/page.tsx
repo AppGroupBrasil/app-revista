@@ -21,7 +21,7 @@ interface Condominio {
 
 interface Modulo { titulo: string; desc: string; icon: string; cor: string; href: (id: string) => string | null }
 const modulos: Modulo[] = [
-  { titulo: 'Diário de Bordo',  desc: 'Obras, manutenções, eventos do dia-a-dia',  icon: '📔', cor: 'from-[#10B981] to-[#0D9488]', href: id => `/painel/${id}/diario` },
+  { titulo: 'Diário do Condomínio',  desc: 'Obras, manutenções, eventos do dia-a-dia',  icon: '📔', cor: 'from-[#10B981] to-[#0D9488]', href: id => `/painel/${id}/diario` },
   { titulo: 'KPIs em Destaque', desc: 'Indicadores que provam o valor entregue',   icon: '📊', cor: 'from-[#F59E0B] to-[#D97706]', href: id => `/painel/${id}/kpis` },
   { titulo: 'Avaliações & NPS', desc: 'Mural de agradecimentos e moderação',       icon: '⭐', cor: 'from-[#EC4899] to-[#DB2777]', href: id => `/painel/${id}/avaliacoes` },
   { titulo: 'Revista Digital',  desc: 'Edições, seções e conteúdo',                icon: '📖', cor: 'from-[#1E3A5F] to-[#2A5A8F]', href: () => null },

@@ -54,7 +54,7 @@ function Diario({ condoId }: { condoId: string }) {
 
   return (
     <div className="min-h-screen bg-surface-alt">
-      <AppHeader subtitle="Diário de Bordo" />
+      <AppHeader subtitle="Diário do Condomínio" />
 
       <div className="pt-20">
         <div className="bg-gradient-to-r from-[#10B981] to-[#0D9488] text-white">
@@ -65,7 +65,7 @@ function Diario({ condoId }: { condoId: string }) {
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
               <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm flex items-center justify-center text-2xl border border-white/20">📔</div>
               <div className="flex-1">
-                <h1 className="text-2xl font-bold">Diário de Bordo</h1>
+                <h1 className="text-2xl font-bold">Diário do Condomínio</h1>
                 <p className="text-white/80 text-sm">Documente obras, manutenções e eventos do condomínio.</p>
               </div>
               <button onClick={() => setShowForm(true)}
