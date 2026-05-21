@@ -7,6 +7,9 @@ import { AuthModule } from './auth/auth.module';
 import { CondominiosModule } from './condominios/condominios.module';
 import { ProvisioningModule } from './provisioning/provisioning.module';
 import { MasterModule } from './master/master.module';
+import { DiarioModule } from './diario/diario.module';
+import { KpisModule } from './kpis/kpis.module';
+import { AvaliacoesModule } from './avaliacoes/avaliacoes.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -18,6 +21,9 @@ import { HealthController } from './health.controller';
     CondominiosModule,
     ProvisioningModule,
     MasterModule,
+    DiarioModule,
+    KpisModule,
+    AvaliacoesModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

@@ -19,13 +19,16 @@ interface Condominio {
   criado_em: string;
 }
 
-const modulos = [
-  { titulo: 'Revista Digital', desc: 'Edições, seções e conteúdo',         icon: '📖', cor: 'from-[#1E3A5F] to-[#2A5A8F]' },
-  { titulo: 'Chamados',        desc: 'Solicitações dos moradores',         icon: '🔧', cor: 'from-[#0EA5E9] to-[#0284C7]' },
-  { titulo: 'Classificados',   desc: 'Anúncios dos moradores',             icon: '🏷️', cor: 'from-[#F59E0B] to-[#D97706]' },
-  { titulo: 'Caronas',         desc: 'Caronas compartilhadas',             icon: '🚗', cor: 'from-[#8B5CF6] to-[#7C3AED]' },
-  { titulo: 'Funcionários',    desc: 'Tarefas, checklists, vistorias',     icon: '👷', cor: 'from-[#10B981] to-[#0D9488]' },
-  { titulo: 'QR Codes',        desc: 'Pontos de acesso impressos',         icon: '📱', cor: 'from-[#EC4899] to-[#DB2777]' },
+interface Modulo { titulo: string; desc: string; icon: string; cor: string; href: (id: string) => string | null }
+const modulos: Modulo[] = [
+  { titulo: 'Diário de Bordo',  desc: 'Obras, manutenções, eventos do dia-a-dia',  icon: '📔', cor: 'from-[#10B981] to-[#0D9488]', href: id => `/painel/${id}/diario` },
+  { titulo: 'KPIs em Destaque', desc: 'Indicadores que provam o valor entregue',   icon: '📊', cor: 'from-[#F59E0B] to-[#D97706]', href: id => `/painel/${id}/kpis` },
+  { titulo: 'Avaliações & NPS', desc: 'Mural de agradecimentos e moderação',       icon: '⭐', cor: 'from-[#EC4899] to-[#DB2777]', href: id => `/painel/${id}/avaliacoes` },
+  { titulo: 'Revista Digital',  desc: 'Edições, seções e conteúdo',                icon: '📖', cor: 'from-[#1E3A5F] to-[#2A5A8F]', href: () => null },
+  { titulo: 'Chamados',         desc: 'Solicitações dos moradores',                icon: '🔧', cor: 'from-[#0EA5E9] to-[#0284C7]', href: () => null },
+  { titulo: 'Classificados',    desc: 'Anúncios dos moradores',                    icon: '🏷️', cor: 'from-[#F97316] to-[#EA580C]', href: () => null },
+  { titulo: 'Caronas',          desc: 'Caronas compartilhadas',                    icon: '🚗', cor: 'from-[#8B5CF6] to-[#7C3AED]', href: () => null },
+  { titulo: 'Funcionários',     desc: 'Tarefas, checklists, vistorias',            icon: '👷', cor: 'from-[#14B8A6] to-[#0D9488]', href: () => null },
 ];
 
 export default function CondoDetail({ params }: { params: Promise<{ id: string }> }) {
@@ -111,20 +114,31 @@ function Detail({ id }: { id: string }) {
         <p className="text-sm text-text-light mb-6">Acesse os recursos disponíveis para este condomínio.</p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {modulos.map((m, i) => (
-            <motion.div
-              key={m.titulo}
-              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
-              className="bg-white border border-border rounded-2xl p-5 opacity-60 cursor-not-allowed"
-            >
-              <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${m.cor} flex items-center justify-center text-xl text-white mb-3`}>
-                {m.icon}
-              </div>
-              <h3 className="font-bold text-text mb-1">{m.titulo}</h3>
-              <p className="text-sm text-text-light">{m.desc}</p>
-              <span className="text-xs text-text-muted mt-3 inline-block px-2 py-0.5 bg-surface-alt rounded-full">Em breve</span>
-            </motion.div>
-          ))}
+          {modulos.map((m, i) => {
+            const href = m.href(id);
+            const inner = (
+              <>
+                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${m.cor} flex items-center justify-center text-xl text-white mb-3`}>
+                  {m.icon}
+                </div>
+                <h3 className="font-bold text-text mb-1">{m.titulo}</h3>
+                <p className="text-sm text-text-light">{m.desc}</p>
+                {!href && <span className="text-xs text-text-muted mt-3 inline-block px-2 py-0.5 bg-surface-alt rounded-full">Em breve</span>}
+              </>
+            );
+            return (
+              <motion.div
+                key={m.titulo}
+                initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}
+              >
+                {href ? (
+                  <Link href={href} className="block bg-white border border-border rounded-2xl p-5 card-hover hover:shadow-md transition">{inner}</Link>
+                ) : (
+                  <div className="bg-white border border-border rounded-2xl p-5 opacity-60 cursor-not-allowed">{inner}</div>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </div>
