@@ -43,7 +43,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
   const [showInstall, setShowInstall] = useState(false);
   const [geoLocation, setGeoLocation] = useState<GeoLocation | null>(null);
   const [currentTime, setCurrentTime] = useState(new Date());
-  const startTimeRef = useRef<Date | null>(null);
+  const [startTime, setStartTime] = useState<Date | null>(null);
 
   // Checklist state
   const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>({});
@@ -69,6 +69,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
     params.then(p => setCode(p.code));
   }, [params]);
 
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     if (!code) return;
     const allTasks: EmployeeTask[] = [
@@ -97,6 +98,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
       setNotFound(true);
     }
   }, [code]);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   // Timer
   useEffect(() => {
@@ -125,7 +127,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
 
   const handleStart = () => {
     setStarted(true);
-    startTimeRef.current = new Date();
+    setStartTime(new Date());
     setTaskStatus('em-execucao');
   };
 
@@ -136,8 +138,8 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
   };
 
   const elapsedTime = () => {
-    if (!startTimeRef.current) return '00:00';
-    const diff = Math.floor((currentTime.getTime() - startTimeRef.current.getTime()) / 1000);
+    if (!startTime) return '00:00';
+    const diff = Math.floor((currentTime.getTime() - startTime.getTime()) / 1000);
     const m = Math.floor(diff / 60);
     const s = diff % 60;
     return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
@@ -147,11 +149,11 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
 
   if (notFound) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center p-4">
-        <div className="bg-white rounded-2xl border border-[#E2E8F0] p-8 text-center max-w-sm">
+      <div className="min-h-screen bg-app-soft flex items-center justify-center p-4">
+        <div className="bg-white rounded-2xl border border-border p-8 text-center max-w-sm">
           <p className="text-5xl mb-4">❌</p>
-          <h1 className="text-xl font-bold text-[#1E293B] mb-2">QR Code Inválido</h1>
-          <p className="text-sm text-[#64748B]">O código <strong className="font-mono">{code}</strong> não foi encontrado.</p>
+          <h1 className="text-xl font-bold text-text mb-2">QR Code Inválido</h1>
+          <p className="text-sm text-text-light">O código <strong className="font-mono">{code}</strong> não foi encontrado.</p>
         </div>
       </div>
     );
@@ -159,14 +161,14 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
 
   if (!task) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF] flex items-center justify-center">
-        <div className="animate-pulse text-[#94A3B8]">Carregando...</div>
+      <div className="min-h-screen bg-app-soft flex items-center justify-center">
+        <div className="animate-pulse text-text-muted">Carregando...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+    <div className="min-h-screen bg-app-soft">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white p-5">
         <div className="max-w-lg mx-auto">
@@ -195,7 +197,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
             <button onClick={handleStart} className="w-full py-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all">
               ▶️ Iniciar Tarefa
             </button>
-            <p className="text-xs text-[#94A3B8] mt-2">Sua localização será registrada ao iniciar</p>
+            <p className="text-xs text-text-muted mt-2">Sua localização será registrada ao iniciar</p>
           </motion.div>
         )}
 
@@ -206,16 +208,16 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <span className="text-3xl">✅</span>
               </div>
-              <h2 className="text-xl font-bold text-[#1E293B] mb-2">Tarefa Finalizada!</h2>
-              <p className="text-sm text-[#64748B]">Tempo de execução: <strong>{elapsedTime()}</strong></p>
-              {geoLocation && <p className="text-xs text-[#94A3B8] mt-1">📍 Localização registrada</p>}
+              <h2 className="text-xl font-bold text-text mb-2">Tarefa Finalizada!</h2>
+              <p className="text-sm text-text-light">Tempo de execução: <strong>{elapsedTime()}</strong></p>
+              {geoLocation && <p className="text-xs text-text-muted mt-1">📍 Localização registrada</p>}
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Geo Map */}
         {started && geoLocation && (
-          <div className="mb-5 rounded-xl overflow-hidden border border-[#E2E8F0] shadow-sm" style={{ height: 180 }}>
+          <div className="mb-5 rounded-xl overflow-hidden border border-border shadow-sm" style={{ height: 180 }}>
             <iframe
               title="Sua localização"
               width="100%" height="100%"
@@ -232,29 +234,29 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
             {/* ===== ANTES E DEPOIS ===== */}
             {task.type === 'antes-depois' && (
               <motion.div key="ba" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5">
-                  <h3 className="font-semibold text-[#1E293B] mb-3">📸 Foto ANTES</h3>
-                  <div className="w-full h-40 bg-[#F1F5F9] rounded-xl border-2 border-dashed border-[#CBD5E1] flex items-center justify-center cursor-pointer hover:bg-[#E2E8F0] transition-colors">
+                <div className="bg-white rounded-2xl border border-border p-5">
+                  <h3 className="font-semibold text-text mb-3">📸 Foto ANTES</h3>
+                  <div className="w-full h-40 bg-surface-hover rounded-xl border-2 border-dashed border-border-light flex items-center justify-center cursor-pointer hover:bg-[#E2E8F0] transition-colors">
                     <div className="text-center">
                       <p className="text-3xl">📷</p>
-                      <p className="text-xs text-[#94A3B8] mt-1">Toque para tirar foto</p>
+                      <p className="text-xs text-text-muted mt-1">Toque para tirar foto</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5">
-                  <h3 className="font-semibold text-[#1E293B] mb-3">📸 Foto DEPOIS</h3>
-                  <div className="w-full h-40 bg-[#F1F5F9] rounded-xl border-2 border-dashed border-[#CBD5E1] flex items-center justify-center cursor-pointer hover:bg-[#E2E8F0] transition-colors">
+                <div className="bg-white rounded-2xl border border-border p-5">
+                  <h3 className="font-semibold text-text mb-3">📸 Foto DEPOIS</h3>
+                  <div className="w-full h-40 bg-surface-hover rounded-xl border-2 border-dashed border-border-light flex items-center justify-center cursor-pointer hover:bg-[#E2E8F0] transition-colors">
                     <div className="text-center">
                       <p className="text-3xl">📷</p>
-                      <p className="text-xs text-[#94A3B8] mt-1">Toque para tirar foto</p>
+                      <p className="text-xs text-text-muted mt-1">Toque para tirar foto</p>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5">
-                  <label className="block text-sm font-semibold text-[#1E293B] mb-2">📝 Descrição</label>
-                  <textarea value={baDescription} onChange={e => setBaDescription(e.target.value)} rows={3} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Descreva o que foi feito..." />
+                <div className="bg-white rounded-2xl border border-border p-5">
+                  <label className="block text-sm font-semibold text-text mb-2">📝 Descrição</label>
+                  <textarea value={baDescription} onChange={e => setBaDescription(e.target.value)} rows={3} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Descreva o que foi feito..." />
                 </div>
 
                 <button onClick={handleFinish} className="w-full py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl">
@@ -267,7 +269,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
             {task.type === 'checklist' && (
               <motion.div key="chk" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
                 {(task as ChecklistTask).items.map((item: ChecklistItem) => (
-                  <div key={item.id} className={`bg-white rounded-xl border p-4 ${checkedItems[item.id] ? 'border-green-200 bg-green-50/50' : 'border-[#E2E8F0]'}`}>
+                  <div key={item.id} className={`bg-white rounded-xl border p-4 ${checkedItems[item.id] ? 'border-green-200 bg-green-50/50' : 'border-border'}`}>
                     <div className="flex items-center justify-between">
                       <button
                         onClick={() => setCheckedItems(p => ({ ...p, [item.id]: !p[item.id] }))}
@@ -276,9 +278,9 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
                         {checkedItems[item.id] ? (
                           <span className="w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white text-sm">✓</span>
                         ) : (
-                          <span className="w-6 h-6 rounded-full border-2 border-[#CBD5E1]" />
+                          <span className="w-6 h-6 rounded-full border-2 border-border-light" />
                         )}
-                        <span className={`text-sm ${checkedItems[item.id] ? 'line-through text-green-700' : 'text-[#1E293B]'}`}>{item.text}</span>
+                        <span className={`text-sm ${checkedItems[item.id] ? 'line-through text-green-700' : 'text-text'}`}>{item.text}</span>
                       </button>
                       <button
                         onClick={() => setProblemModal(item.id)}
@@ -290,7 +292,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
                   </div>
                 ))}
 
-                <div className="text-center text-xs text-[#64748B] py-2">
+                <div className="text-center text-xs text-text-light py-2">
                   ✅ {Object.values(checkedItems).filter(Boolean).length}/{(task as ChecklistTask).items.length} concluídos
                 </div>
 
@@ -303,16 +305,16 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
                   {problemModal && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 bg-black/50 flex items-end sm:items-center justify-center p-4">
                       <motion.div initial={{ y: 100 }} animate={{ y: 0 }} exit={{ y: 100 }} className="bg-white rounded-2xl w-full max-w-md p-6">
-                        <h3 className="font-bold text-[#1E293B] mb-3">⚠️ Reportar Problema</h3>
-                        <div className="w-full h-32 bg-[#F1F5F9] rounded-xl border-2 border-dashed border-[#CBD5E1] flex items-center justify-center cursor-pointer mb-3">
+                        <h3 className="font-bold text-text mb-3">⚠️ Reportar Problema</h3>
+                        <div className="w-full h-32 bg-surface-hover rounded-xl border-2 border-dashed border-border-light flex items-center justify-center cursor-pointer mb-3">
                           <div className="text-center">
                             <p className="text-2xl">📷</p>
-                            <p className="text-xs text-[#94A3B8]">Foto do problema</p>
+                            <p className="text-xs text-text-muted">Foto do problema</p>
                           </div>
                         </div>
-                        <textarea value={problemDesc} onChange={e => setProblemDesc(e.target.value)} rows={2} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none mb-3" placeholder="Descreva o problema..." />
+                        <textarea value={problemDesc} onChange={e => setProblemDesc(e.target.value)} rows={2} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none mb-3" placeholder="Descreva o problema..." />
                         <div className="flex gap-2">
-                          <button onClick={() => { setProblemModal(null); setProblemDesc(''); }} className="flex-1 py-2 border border-[#E2E8F0] rounded-xl text-sm text-[#64748B]">Cancelar</button>
+                          <button onClick={() => { setProblemModal(null); setProblemDesc(''); }} className="flex-1 py-2 border border-border rounded-xl text-sm text-text-light">Cancelar</button>
                           <button onClick={() => { setProblemModal(null); setProblemDesc(''); }} className="flex-1 py-2 bg-red-500 text-white rounded-xl text-sm font-semibold">Enviar</button>
                         </div>
                       </motion.div>
@@ -325,8 +327,8 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
             {/* ===== TAREFA ===== */}
             {task.type === 'tarefa' && (
               <motion.div key="task" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-4">
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5">
-                  <h3 className="font-semibold text-[#1E293B] mb-3">Status da Tarefa</h3>
+                <div className="bg-white rounded-2xl border border-border p-5">
+                  <h3 className="font-semibold text-text mb-3">Status da Tarefa</h3>
                   <div className="grid grid-cols-2 gap-2">
                     {([
                       { s: 'aberto' as EmployeeTaskStatus, icon: '📂', label: 'Em Aberto', color: 'border-yellow-300 bg-yellow-50' },
@@ -337,7 +339,7 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
                       <button
                         key={opt.s}
                         onClick={() => { setTaskStatus(opt.s); if (opt.s === 'problema') setReportProblem(true); else setReportProblem(false); }}
-                        className={`p-3 rounded-xl border-2 text-center transition-all ${taskStatus === opt.s ? opt.color : 'border-[#E2E8F0]'}`}
+                        className={`p-3 rounded-xl border-2 text-center transition-all ${taskStatus === opt.s ? opt.color : 'border-border'}`}
                       >
                         <span className="text-xl">{opt.icon}</span>
                         <p className="text-xs font-medium mt-1">{opt.label}</p>
@@ -346,12 +348,12 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
                   </div>
                 </div>
 
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] p-5">
-                  <h3 className="font-semibold text-[#1E293B] mb-3">📸 Fotos da Execução</h3>
-                  <div className="w-full h-32 bg-[#F1F5F9] rounded-xl border-2 border-dashed border-[#CBD5E1] flex items-center justify-center cursor-pointer">
+                <div className="bg-white rounded-2xl border border-border p-5">
+                  <h3 className="font-semibold text-text mb-3">📸 Fotos da Execução</h3>
+                  <div className="w-full h-32 bg-surface-hover rounded-xl border-2 border-dashed border-border-light flex items-center justify-center cursor-pointer">
                     <div className="text-center">
                       <p className="text-2xl">📷</p>
-                      <p className="text-xs text-[#94A3B8]">Adicionar fotos</p>
+                      <p className="text-xs text-text-muted">Adicionar fotos</p>
                     </div>
                   </div>
                 </div>
@@ -390,21 +392,21 @@ export default function TarefaFuncionarioPage({ params }: { params: Promise<{ co
             {/* ===== VISTORIA ===== */}
             {task.type === 'vistoria' && (
               <motion.div key="vis" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-3">
-                <p className="text-xs text-[#64748B] mb-1">Itens pré-determinados + livres:</p>
+                <p className="text-xs text-text-light mb-1">Itens pré-determinados + livres:</p>
                 {[...(task as InspectionTask).items, ...freeFormItems.map(f => ({ ...f, preset: false, status: 'pendente' as const, photo: undefined, description: undefined }))].map((item) => (
-                  <div key={item.id} className={`bg-white rounded-xl border p-4 ${inspectionStatuses[item.id] === 'ok' ? 'border-green-200 bg-green-50/50' : inspectionStatuses[item.id] === 'problema' ? 'border-red-200 bg-red-50/50' : 'border-[#E2E8F0]'}`}>
+                  <div key={item.id} className={`bg-white rounded-xl border p-4 ${inspectionStatuses[item.id] === 'ok' ? 'border-green-200 bg-green-50/50' : inspectionStatuses[item.id] === 'problema' ? 'border-red-200 bg-red-50/50' : 'border-border'}`}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-[#1E293B]">{item.label}</span>
+                      <span className="text-sm font-medium text-text">{item.label}</span>
                       {!('preset' in item && item.preset) && <span className="px-1.5 py-0.5 bg-purple-100 text-purple-600 text-[10px] font-semibold rounded-full">Livre</span>}
                     </div>
                     <div className="flex gap-2 mb-2">
-                      <button onClick={() => setInspectionStatuses(p => ({ ...p, [item.id]: 'ok' }))} className={`flex-1 py-1.5 rounded-lg text-xs font-medium border-2 transition-all ${inspectionStatuses[item.id] === 'ok' ? 'border-green-400 bg-green-100 text-green-700' : 'border-[#E2E8F0] text-[#64748B]'}`}>✅ OK</button>
-                      <button onClick={() => setInspectionStatuses(p => ({ ...p, [item.id]: 'problema' }))} className={`flex-1 py-1.5 rounded-lg text-xs font-medium border-2 transition-all ${inspectionStatuses[item.id] === 'problema' ? 'border-red-400 bg-red-100 text-red-700' : 'border-[#E2E8F0] text-[#64748B]'}`}>⚠️ Problema</button>
+                      <button onClick={() => setInspectionStatuses(p => ({ ...p, [item.id]: 'ok' }))} className={`flex-1 py-1.5 rounded-lg text-xs font-medium border-2 transition-all ${inspectionStatuses[item.id] === 'ok' ? 'border-green-400 bg-green-100 text-green-700' : 'border-border text-text-light'}`}>✅ OK</button>
+                      <button onClick={() => setInspectionStatuses(p => ({ ...p, [item.id]: 'problema' }))} className={`flex-1 py-1.5 rounded-lg text-xs font-medium border-2 transition-all ${inspectionStatuses[item.id] === 'problema' ? 'border-red-400 bg-red-100 text-red-700' : 'border-border text-text-light'}`}>⚠️ Problema</button>
                     </div>
-                    <div className="w-full h-24 bg-[#F1F5F9] rounded-lg border-2 border-dashed border-[#CBD5E1] flex items-center justify-center cursor-pointer mb-2">
-                      <div className="text-center"><p className="text-lg">📷</p><p className="text-[10px] text-[#94A3B8]">Foto</p></div>
+                    <div className="w-full h-24 bg-surface-hover rounded-lg border-2 border-dashed border-border-light flex items-center justify-center cursor-pointer mb-2">
+                      <div className="text-center"><p className="text-lg">📷</p><p className="text-[10px] text-text-muted">Foto</p></div>
                     </div>
-                    <textarea value={inspectionDescs[item.id] ?? ''} onChange={e => setInspectionDescs(p => ({ ...p, [item.id]: e.target.value }))} rows={1} className="w-full px-2 py-1.5 border border-[#E2E8F0] rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Observações..." />
+                    <textarea value={inspectionDescs[item.id] ?? ''} onChange={e => setInspectionDescs(p => ({ ...p, [item.id]: e.target.value }))} rows={1} className="w-full px-2 py-1.5 border border-border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Observações..." />
                   </div>
                 ))}
 

@@ -54,7 +54,12 @@ export default function MoradorPage() {
   useEffect(() => {
     if (geocodeTimer.current) clearTimeout(geocodeTimer.current);
     const dest = caronaForm.destination.trim();
-    if (dest.length < 5) { setMapCoords(null); return; }
+    if (dest.length < 5) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setMapCoords(null);
+      return;
+    }
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMapLoading(true);
     geocodeTimer.current = setTimeout(() => {
       fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(dest)}&limit=1`, {
@@ -169,7 +174,7 @@ export default function MoradorPage() {
   const condo = demoCondominium;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+    <div className="min-h-screen bg-app-soft">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white">
         <div className="max-w-lg mx-auto px-4 py-6">
@@ -204,46 +209,46 @@ export default function MoradorPage() {
               key="success"
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="bg-white rounded-2xl border border-[#E2E8F0] p-8 text-center"
+              className="bg-white rounded-2xl border border-border p-8 text-center"
             >
               <div className="w-16 h-16 rounded-full bg-[#10B981]/10 flex items-center justify-center text-3xl mx-auto mb-4">
                 ✅
               </div>
-              <h2 className="text-xl font-bold text-[#1E293B] mb-2">Enviado com sucesso!</h2>
+              <h2 className="text-xl font-bold text-text mb-2">Enviado com sucesso!</h2>
               {trackingCode.startsWith('JF') ? (
                 <>
-                  <p className="text-sm text-[#64748B] mb-4">
+                  <p className="text-sm text-text-light mb-4">
                     Seu código de acompanhamento é:
                   </p>
-                  <div className="bg-[#F8FAFC] rounded-xl p-4 mb-4">
-                    <div className="text-2xl font-mono font-bold text-[#1E3A5F]">{trackingCode}</div>
+                  <div className="bg-surface-alt rounded-xl p-4 mb-4">
+                    <div className="text-2xl font-mono font-bold text-primary">{trackingCode}</div>
                   </div>
-                  <p className="text-xs text-[#94A3B8] mb-4">
+                  <p className="text-xs text-text-muted mb-4">
                     Um link de acompanhamento foi enviado para seu e-mail. Você também pode copiar o link abaixo:
                   </p>
-                  <div className="flex items-center gap-2 bg-[#F8FAFC] rounded-lg p-2 mb-6">
+                  <div className="flex items-center gap-2 bg-surface-alt rounded-lg p-2 mb-6">
                     <input
                       type="text"
                       readOnly
                       value={`www.apprevista.com.br/acompanhar/${trackingCode}`}
-                      className="flex-1 bg-transparent text-xs text-[#64748B] outline-none font-mono"
+                      className="flex-1 bg-transparent text-xs text-text-light outline-none font-mono"
                     />
                     <button
                       onClick={() => navigator.clipboard?.writeText(`www.apprevista.com.br/acompanhar/${trackingCode}`)}
-                      className="px-3 py-1 bg-[#1E3A5F] text-white text-xs font-medium rounded-md hover:bg-[#2A5A8F] transition-all"
+                      className="px-3 py-1 bg-primary text-white text-xs font-medium rounded-md hover:bg-[#2A5A8F] transition-all"
                     >
                       Copiar
                     </button>
                   </div>
                   <Link
                     href={`/demo/acompanhar/${trackingCode}`}
-                    className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-[#1E3A5F] border border-[#1E3A5F] rounded-lg hover:bg-[#1E3A5F] hover:text-white transition-all"
+                    className="inline-flex items-center justify-center px-6 py-2 text-sm font-medium text-primary border border-[#1E3A5F] rounded-lg hover:bg-primary hover:text-white transition-all"
                   >
                     Ver Acompanhamento
                   </Link>
                 </>
               ) : (
-                <p className="text-sm text-[#64748B] mb-6">
+                <p className="text-sm text-text-light mb-6">
                   {trackingCode === 'CLASSIFICADO-OK'
                     ? `Seu classificado será publicado na próxima edição da revista${classificadoForm.images.length > 0 ? ` com ${classificadoForm.images.length} imagem${classificadoForm.images.length > 1 ? 'ns' : ''}` : ''}!`
                     : 'Sua oferta de carona foi registrada e aparecerá na revista!'}
@@ -252,7 +257,7 @@ export default function MoradorPage() {
               <div className="mt-4">
                 <button
                   onClick={resetForm}
-                  className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors"
+                  className="text-sm text-text-light hover:text-primary transition-colors"
                 >
                   ← Voltar ao início
                 </button>
@@ -265,12 +270,12 @@ export default function MoradorPage() {
                 <div className="space-y-3">
                   <Link
                     href="/demo/revista"
-                    className="flex items-center gap-4 bg-white rounded-xl border border-[#E2E8F0] p-4 card-hover"
+                    className="flex items-center gap-4 bg-white rounded-xl border border-border p-4 card-hover"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#1E3A5F]/10 flex items-center justify-center text-xl">📖</div>
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-xl">📖</div>
                     <div className="flex-1">
-                      <div className="font-semibold text-[#1E293B]">Ler Revista</div>
-                      <div className="text-xs text-[#94A3B8]">Edição de Março 2026</div>
+                      <div className="font-semibold text-text">Ler Revista</div>
+                      <div className="text-xs text-text-muted">Edição de Março 2026</div>
                     </div>
                     <svg className="w-5 h-5 text-[#CBD5E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                   </Link>
@@ -283,29 +288,29 @@ export default function MoradorPage() {
                     <button
                       key={item.id}
                       onClick={() => setTab(item.id)}
-                      className="w-full flex items-center gap-4 bg-white rounded-xl border border-[#E2E8F0] p-4 card-hover text-left"
+                      className="w-full flex items-center gap-4 bg-white rounded-xl border border-border p-4 card-hover text-left"
                     >
-                      <div className="w-12 h-12 rounded-xl bg-[#F8FAFC] flex items-center justify-center text-xl">{item.icon}</div>
+                      <div className="w-12 h-12 rounded-xl bg-surface-alt flex items-center justify-center text-xl">{item.icon}</div>
                       <div className="flex-1">
-                        <div className="font-semibold text-[#1E293B]">{item.title}</div>
-                        <div className="text-xs text-[#94A3B8]">{item.desc}</div>
+                        <div className="font-semibold text-text">{item.title}</div>
+                        <div className="text-xs text-text-muted">{item.desc}</div>
                       </div>
                       <svg className="w-5 h-5 text-[#CBD5E1]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                     </button>
                   ))}
 
                   <div className="pt-4">
-                    <div className="bg-white rounded-xl border border-[#E2E8F0] p-4">
-                      <label className="block text-xs font-medium text-[#64748B] mb-2">Já tem um código de acompanhamento?</label>
+                    <div className="bg-white rounded-xl border border-border p-4">
+                      <label className="block text-xs font-medium text-text-light mb-2">Já tem um código de acompanhamento?</label>
                       <div className="flex gap-2">
                         <input
                           type="text"
                           placeholder="Ex: JF-2026-0001"
-                          className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                          className="flex-1 px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
                         />
                         <Link
                           href="/demo/acompanhar/JF-2026-0001"
-                          className="px-4 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
+                          className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
                         >
                           Buscar
                         </Link>
@@ -318,17 +323,17 @@ export default function MoradorPage() {
               {/* Chamado Form */}
               {tab === 'chamado' && (
                 <div>
-                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-[#64748B] mb-4 hover:text-[#1E3A5F]">
+                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-text-light mb-4 hover:text-primary">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     Voltar
                   </button>
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
-                    <h2 className="text-lg font-bold text-[#1E293B] mb-1">Abrir Chamado</h2>
-                    <p className="text-xs text-[#94A3B8] mb-6">Preencha os dados abaixo para registrar sua solicitação</p>
+                  <div className="bg-white rounded-2xl border border-border p-6">
+                    <h2 className="text-lg font-bold text-text mb-1">Abrir Chamado</h2>
+                    <p className="text-xs text-text-muted mb-6">Preencha os dados abaixo para registrar sua solicitação</p>
                     <form onSubmit={handleSubmitChamado} className="space-y-4">
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Tipo</label>
-                        <select value={chamadoForm.type} onChange={e => setChamadoForm(p => ({...p, type: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
+                        <label className="block text-xs font-medium text-text-light mb-1">Tipo</label>
+                        <select value={chamadoForm.type} onChange={e => setChamadoForm(p => ({...p, type: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
                           <option value="manutencao">🔧 Manutenção</option>
                           <option value="reclamacao">📢 Reclamação</option>
                           <option value="ocorrencia">⚠️ Ocorrência</option>
@@ -337,29 +342,29 @@ export default function MoradorPage() {
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Nome</label>
-                          <input type="text" required value={chamadoForm.name} onChange={e => setChamadoForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Seu nome" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Nome</label>
+                          <input type="text" required value={chamadoForm.name} onChange={e => setChamadoForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Seu nome" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Apartamento</label>
-                          <input type="text" required value={chamadoForm.unit} onChange={e => setChamadoForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: 302" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Apartamento</label>
+                          <input type="text" required value={chamadoForm.unit} onChange={e => setChamadoForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: 302" />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">E-mail</label>
-                        <input type="email" required value={chamadoForm.email} onChange={e => setChamadoForm(p => ({...p, email: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="seu@email.com" />
+                        <label className="block text-xs font-medium text-text-light mb-1">E-mail</label>
+                        <input type="email" required value={chamadoForm.email} onChange={e => setChamadoForm(p => ({...p, email: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="seu@email.com" />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Assunto</label>
-                        <input type="text" required value={chamadoForm.title} onChange={e => setChamadoForm(p => ({...p, title: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Descreva brevemente" />
+                        <label className="block text-xs font-medium text-text-light mb-1">Assunto</label>
+                        <input type="text" required value={chamadoForm.title} onChange={e => setChamadoForm(p => ({...p, title: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Descreva brevemente" />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Descrição detalhada</label>
-                        <textarea required value={chamadoForm.description} onChange={e => setChamadoForm(p => ({...p, description: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Detalhe sua solicitação..." />
+                        <label className="block text-xs font-medium text-text-light mb-1">Descrição detalhada</label>
+                        <textarea required value={chamadoForm.description} onChange={e => setChamadoForm(p => ({...p, description: e.target.value}))} rows={4} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Detalhe sua solicitação..." />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Fotos (opcional)</label>
-                        <div className="w-full h-16 border-2 border-dashed border-[#E2E8F0] rounded-lg flex items-center justify-center text-[#94A3B8] text-xs cursor-pointer hover:border-[#1E3A5F] transition-colors">
+                        <label className="block text-xs font-medium text-text-light mb-1">Fotos (opcional)</label>
+                        <div className="w-full h-16 border-2 border-dashed border-border rounded-lg flex items-center justify-center text-text-muted text-xs cursor-pointer hover:border-[#1E3A5F] transition-colors">
                           📷 Adicionar fotos
                         </div>
                       </div>
@@ -374,26 +379,26 @@ export default function MoradorPage() {
               {/* Classificado Form */}
               {tab === 'classificado' && (
                 <div>
-                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-[#64748B] mb-4 hover:text-[#1E3A5F]">
+                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-text-light mb-4 hover:text-primary">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     Voltar
                   </button>
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
-                    <h2 className="text-lg font-bold text-[#1E293B] mb-1">Publicar Classificado</h2>
-                    <p className="text-xs text-[#94A3B8] mb-6">Anuncie para seus vizinhos</p>
+                  <div className="bg-white rounded-2xl border border-border p-6">
+                    <h2 className="text-lg font-bold text-text mb-1">Publicar Classificado</h2>
+                    <p className="text-xs text-text-muted mb-6">Anuncie para seus vizinhos</p>
                     <form onSubmit={handleSubmitClassificado} className="space-y-4">
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Nome</label>
-                          <input type="text" required value={classificadoForm.name} onChange={e => setClassificadoForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Nome</label>
+                          <input type="text" required value={classificadoForm.name} onChange={e => setClassificadoForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Apartamento</label>
-                          <input type="text" required value={classificadoForm.unit} onChange={e => setClassificadoForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Apartamento</label>
+                          <input type="text" required value={classificadoForm.unit} onChange={e => setClassificadoForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Tipo</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Tipo</label>
                         <div className="grid grid-cols-4 gap-2">
                           {[
                             { v: 'venda', l: '💰 Venda' },
@@ -406,7 +411,7 @@ export default function MoradorPage() {
                               type="button"
                               onClick={() => setClassificadoForm(p => ({...p, category: t.v}))}
                               className={`py-2 rounded-lg text-xs font-medium border-2 transition-all ${
-                                classificadoForm.category === t.v ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 text-[#1E3A5F]' : 'border-[#E2E8F0] text-[#64748B]'
+                                classificadoForm.category === t.v ? 'border-[#1E3A5F] bg-primary/5 text-primary' : 'border-border text-text-light'
                               }`}
                             >
                               {t.l}
@@ -415,32 +420,32 @@ export default function MoradorPage() {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">O que está anunciando?</label>
-                        <input type="text" required value={classificadoForm.title} onChange={e => setClassificadoForm(p => ({...p, title: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Bicicleta aro 29" />
+                        <label className="block text-xs font-medium text-text-light mb-1">O que está anunciando?</label>
+                        <input type="text" required value={classificadoForm.title} onChange={e => setClassificadoForm(p => ({...p, title: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Bicicleta aro 29" />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Descrição</label>
-                        <textarea required value={classificadoForm.description} onChange={e => setClassificadoForm(p => ({...p, description: e.target.value}))} rows={3} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" />
+                        <label className="block text-xs font-medium text-text-light mb-1">Descrição</label>
+                        <textarea required value={classificadoForm.description} onChange={e => setClassificadoForm(p => ({...p, description: e.target.value}))} rows={3} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" />
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Preço (se houver)</label>
-                          <input type="text" value={classificadoForm.price} onChange={e => setClassificadoForm(p => ({...p, price: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="R$ 0,00" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Preço (se houver)</label>
+                          <input type="text" value={classificadoForm.price} onChange={e => setClassificadoForm(p => ({...p, price: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="R$ 0,00" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Telefone</label>
-                          <input type="text" required value={classificadoForm.phone} onChange={e => setClassificadoForm(p => ({...p, phone: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="(11) 99999-9999" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Telefone</label>
+                          <input type="text" required value={classificadoForm.phone} onChange={e => setClassificadoForm(p => ({...p, phone: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="(11) 99999-9999" />
                         </div>
                       </div>
                       <div>
                         <div className="flex items-center justify-between mb-1">
-                          <label className="block text-xs font-medium text-[#64748B]">Fotos do item (opcional)</label>
-                          <span className="text-[10px] text-[#94A3B8]">Até 4 imagens</span>
+                          <label className="block text-xs font-medium text-text-light">Fotos do item (opcional)</label>
+                          <span className="text-[10px] text-text-muted">Até 4 imagens</span>
                         </div>
                         {classificadoForm.images.length > 0 && (
                           <div className="grid grid-cols-2 gap-3 mb-3">
                             {classificadoForm.images.map((imageUrl, idx) => (
-                              <div key={`${imageUrl}-${idx}`} className="relative h-24 rounded-xl overflow-hidden border border-[#E2E8F0] group">
+                              <div key={`${imageUrl}-${idx}`} className="relative h-24 rounded-xl overflow-hidden border border-border group">
                                 <img src={imageUrl} alt={`Imagem do classificado ${idx + 1}`} className="w-full h-full object-cover" />
                                 <button
                                   type="button"
@@ -464,7 +469,7 @@ export default function MoradorPage() {
                         <button
                           type="button"
                           onClick={() => classificadoFileInputRef.current?.click()}
-                          className="w-full h-16 border-2 border-dashed border-[#E2E8F0] rounded-lg flex items-center justify-center text-[#94A3B8] text-xs cursor-pointer hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-colors"
+                          className="w-full h-16 border-2 border-dashed border-border rounded-lg flex items-center justify-center text-text-muted text-xs cursor-pointer hover:border-[#1E3A5F] hover:text-primary transition-colors"
                         >
                           📷 Adicionar fotos do produto ou serviço
                         </button>
@@ -480,31 +485,31 @@ export default function MoradorPage() {
               {/* Carona Form */}
               {tab === 'carona' && (
                 <div>
-                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-[#64748B] mb-4 hover:text-[#1E3A5F]">
+                  <button onClick={() => setTab('inicio')} className="flex items-center gap-1 text-sm text-text-light mb-4 hover:text-primary">
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
                     Voltar
                   </button>
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
-                    <h2 className="text-lg font-bold text-[#1E293B] mb-1">Oferecer Carona</h2>
-                    <p className="text-xs text-[#94A3B8] mb-6">Ajude seus vizinhos — ofereça carona</p>
+                  <div className="bg-white rounded-2xl border border-border p-6">
+                    <h2 className="text-lg font-bold text-text mb-1">Oferecer Carona</h2>
+                    <p className="text-xs text-text-muted mb-6">Ajude seus vizinhos — ofereça carona</p>
                     <form onSubmit={handleSubmitCarona} className="space-y-4">
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Nome</label>
-                          <input type="text" required value={caronaForm.name} onChange={e => setCaronaForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Nome</label>
+                          <input type="text" required value={caronaForm.name} onChange={e => setCaronaForm(p => ({...p, name: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Apartamento</label>
-                          <input type="text" required value={caronaForm.unit} onChange={e => setCaronaForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Apartamento</label>
+                          <input type="text" required value={caronaForm.unit} onChange={e => setCaronaForm(p => ({...p, unit: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Destino</label>
-                        <input type="text" required value={caronaForm.destination} onChange={e => setCaronaForm(p => ({...p, destination: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Av. Paulista - próx. metrô Trianon" />
-                        <div className="mt-2 rounded-xl overflow-hidden border border-[#E2E8F0] shadow-sm relative" style={{ height: 200 }}>
+                        <label className="block text-xs font-medium text-text-light mb-1">Destino</label>
+                        <input type="text" required value={caronaForm.destination} onChange={e => setCaronaForm(p => ({...p, destination: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Av. Paulista - próx. metrô Trianon" />
+                        <div className="mt-2 rounded-xl overflow-hidden border border-border shadow-sm relative" style={{ height: 200 }}>
                           {mapLoading && (
                             <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/70">
-                              <div className="flex items-center gap-2 text-xs text-[#94A3B8]">
+                              <div className="flex items-center gap-2 text-xs text-text-muted">
                                 <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" /></svg>
                                 Buscando localização…
                               </div>
@@ -525,18 +530,18 @@ export default function MoradorPage() {
                       </div>
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Horário de saída</label>
-                          <input type="time" required value={caronaForm.time} onChange={e => setCaronaForm(p => ({...p, time: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
+                          <label className="block text-xs font-medium text-text-light mb-1">Horário de saída</label>
+                          <input type="time" required value={caronaForm.time} onChange={e => setCaronaForm(p => ({...p, time: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Vagas</label>
-                          <select value={caronaForm.seats} onChange={e => setCaronaForm(p => ({...p, seats: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
+                          <label className="block text-xs font-medium text-text-light mb-1">Vagas</label>
+                          <select value={caronaForm.seats} onChange={e => setCaronaForm(p => ({...p, seats: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
                             {[1,2,3,4].map(n => <option key={n} value={n}>{n} vaga{n > 1 ? 's' : ''}</option>)}
                           </select>
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-2">Dias da semana</label>
+                        <label className="block text-xs font-medium text-text-light mb-2">Dias da semana</label>
                         <div className="flex flex-wrap gap-2">
                           {['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'].map(day => (
                             <button
@@ -544,7 +549,7 @@ export default function MoradorPage() {
                               type="button"
                               onClick={() => toggleDay(day)}
                               className={`px-3 py-1.5 rounded-lg text-xs font-medium border-2 transition-all ${
-                                caronaForm.days.includes(day) ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 text-[#1E3A5F]' : 'border-[#E2E8F0] text-[#64748B]'
+                                caronaForm.days.includes(day) ? 'border-[#1E3A5F] bg-primary/5 text-primary' : 'border-border text-text-light'
                               }`}
                             >
                               {day}
@@ -553,8 +558,8 @@ export default function MoradorPage() {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Telefone / WhatsApp</label>
-                        <input type="text" required value={caronaForm.phone} onChange={e => setCaronaForm(p => ({...p, phone: e.target.value}))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="(11) 99999-9999" />
+                        <label className="block text-xs font-medium text-text-light mb-1">Telefone / WhatsApp</label>
+                        <input type="text" required value={caronaForm.phone} onChange={e => setCaronaForm(p => ({...p, phone: e.target.value}))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="(11) 99999-9999" />
                       </div>
                       <button type="submit" className="w-full py-3 bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white font-semibold rounded-xl hover:shadow-lg transition-all">
                         Publicar Carona

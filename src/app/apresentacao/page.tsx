@@ -77,26 +77,26 @@ function Slide({ children, className = '' }: { children: React.ReactNode; classN
 
 /* ─── page number ─── */
 function PageNum({ n }: { n: number }) {
-  return <div className="absolute bottom-6 right-8 text-xs text-[#94A3B8] print:bottom-4 print:right-6">{String(n).padStart(2, '0')}</div>;
+  return <div className="absolute bottom-6 right-8 text-xs text-text-muted print:bottom-4 print:right-6">{String(n).padStart(2, '0')}</div>;
 }
 
 /* ─── main ─── */
 export default function ApresentacaoPage() {
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-surface-hover">
       {/* ── Toolbar (hidden in print) ── */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-[#E2E8F0] print:hidden">
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-border print:hidden">
         <div className="max-w-[1100px] mx-auto px-4 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/images/logo.png" alt="App Revista" width={28} height={28} className="rounded-lg" />
-            <span className="text-sm font-bold text-[#1E3A5F]">APP REVISTA</span>
+            <span className="text-sm font-bold text-primary">APP REVISTA</span>
           </Link>
           <div className="flex items-center gap-2">
-            <button onClick={() => globalThis.print()} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] bg-[#F1F5F9] rounded-lg hover:bg-[#E2E8F0] transition-colors">
+            <button onClick={() => globalThis.print()} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-light bg-surface-hover rounded-lg hover:bg-[#E2E8F0] transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
               Gerar PDF
             </button>
-            <button onClick={copiarLink} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] bg-[#F1F5F9] rounded-lg hover:bg-[#E2E8F0] transition-colors">
+            <button onClick={copiarLink} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-light bg-surface-hover rounded-lg hover:bg-[#E2E8F0] transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
               Copiar Link
             </button>
@@ -138,8 +138,8 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">01</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">O Problema e a Solução</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">01</div>
+              <h2 className="text-2xl font-bold text-text">O Problema e a Solução</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
@@ -186,9 +186,9 @@ export default function ApresentacaoPage() {
               </div>
             </div>
 
-            <div className="mt-8 p-6 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] text-center">
-              <p className="text-lg font-semibold text-[#1E293B]">
-                &ldquo;Não basta fazer — <span className="text-[#1E3A5F] font-bold">mostre tudo o que você realiza!</span>&rdquo;
+            <div className="mt-8 p-6 bg-surface-alt rounded-xl border border-border text-center">
+              <p className="text-lg font-semibold text-text">
+                &ldquo;Não basta fazer — <span className="text-primary font-bold">mostre tudo o que você realiza!</span>&rdquo;
               </p>
             </div>
           </div>
@@ -199,19 +199,19 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">02</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">Funcionalidades Principais</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">02</div>
+              <h2 className="text-2xl font-bold text-text">Funcionalidades Principais</h2>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {funcionalidades.map(f => (
-                <div key={f.title} className="bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] p-6">
+                <div key={f.title} className="bg-surface-alt rounded-xl border border-border p-6">
                   <div className="text-3xl mb-3">{f.icon}</div>
-                  <h3 className="text-base font-bold text-[#1E293B] mb-3">{f.title}</h3>
+                  <h3 className="text-base font-bold text-text mb-3">{f.title}</h3>
                   <ul className="space-y-2">
                     {f.items.map(item => (
-                      <li key={item} className="flex items-start gap-2 text-xs text-[#475569]">
-                        <svg className="w-3.5 h-3.5 text-[#1E3A5F] mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                      <li key={item} className="flex items-start gap-2 text-xs text-text-light">
+                        <svg className="w-3.5 h-3.5 text-primary mt-0.5 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         <span>{item}</span>
                       </li>
                     ))}
@@ -227,10 +227,10 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">03</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">8 Layouts de Revista</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">03</div>
+              <h2 className="text-2xl font-bold text-text">8 Layouts de Revista</h2>
             </div>
-            <p className="text-[#64748B] mb-8 max-w-2xl">Cada condomínio pode escolher o estilo que mais combina com a sua identidade visual. Todos os layouts são responsivos e otimizados para mobile.</p>
+            <p className="text-text-light mb-8 max-w-2xl">Cada condomínio pode escolher o estilo que mais combina com a sua identidade visual. Todos os layouts são responsivos e otimizados para mobile.</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
@@ -243,12 +243,12 @@ export default function ApresentacaoPage() {
                 { name: 'Timeline', desc: 'Linha do tempo', icon: '⏱️', color: '#D97706' },
                 { name: 'Editorial', desc: 'Magazine premium', icon: '✨', color: '#6D28D9' },
               ].map(l => (
-                <div key={l.name} className="rounded-xl border border-[#E2E8F0] overflow-hidden bg-white">
+                <div key={l.name} className="rounded-xl border border-border overflow-hidden bg-white">
                   <div className="h-2" style={{ backgroundColor: l.color }} />
                   <div className="p-5 text-center">
                     <div className="text-3xl mb-2">{l.icon}</div>
-                    <h4 className="text-sm font-bold text-[#1E293B]">{l.name}</h4>
-                    <p className="text-xs text-[#94A3B8] mt-1">{l.desc}</p>
+                    <h4 className="text-sm font-bold text-text">{l.name}</h4>
+                    <p className="text-xs text-text-muted mt-1">{l.desc}</p>
                   </div>
                 </div>
               ))}
@@ -258,9 +258,9 @@ export default function ApresentacaoPage() {
               {['Azul', 'Verde', 'Roxo', 'Dourado', 'Vermelho', 'Rosa', 'Turquesa', 'Grafite'].map((tema, i) => {
                 const cores = ['#1E3A5F', '#059669', '#7C3AED', '#D4AF37', '#DC2626', '#EC4899', '#0891B2', '#475569'];
                 return (
-                  <div key={tema} className="flex items-center gap-2 p-2 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]">
+                  <div key={tema} className="flex items-center gap-2 p-2 rounded-lg bg-surface-alt border border-border">
                     <div className="w-5 h-5 rounded-full shrink-0" style={{ backgroundColor: cores[i] }} />
-                    <span className="text-xs font-medium text-[#475569]">{tema}</span>
+                    <span className="text-xs font-medium text-text-light">{tema}</span>
                   </div>
                 );
               })}
@@ -273,15 +273,15 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">04</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">38+ Categorias Prontas</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">04</div>
+              <h2 className="text-2xl font-bold text-text">38+ Categorias Prontas</h2>
             </div>
-            <p className="text-[#64748B] mb-6">O síndico ativa apenas os cards que precisa — cada um com formulário específico, prévia em mockup celular e botão de ativar/desativar.</p>
+            <p className="text-text-light mb-6">O síndico ativa apenas os cards que precisa — cada um com formulário específico, prévia em mockup celular e botão de ativar/desativar.</p>
 
             <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
               {categorias.map(cat => (
-                <div key={cat} className="flex items-center gap-2 px-3 py-2.5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg">
-                  <svg className="w-3.5 h-3.5 text-[#1E3A5F] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
+                <div key={cat} className="flex items-center gap-2 px-3 py-2.5 bg-surface-alt border border-border rounded-lg">
+                  <svg className="w-3.5 h-3.5 text-primary shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   <span className="text-[11px] font-medium text-[#334155] leading-tight">{cat}</span>
                 </div>
               ))}
@@ -294,17 +294,17 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">05</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">4 Perfis de Acesso</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">05</div>
+              <h2 className="text-2xl font-bold text-text">4 Perfis de Acesso</h2>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-6">
               {perfis.map(p => (
-                <div key={p.role} className="flex gap-5 p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl">
+                <div key={p.role} className="flex gap-5 p-6 bg-surface-alt border border-border rounded-xl">
                   <div className="text-4xl shrink-0">{p.icon}</div>
                   <div>
-                    <h3 className="text-lg font-bold text-[#1E293B] mb-2">{p.role}</h3>
-                    <p className="text-sm text-[#475569] leading-relaxed">{p.desc}</p>
+                    <h3 className="text-lg font-bold text-text mb-2">{p.role}</h3>
+                    <p className="text-sm text-text-light leading-relaxed">{p.desc}</p>
                   </div>
                 </div>
               ))}
@@ -332,16 +332,16 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">06</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">Diferenciais</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">06</div>
+              <h2 className="text-2xl font-bold text-text">Diferenciais</h2>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
               {diferenciais.map(d => (
-                <div key={d.title} className="text-center p-5 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl">
+                <div key={d.title} className="text-center p-5 bg-surface-alt border border-border rounded-xl">
                   <div className="text-3xl mb-3">{d.icon}</div>
-                  <h4 className="text-sm font-bold text-[#1E293B] mb-1">{d.title}</h4>
-                  <p className="text-xs text-[#64748B]">{d.desc}</p>
+                  <h4 className="text-sm font-bold text-text mb-1">{d.title}</h4>
+                  <p className="text-xs text-text-light">{d.desc}</p>
                 </div>
               ))}
             </div>
@@ -352,7 +352,7 @@ export default function ApresentacaoPage() {
                 <p className="text-sm text-[#92400E]">Disponibilidade garantida</p>
               </div>
               <div className="p-6 bg-[#EEF2FF] border border-[#C7D2FE] rounded-xl text-center">
-                <div className="text-4xl font-bold text-[#1E3A5F] mb-1">38+</div>
+                <div className="text-4xl font-bold text-primary mb-1">38+</div>
                 <p className="text-sm text-[#3730A3]">Categorias prontas</p>
               </div>
               <div className="p-6 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl text-center">
@@ -368,13 +368,13 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">07</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">Planos e Investimento</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">07</div>
+              <h2 className="text-2xl font-bold text-text">Planos e Investimento</h2>
             </div>
 
             <div className="grid md:grid-cols-2 gap-8">
               {/* Plano Síndico */}
-              <div className="border-2 border-[#E2E8F0] rounded-2xl overflow-hidden">
+              <div className="border-2 border-border rounded-2xl overflow-hidden">
                 <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] p-6 text-white">
                   <h3 className="text-xl font-bold mb-1">Plano Síndico</h3>
                   <div className="flex items-baseline gap-1">
@@ -386,7 +386,7 @@ export default function ApresentacaoPage() {
                 <div className="p-6">
                   <ul className="space-y-3">
                     {['1 condomínio', 'Até 25 categorias', 'Edições ilimitadas', 'QR Code para moradores', 'Classificados', 'Caronas coletivas', 'Módulo de chamados', 'Personalização de cores e layout', 'Cabeçalho premium', 'Suporte por e-mail'].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-[#475569]">
+                      <li key={f} className="flex items-center gap-2 text-sm text-text-light">
                         <svg className="w-4 h-4 text-[#10B981] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
@@ -408,7 +408,7 @@ export default function ApresentacaoPage() {
                 <div className="p-6">
                   <ul className="space-y-3">
                     {['Condomínios ilimitados', 'Todas as 25+ categorias', 'Edições ilimitadas', 'QR Code para moradores', 'Classificados e publicidade', 'Caronas coletivas', 'Módulo completo de chamados', 'Personalização total', 'Cabeçalho premium com logo', 'Relatórios e analytics', 'Gestão de síndicos', 'Suporte prioritário'].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-sm text-[#475569]">
+                      <li key={f} className="flex items-center gap-2 text-sm text-text-light">
                         <svg className="w-4 h-4 text-[#D4AF37] shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
@@ -418,7 +418,7 @@ export default function ApresentacaoPage() {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-8 text-sm text-[#64748B]">
+            <div className="mt-6 flex items-center justify-center gap-8 text-sm text-text-light">
               <div className="flex items-center gap-1.5"><svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg> 7 dias grátis</div>
               <div className="flex items-center gap-1.5"><svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg> Sem fidelidade</div>
               <div className="flex items-center gap-1.5"><svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg> Sem multa</div>
@@ -432,26 +432,26 @@ export default function ApresentacaoPage() {
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#1E3A5F] flex items-center justify-center text-white text-sm font-bold">08</div>
-              <h2 className="text-2xl font-bold text-[#1E293B]">Ecossistema APP GROUP</h2>
+              <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">08</div>
+              <h2 className="text-2xl font-bold text-text">Ecossistema APP GROUP</h2>
             </div>
-            <p className="text-[#64748B] mb-8 max-w-2xl">O APP REVISTA faz parte de um ecossistema completo de soluções para condomínios, com integração nativa entre todos os sistemas.</p>
+            <p className="text-text-light mb-8 max-w-2xl">O APP REVISTA faz parte de um ecossistema completo de soluções para condomínios, com integração nativa entre todos os sistemas.</p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {ecosistema.map(app => (
-                <div key={app.nome} className="bg-white border border-[#E2E8F0] rounded-2xl p-6 text-center shadow-sm">
-                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden bg-[#F8FAFC]">
+                <div key={app.nome} className="bg-white border border-border rounded-2xl p-6 text-center shadow-sm">
+                  <div className="relative w-20 h-20 mx-auto mb-4 rounded-2xl overflow-hidden bg-surface-alt">
                     <Image src={app.logo} alt={app.nome} fill sizes="80px" className="object-contain p-2" />
                   </div>
-                  <h4 className="text-base font-bold text-[#1E293B]">{app.nome}</h4>
-                  <p className="text-xs text-[#64748B] mt-1">{app.dominio}</p>
+                  <h4 className="text-base font-bold text-text">{app.nome}</h4>
+                  <p className="text-xs text-text-light mt-1">{app.dominio}</p>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 p-6 bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl">
-              <h4 className="text-sm font-bold text-[#1E293B] mb-3">Sobre a Empresa</h4>
-              <div className="grid md:grid-cols-2 gap-4 text-sm text-[#475569]">
+            <div className="mt-8 p-6 bg-surface-alt border border-border rounded-xl">
+              <h4 className="text-sm font-bold text-text mb-3">Sobre a Empresa</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm text-text-light">
                 <div>
                   <p><strong>Razão Social:</strong> APP GROUP LTDA - ME</p>
                   <p><strong>CNPJ:</strong> 51.797.070/0001-53</p>

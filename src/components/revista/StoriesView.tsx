@@ -53,6 +53,7 @@ export default function StoriesView({ edition, condo, sections, getCategoryInfo 
   }, [isPaused, currentStory, goNext]);
 
   // Reset progress on story change
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   useEffect(() => { setProgress(0); }, [currentStory]);
 
   const handleTap = (e: React.MouseEvent<HTMLDivElement>) => {

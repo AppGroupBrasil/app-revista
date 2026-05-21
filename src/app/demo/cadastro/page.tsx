@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { registrar, login } from '@/lib/auth';
+import { api } from '@/lib/api';
 
 type Perfil = null | 'sindico' | 'administradora';
 
@@ -15,34 +17,59 @@ export default function CadastroPage() {
     phone: '',
     password: '',
     confirmPassword: '',
-    // Síndico
     condoName: '',
     condoAddress: '',
-    // Administradora
     companyName: '',
     companyLogo: '',
     cnpj: '',
   });
   const [created, setCreated] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setCreated(true);
+    setErro(null);
+    if (!perfil) { setErro('Selecione o perfil'); return; }
+    if (form.password !== form.confirmPassword) { setErro('Senhas não conferem'); return; }
+    if (form.password.length < 6) { setErro('Senha deve ter pelo menos 6 caracteres'); return; }
+
+    setLoading(true);
+    try {
+      await registrar({
+        email: form.email,
+        senha: form.password,
+        nome: form.name,
+        telefone: form.phone || undefined,
+      });
+      await login(form.email, form.password);
+      await api.post('/condominios', {
+        perfil,
+        nome: perfil === 'sindico' ? form.condoName : form.companyName,
+        endereco: form.condoAddress || undefined,
+        cnpj: perfil === 'administradora' ? form.cnpj : undefined,
+      });
+      setCreated(true);
+    } catch (err) {
+      setErro(err instanceof Error ? err.message : 'Erro ao cadastrar');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-white to-[#EEF2FF]">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur border-b border-[#E2E8F0]">
+      <header className="bg-white/80 backdrop-blur border-b border-border">
         <div className="max-w-5xl mx-auto px-4 min-h-18 flex items-center justify-between">
           <Link href="/" className="flex items-start gap-2">
             <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-lg" />
             <div className="flex flex-col">
               <span className="text-lg font-bold bg-gradient-to-r from-[#1E3A5F] to-[#D4AF37] bg-clip-text text-transparent leading-none">APP REVISTA</span>
-              <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-[#1E3A5F] leading-none">Condominio</span>
+              <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-primary leading-none">Condominio</span>
             </div>
           </Link>
-          <Link href="/demo" className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors">
+          <Link href="/demo" className="text-sm text-text-light hover:text-primary transition-colors">
             ← Voltar ao Demo
           </Link>
         </div>
@@ -56,8 +83,8 @@ export default function CadastroPage() {
               <div className="w-20 h-20 mx-auto rounded-full bg-green-100 flex items-center justify-center mb-6">
                 <span className="text-4xl">✅</span>
               </div>
-              <h1 className="text-2xl font-bold text-[#1E293B] mb-2">Cadastro Realizado!</h1>
-              <p className="text-[#64748B] mb-8">
+              <h1 className="text-2xl font-bold text-text mb-2">Cadastro Realizado!</h1>
+              <p className="text-text-light mb-8">
                 {perfil === 'sindico'
                   ? 'Seu condomínio já está pronto. Acesse o painel para começar.'
                   : 'Sua conta de administradora foi criada. Gerencie seus condomínios no painel.'}
@@ -71,7 +98,7 @@ export default function CadastroPage() {
                 </Link>
                 <Link
                   href="/demo"
-                  className="px-6 py-3 bg-white border-2 border-[#E2E8F0] text-[#1E3A5F] font-semibold rounded-xl hover:border-[#1E3A5F] transition-all"
+                  className="px-6 py-3 bg-white border-2 border-border text-primary font-semibold rounded-xl hover:border-[#1E3A5F] transition-all"
                 >
                   Ver Demo
                 </Link>
@@ -81,8 +108,8 @@ export default function CadastroPage() {
             /* ============ PROFILE SELECTION ============ */
             <motion.div key="select" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               <div className="text-center mb-10">
-                <h1 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-3">Criar Conta</h1>
-                <p className="text-[#64748B] text-lg">Selecione o tipo de cadastro</p>
+                <h1 className="text-3xl sm:text-4xl font-bold text-text mb-3">Criar Conta</h1>
+                <p className="text-text-light text-lg">Selecione o tipo de cadastro</p>
               </div>
 
               <div className="grid sm:grid-cols-2 gap-6">
@@ -91,15 +118,15 @@ export default function CadastroPage() {
                   whileHover={{ scale: 1.02, y: -4 }}
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setPerfil('sindico')}
-                  className="relative bg-white rounded-2xl border-2 border-[#E2E8F0] p-8 text-left hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10 transition-all group"
+                  className="relative bg-white rounded-2xl border-2 border-border p-8 text-left hover:border-[#10B981] hover:shadow-xl hover:shadow-[#10B981]/10 transition-all group"
                 >
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#10B981] to-[#059669] flex items-center justify-center mb-5 shadow-lg shadow-[#10B981]/20">
                     <span className="text-3xl">🏠</span>
                   </div>
-                  <h2 className="text-xl font-bold text-[#1E293B] mb-2 group-hover:text-[#10B981] transition-colors">
+                  <h2 className="text-xl font-bold text-text mb-2 group-hover:text-[#10B981] transition-colors">
                     CADASTRO SÍNDICO
                   </h2>
-                  <p className="text-sm text-[#64748B] mb-5">
+                  <p className="text-sm text-text-light mb-5">
                     Para síndicos que administram um único condomínio
                   </p>
                   <ul className="space-y-2">
@@ -110,16 +137,16 @@ export default function CadastroPage() {
                       'Módulo de chamados',
                       'QR Code público',
                     ].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-xs text-[#475569]">
+                      <li key={f} className="flex items-center gap-2 text-xs text-text-light">
                         <svg className="w-4 h-4 text-[#10B981] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-baseline gap-1">
-                    <span className="text-xs text-[#64748B]">R$</span>
-                    <span className="text-3xl font-bold text-[#1E293B]">99</span>
-                    <span className="text-xs text-[#64748B]">/mês</span>
+                  <div className="mt-6 pt-4 border-t border-border flex items-baseline gap-1">
+                    <span className="text-xs text-text-light">R$</span>
+                    <span className="text-3xl font-bold text-text">99</span>
+                    <span className="text-xs text-text-light">/mês</span>
                   </div>
                 </motion.button>
 
@@ -134,10 +161,10 @@ export default function CadastroPage() {
                   <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#1E3A5F] to-[#2A5A8F] flex items-center justify-center mb-5 shadow-lg shadow-[#1E3A5F]/20">
                     <span className="text-3xl">🏢</span>
                   </div>
-                  <h2 className="text-xl font-bold text-[#1E293B] mb-2 group-hover:text-[#1E3A5F] transition-colors">
+                  <h2 className="text-xl font-bold text-text mb-2 group-hover:text-primary transition-colors">
                     CADASTRO ADMINISTRADORA
                   </h2>
-                  <p className="text-sm text-[#64748B] mb-5">
+                  <p className="text-sm text-text-light mb-5">
                     Para administradoras que gerenciam múltiplos condomínios
                   </p>
                   <ul className="space-y-2">
@@ -148,24 +175,24 @@ export default function CadastroPage() {
                       'Relatórios e analytics',
                       'Suporte prioritário',
                     ].map(f => (
-                      <li key={f} className="flex items-center gap-2 text-xs text-[#475569]">
+                      <li key={f} className="flex items-center gap-2 text-xs text-text-light">
                         <svg className="w-4 h-4 text-[#D4AF37] flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6 pt-4 border-t border-[#E2E8F0] flex items-baseline gap-1">
-                    <span className="text-xs text-[#64748B]">R$</span>
-                    <span className="text-3xl font-bold text-[#1E293B]">199</span>
-                    <span className="text-xs text-[#64748B]">/mês</span>
+                  <div className="mt-6 pt-4 border-t border-border flex items-baseline gap-1">
+                    <span className="text-xs text-text-light">R$</span>
+                    <span className="text-3xl font-bold text-text">199</span>
+                    <span className="text-xs text-text-light">/mês</span>
                   </div>
                 </motion.button>
               </div>
 
               {/* Login link */}
-              <p className="text-center mt-8 text-sm text-[#64748B]">
+              <p className="text-center mt-8 text-sm text-text-light">
                 Já tem uma conta?{' '}
-                <Link href="/demo/painel" className="text-[#1E3A5F] font-semibold hover:underline">
+                <Link href="/demo/painel" className="text-primary font-semibold hover:underline">
                   Entrar
                 </Link>
               </p>
@@ -175,12 +202,12 @@ export default function CadastroPage() {
             <motion.div key="form" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
               <button
                 onClick={() => setPerfil(null)}
-                className="flex items-center gap-1 text-sm text-[#64748B] hover:text-[#1E3A5F] mb-6 transition-colors"
+                className="flex items-center gap-1 text-sm text-text-light hover:text-primary mb-6 transition-colors"
               >
                 ← Voltar à seleção
               </button>
 
-              <div className="bg-white rounded-2xl border border-[#E2E8F0] shadow-xl overflow-hidden">
+              <div className="bg-white rounded-2xl border border-border shadow-xl overflow-hidden">
                 {/* Form header */}
                 <div className={`p-6 ${perfil === 'sindico' ? 'bg-gradient-to-r from-[#10B981] to-[#059669]' : 'bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F]'} text-white`}>
                   <div className="flex items-center gap-3">
@@ -199,53 +226,53 @@ export default function CadastroPage() {
                 <form onSubmit={handleSubmit} className="p-6 space-y-6">
                   {/* Personal data */}
                   <div>
-                    <h3 className="text-sm font-bold text-[#1E293B] mb-3 flex items-center gap-2">
-                      <span className="w-6 h-6 rounded-full bg-[#F1F5F9] flex items-center justify-center text-xs font-bold text-[#1E3A5F]">1</span>
+                    <h3 className="text-sm font-bold text-text mb-3 flex items-center gap-2">
+                      <span className="w-6 h-6 rounded-full bg-surface-hover flex items-center justify-center text-xs font-bold text-primary">1</span>
                       Dados Pessoais
                     </h3>
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Nome Completo *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Nome Completo *</label>
                         <input
                           type="text"
                           required
                           value={form.name}
                           onChange={e => setForm(p => ({ ...p, name: e.target.value }))}
                           placeholder="Seu nome"
-                          className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                          className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Telefone *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Telefone *</label>
                         <input
                           type="tel"
                           required
                           value={form.phone}
                           onChange={e => setForm(p => ({ ...p, phone: e.target.value }))}
                           placeholder="(11) 99999-9999"
-                          className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                          className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">E-mail *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">E-mail *</label>
                         <input
                           type="email"
                           required
                           value={form.email}
                           onChange={e => setForm(p => ({ ...p, email: e.target.value }))}
                           placeholder="seu@email.com"
-                          className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                          className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Senha *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Senha *</label>
                         <input
                           type="password"
                           required
                           value={form.password}
                           onChange={e => setForm(p => ({ ...p, password: e.target.value }))}
                           placeholder="Mínimo 6 caracteres"
-                          className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                          className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                         />
                       </div>
                     </div>
@@ -254,31 +281,31 @@ export default function CadastroPage() {
                   {/* Condominium data (síndico) */}
                   {perfil === 'sindico' && (
                     <div>
-                      <h3 className="text-sm font-bold text-[#1E293B] mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-[#F1F5F9] flex items-center justify-center text-xs font-bold text-[#10B981]">2</span>
+                      <h3 className="text-sm font-bold text-text mb-3 flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-surface-hover flex items-center justify-center text-xs font-bold text-[#10B981]">2</span>
                         Dados do Condomínio
                       </h3>
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Nome do Condomínio *</label>
+                          <label className="block text-xs font-medium text-text-light mb-1">Nome do Condomínio *</label>
                           <input
                             type="text"
                             required
                             value={form.condoName}
                             onChange={e => setForm(p => ({ ...p, condoName: e.target.value }))}
                             placeholder="Residencial Exemplo"
-                            className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                            className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Endereço *</label>
+                          <label className="block text-xs font-medium text-text-light mb-1">Endereço *</label>
                           <input
                             type="text"
                             required
                             value={form.condoAddress}
                             onChange={e => setForm(p => ({ ...p, condoAddress: e.target.value }))}
                             placeholder="Rua, número, bairro"
-                            className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                            className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                           />
                         </div>
                       </div>
@@ -288,31 +315,31 @@ export default function CadastroPage() {
                   {/* Company data (administradora) */}
                   {perfil === 'administradora' && (
                     <div>
-                      <h3 className="text-sm font-bold text-[#1E293B] mb-3 flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-[#F1F5F9] flex items-center justify-center text-xs font-bold text-[#1E3A5F]">2</span>
+                      <h3 className="text-sm font-bold text-text mb-3 flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-surface-hover flex items-center justify-center text-xs font-bold text-primary">2</span>
                         Dados da Empresa
                       </h3>
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Nome da Empresa *</label>
+                          <label className="block text-xs font-medium text-text-light mb-1">Nome da Empresa *</label>
                           <input
                             type="text"
                             required
                             value={form.companyName}
                             onChange={e => setForm(p => ({ ...p, companyName: e.target.value }))}
                             placeholder="Administradora Exemplo Ltda."
-                            className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                            className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">CNPJ *</label>
+                          <label className="block text-xs font-medium text-text-light mb-1">CNPJ *</label>
                           <input
                             type="text"
                             required
                             value={form.cnpj}
                             onChange={e => setForm(p => ({ ...p, cnpj: e.target.value }))}
                             placeholder="00.000.000/0001-00"
-                            className="w-full px-3 py-2.5 border border-[#E2E8F0] rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
+                            className="w-full px-3 py-2.5 border border-border rounded-xl text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none transition-all"
                           />
                         </div>
                       </div>
@@ -324,19 +351,25 @@ export default function CadastroPage() {
                     </div>
                   )}
 
-                  {/* Submit */}
+                  {erro && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+                      {erro}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className={`w-full py-3 rounded-xl font-semibold text-white transition-all hover:shadow-lg ${
+                    disabled={loading}
+                    className={`w-full py-3 rounded-xl font-semibold text-white transition-all hover:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed ${
                       perfil === 'sindico'
                         ? 'bg-gradient-to-r from-[#10B981] to-[#059669] hover:shadow-[#10B981]/30'
                         : 'bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] hover:shadow-[#1E3A5F]/30'
                     }`}
                   >
-                    Criar Conta {perfil === 'sindico' ? 'Síndico' : 'Administradora'}
+                    {loading ? 'Criando conta…' : `Criar Conta ${perfil === 'sindico' ? 'Síndico' : 'Administradora'}`}
                   </button>
 
-                  <p className="text-center text-xs text-[#94A3B8]">
+                  <p className="text-center text-xs text-text-muted">
                     Ao criar sua conta, você concorda com os Termos de Uso e a Política de Privacidade.
                   </p>
                 </form>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QRCodeSVG } from 'qrcode.react';
 
@@ -20,17 +21,17 @@ export default function QRCodesPage() {
   const selected = selectedIdx !== null ? qrCodesExemplo[selectedIdx] : null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] via-white to-[#F1F5F9]">
+    <div className="min-h-screen bg-app">
       {/* Header */}
       <header className="bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] text-white">
         <div className="max-w-lg mx-auto px-4 pt-4 flex items-center justify-between">
-          <a href="/demo" className="text-white/70 hover:text-white transition-colors text-sm flex items-center gap-1">
+          <Link href="/demo" className="text-white/70 hover:text-white transition-colors text-sm flex items-center gap-1">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Voltar
-          </a>
-          <a href="/" className="px-3 py-1 text-xs font-medium text-white/70 bg-white/10 rounded-lg hover:bg-white/20 hover:text-white transition-all">
+          </Link>
+          <Link href="/" className="px-3 py-1 text-xs font-medium text-white/70 bg-white/10 rounded-lg hover:bg-white/20 hover:text-white transition-all">
             Sair
-          </a>
+          </Link>
         </div>
         <div className="max-w-lg mx-auto px-4 py-4 text-center">
           <div className="text-3xl mb-2">📱</div>
@@ -44,18 +45,18 @@ export default function QRCodesPage() {
         <div className="relative">
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
-            className="w-full px-4 py-3.5 bg-white rounded-xl border border-[#E2E8F0] shadow-sm flex items-center justify-between hover:border-[#6D28D9]/40 transition-all"
+            className="w-full px-4 py-3.5 bg-white rounded-xl border border-border shadow-sm flex items-center justify-between hover:border-[#6D28D9]/40 transition-all"
           >
             <div className="flex items-center gap-3">
               <span className="text-lg">{selected ? selected.icone : '📱'}</span>
-              <span className={`text-sm font-medium ${selected ? 'text-[#1E293B]' : 'text-[#94A3B8]'}`}>
+              <span className={`text-sm font-medium ${selected ? 'text-text' : 'text-text-muted'}`}>
                 {selected ? selected.titulo : 'Selecione um QR Code...'}
               </span>
             </div>
             <motion.span
               animate={{ rotate: dropdownOpen ? 180 : 0 }}
               transition={{ duration: 0.2 }}
-              className="text-[#94A3B8]"
+              className="text-text-muted"
             >
               ▾
             </motion.span>
@@ -68,18 +69,18 @@ export default function QRCodesPage() {
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -8, scale: 0.98 }}
                 transition={{ duration: 0.15 }}
-                className="absolute z-20 w-full mt-2 bg-white rounded-xl border border-[#E2E8F0] shadow-xl overflow-hidden"
+                className="absolute z-20 w-full mt-2 bg-white rounded-xl border border-border shadow-xl overflow-hidden"
               >
                 {qrCodesExemplo.map((qr, idx) => (
                   <button
                     key={idx}
                     onClick={() => { setSelectedIdx(idx); setDropdownOpen(false); }}
-                    className={`w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-[#F8FAFC] transition-colors border-b border-[#F1F5F9] last:border-0 ${selectedIdx === idx ? 'bg-[#6D28D9]/5' : ''}`}
+                    className={`w-full px-4 py-3 flex items-center gap-3 text-left hover:bg-surface-alt transition-colors border-b border-[#F1F5F9] last:border-0 ${selectedIdx === idx ? 'bg-[#6D28D9]/5' : ''}`}
                   >
                     <span className="text-lg flex-shrink-0">{qr.icone}</span>
                     <div className="min-w-0">
-                      <p className="text-sm font-medium text-[#1E293B] truncate">{qr.titulo}</p>
-                      <p className="text-xs text-[#64748B] truncate">{qr.descricao}</p>
+                      <p className="text-sm font-medium text-text truncate">{qr.titulo}</p>
+                      <p className="text-xs text-text-light truncate">{qr.descricao}</p>
                     </div>
                     {selectedIdx === idx && <span className="ml-auto text-[#6D28D9] flex-shrink-0">✓</span>}
                   </button>
@@ -98,11 +99,11 @@ export default function QRCodesPage() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.25 }}
-              className="bg-white rounded-2xl border border-[#E2E8F0] shadow-lg overflow-hidden"
+              className="bg-white rounded-2xl border border-border shadow-lg overflow-hidden"
             >
               {/* QR Code */}
               <div className="flex flex-col items-center py-8 px-6 bg-gradient-to-b from-[#FAFAFE] to-white">
-                <div className="bg-white p-4 rounded-2xl shadow-md border border-[#E2E8F0]">
+                <div className="bg-white p-4 rounded-2xl shadow-md border border-border">
                   <QRCodeSVG value={selected.url} size={200} bgColor="#ffffff" fgColor="#1E293B" level="M" />
                 </div>
               </div>
@@ -111,10 +112,10 @@ export default function QRCodesPage() {
               <div className="px-6 pb-6 space-y-3">
                 <div className="flex items-center gap-2">
                   <span className="text-2xl">{selected.icone}</span>
-                  <h2 className="text-lg font-bold text-[#1E293B]">{selected.titulo}</h2>
+                  <h2 className="text-lg font-bold text-text">{selected.titulo}</h2>
                 </div>
                 {selected.descricao && (
-                  <p className="text-sm text-[#64748B] leading-relaxed">{selected.descricao}</p>
+                  <p className="text-sm text-text-light leading-relaxed">{selected.descricao}</p>
                 )}
 
                 {/* Botão Acessar */}
@@ -132,28 +133,28 @@ export default function QRCodesPage() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="bg-white rounded-2xl border border-[#E2E8F0] p-12 text-center"
+              className="bg-white rounded-2xl border border-border p-12 text-center"
             >
               <div className="text-5xl mb-4">📱</div>
-              <p className="text-sm text-[#94A3B8] font-medium">Selecione um QR Code acima para visualizar</p>
+              <p className="text-sm text-text-muted font-medium">Selecione um QR Code acima para visualizar</p>
             </motion.div>
           )}
         </AnimatePresence>
 
         {/* Lista rápida de todos */}
         <div className="space-y-2">
-          <h3 className="text-xs font-semibold text-[#94A3B8] uppercase tracking-wider px-1">Todos os QR Codes</h3>
+          <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider px-1">Todos os QR Codes</h3>
           {qrCodesExemplo.map((qr, idx) => (
             <motion.button
               key={idx}
               whileTap={{ scale: 0.98 }}
               onClick={() => { setSelectedIdx(idx); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className={`w-full p-3 bg-white rounded-xl border text-left flex items-center gap-3 transition-all ${selectedIdx === idx ? 'border-[#6D28D9]/40 shadow-md shadow-[#6D28D9]/5' : 'border-[#E2E8F0] hover:border-[#CBD5E1]'}`}
+              className={`w-full p-3 bg-white rounded-xl border text-left flex items-center gap-3 transition-all ${selectedIdx === idx ? 'border-[#6D28D9]/40 shadow-md shadow-[#6D28D9]/5' : 'border-border hover:border-border-light'}`}
             >
               <span className="text-lg flex-shrink-0">{qr.icone}</span>
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-[#1E293B] truncate">{qr.titulo}</p>
-                <p className="text-xs text-[#64748B] truncate">{qr.descricao}</p>
+                <p className="text-sm font-medium text-text truncate">{qr.titulo}</p>
+                <p className="text-xs text-text-light truncate">{qr.descricao}</p>
               </div>
               <span className="text-xs text-[#6D28D9] font-medium flex-shrink-0">Ver →</span>
             </motion.button>
@@ -162,7 +163,7 @@ export default function QRCodesPage() {
 
         {/* Footer */}
         <div className="text-center py-4">
-          <p className="text-xs text-[#94A3B8]">Powered by <span className="font-semibold text-[#6D28D9]">APP REVISTA</span></p>
+          <p className="text-xs text-text-muted">Powered by <span className="font-semibold text-[#6D28D9]">APP REVISTA</span></p>
         </div>
       </main>
     </div>

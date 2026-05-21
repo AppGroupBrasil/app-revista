@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { demoCondominium, demoEdition } from '@/data/demo';
 import { categories } from '@/data/categories';
@@ -24,6 +25,7 @@ export default function RevistaPage() {
   const [demoClassifieds, setDemoClassifieds] = useState<DemoClassifiedSubmission[]>([]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDemoClassifieds(loadDemoClassifieds());
   }, []);
 
@@ -48,10 +50,10 @@ export default function RevistaPage() {
     <div className="min-h-screen flex flex-col" style={{ background: theme.bgGradient }}>
       {/* Top Bar */}
       <div className="flex items-center justify-between px-4 sm:px-6 py-3 bg-black/20 backdrop-blur-sm border-b border-white/5">
-        <a href="/demo" className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm">
+        <Link href="/demo" className="flex items-center gap-2 text-white/60 hover:text-white transition-colors text-sm">
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
           Voltar
-        </a>
+        </Link>
 
         {/* View Mode Selector - compact */}
         <div className="flex items-center gap-1 bg-white/5 p-1 rounded-xl border border-white/10">
@@ -82,9 +84,9 @@ export default function RevistaPage() {
             <span>🎨</span>
             <span className="hidden sm:inline">Personalizar</span>
           </button>
-          <a href="/" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all text-xs">
+          <Link href="/" className="px-3 py-1.5 rounded-lg bg-white/5 border border-white/10 text-white/50 hover:text-white hover:bg-white/10 transition-all text-xs">
             Sair
-          </a>
+          </Link>
         </div>
       </div>
 

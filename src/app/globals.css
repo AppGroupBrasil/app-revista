@@ -2,22 +2,33 @@
 
 @theme inline {
   --color-primary: #1E3A5F;
+  --color-primary-hover: #16304D;
   --color-primary-light: #2A5A8F;
   --color-primary-dark: #0F1F33;
   --color-accent: #D4AF37;
   --color-accent-light: #E8CC6E;
+  --color-accent-dark: #CA8A04;
   --color-surface: #FFFFFF;
   --color-surface-alt: #F8FAFC;
   --color-surface-hover: #F1F5F9;
   --color-text: #1E293B;
   --color-text-light: #64748B;
+  --color-text-muted: #94A3B8;
   --color-text-inverse: #FFFFFF;
   --color-border: #E2E8F0;
+  --color-border-light: #CBD5E1;
   --color-success: #10B981;
   --color-warning: #F59E0B;
   --color-error: #EF4444;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+}
+
+.bg-app {
+  background-image: linear-gradient(135deg, #F8FAFC, #FFFFFF, #F1F5F9);
+}
+.bg-app-soft {
+  background-image: linear-gradient(135deg, #F8FAFC, #EEF2FF);
 }
 
 * {

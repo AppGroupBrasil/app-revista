@@ -42,3 +42,8 @@ next-env.d.ts
 
 *.tar
 *.aab
+
+api/node_modules
+api/dist
+api/.env
+.env*.local

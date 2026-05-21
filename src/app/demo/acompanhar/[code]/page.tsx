@@ -52,7 +52,7 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
   const status = statusColors[request.status] || statusColors['aberto'];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+    <div className="min-h-screen bg-app-soft">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white">
         <div className="max-w-lg mx-auto px-4 py-6">
@@ -72,13 +72,13 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white rounded-2xl border border-[#E2E8F0] p-6"
+          className="bg-white rounded-2xl border border-border p-6"
         >
           <div className="flex items-center justify-between mb-4">
             <span className={`px-2.5 py-1 rounded-full text-xs font-medium ${status.bg} ${status.text}`}>
               {status.label}
             </span>
-            <span className="text-xs text-[#94A3B8]">
+            <span className="text-xs text-text-muted">
               {new Date(request.createdAt).toLocaleDateString('pt-BR')}
             </span>
           </div>
@@ -89,24 +89,24 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
                 type="text"
                 value={editTitle}
                 onChange={e => setEditTitle(e.target.value)}
-                className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
               />
               <textarea
                 value={editDesc}
                 onChange={e => setEditDesc(e.target.value)}
                 rows={3}
-                className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none"
+                className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none"
               />
               <div className="flex gap-2">
                 <button
                   onClick={() => setEditing(false)}
-                  className="px-4 py-2 bg-[#1E3A5F] text-white text-xs font-medium rounded-lg"
+                  className="px-4 py-2 bg-primary text-white text-xs font-medium rounded-lg"
                 >
                   Salvar
                 </button>
                 <button
                   onClick={() => setEditing(false)}
-                  className="px-4 py-2 text-[#64748B] text-xs font-medium"
+                  className="px-4 py-2 text-text-light text-xs font-medium"
                 >
                   Cancelar
                 </button>
@@ -114,15 +114,15 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
             </div>
           ) : (
             <>
-              <h2 className="text-lg font-bold text-[#1E293B] mb-2">{request.title}</h2>
-              <p className="text-sm text-[#64748B] mb-4">{request.description}</p>
-              <div className="flex items-center gap-4 text-xs text-[#94A3B8]">
+              <h2 className="text-lg font-bold text-text mb-2">{request.title}</h2>
+              <p className="text-sm text-text-light mb-4">{request.description}</p>
+              <div className="flex items-center gap-4 text-xs text-text-muted">
                 <span>👤 {request.residentName}</span>
                 <span>🏠 Apto {request.residentUnit}</span>
               </div>
               <button
                 onClick={handleEdit}
-                className="mt-3 text-xs text-[#1E3A5F] font-medium hover:underline"
+                className="mt-3 text-xs text-primary font-medium hover:underline"
               >
                 ✏️ Editar informações
               </button>
@@ -135,19 +135,19 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="bg-white rounded-2xl border border-[#E2E8F0] p-6"
+          className="bg-white rounded-2xl border border-border p-6"
         >
-          <h3 className="text-sm font-semibold text-[#1E293B] mb-4">Histórico</h3>
+          <h3 className="text-sm font-semibold text-text mb-4">Histórico</h3>
           <div className="space-y-4">
             {/* Creation event */}
             <div className="flex gap-3">
               <div className="flex flex-col items-center">
-                <div className="w-8 h-8 rounded-full bg-[#1E3A5F]/10 flex items-center justify-center text-sm">📝</div>
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-sm">📝</div>
                 <div className="w-px h-full bg-[#E2E8F0] mt-1" />
               </div>
               <div className="pb-4">
-                <div className="text-sm font-medium text-[#1E293B]">Chamado aberto</div>
-                <div className="text-xs text-[#94A3B8]">{new Date(request.createdAt).toLocaleString('pt-BR')}</div>
+                <div className="text-sm font-medium text-text">Chamado aberto</div>
+                <div className="text-xs text-text-muted">{new Date(request.createdAt).toLocaleString('pt-BR')}</div>
               </div>
             </div>
 
@@ -163,11 +163,11 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
                   <div className="w-px h-full bg-[#E2E8F0] mt-1" />
                 </div>
                 <div className="pb-4">
-                  <div className="text-sm font-medium text-[#1E293B]">{msg.author}</div>
-                  <div className="text-xs text-[#94A3B8] mb-1">
+                  <div className="text-sm font-medium text-text">{msg.author}</div>
+                  <div className="text-xs text-text-muted mb-1">
                     {msg.authorRole === 'sindico' ? 'Síndico' : 'Morador'} · {new Date(msg.createdAt).toLocaleString('pt-BR')}
                   </div>
-                  <div className="bg-[#F8FAFC] rounded-lg p-3 text-sm text-[#475569]">
+                  <div className="bg-surface-alt rounded-lg p-3 text-sm text-text-light">
                     {msg.content}
                   </div>
                 </div>
@@ -176,18 +176,18 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
           </div>
 
           {/* Reply */}
-          <form onSubmit={handleSendMessage} className="mt-4 pt-4 border-t border-[#E2E8F0]">
+          <form onSubmit={handleSendMessage} className="mt-4 pt-4 border-t border-border">
             <div className="flex gap-2">
               <input
                 type="text"
                 value={newMessage}
                 onChange={e => setNewMessage(e.target.value)}
                 placeholder="Escreva uma mensagem..."
-                className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                className="flex-1 px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
               />
               <button
                 type="submit"
-                className="px-4 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
+                className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
               >
                 Enviar
               </button>
@@ -199,12 +199,12 @@ export default function AcompanharPage({ params }: { params: Promise<{ code: str
         <div className="flex items-center justify-center gap-4 pt-2">
           <button
             onClick={() => navigator.clipboard?.writeText(`www.apprevista.com.br/acompanhar/${request.trackingCode}`)}
-            className="text-xs text-[#64748B] hover:text-[#1E3A5F] flex items-center gap-1"
+            className="text-xs text-text-light hover:text-primary flex items-center gap-1"
           >
             🔗 Copiar link
           </button>
           <span className="text-[#E2E8F0]">|</span>
-          <Link href="/demo/morador" className="text-xs text-[#64748B] hover:text-[#1E3A5F]">
+          <Link href="/demo/morador" className="text-xs text-text-light hover:text-primary">
             ← Voltar
           </Link>
         </div>

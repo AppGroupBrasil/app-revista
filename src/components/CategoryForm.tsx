@@ -14,8 +14,8 @@ interface CategoryFormProps {
   onRemoveImage: (index: number) => void;
 }
 
-const inputClass = 'w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]';
-const labelClass = 'block text-xs font-medium text-[#64748B] mb-1';
+const inputClass = 'w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]';
+const labelClass = 'block text-xs font-medium text-text-light mb-1';
 
 function ImageManager({ section, newImageUrl, onImageUrlChange, onAddImage, onRemoveImage }: {
   section: MagazineSection;
@@ -30,7 +30,7 @@ function ImageManager({ section, newImageUrl, onImageUrlChange, onAddImage, onRe
       {section.images.length > 0 && (
         <div className="grid grid-cols-3 gap-2 mb-3">
           {section.images.map((img, idx) => (
-            <div key={idx} className="relative group rounded-lg overflow-hidden h-24 bg-[#F1F5F9]">
+            <div key={idx} className="relative group rounded-lg overflow-hidden h-24 bg-surface-hover">
               <img src={img} alt={`Foto ${idx + 1}`} className="w-full h-full object-cover" />
               <button onClick={() => onRemoveImage(idx)}
                 className="absolute top-1 right-1 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-xs opacity-0 group-hover:opacity-100 transition-opacity">✕</button>
@@ -43,7 +43,7 @@ function ImageManager({ section, newImageUrl, onImageUrlChange, onAddImage, onRe
           onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); onAddImage(); } }}
           placeholder="Cole a URL da imagem..." className={`flex-1 ${inputClass}`} />
         <button onClick={onAddImage} disabled={!newImageUrl.trim()}
-          className="px-3 py-2 bg-[#1E3A5F] text-white text-xs font-medium rounded-lg hover:bg-[#2A5A8F] disabled:opacity-40 flex-shrink-0">+ Foto</button>
+          className="px-3 py-2 bg-primary text-white text-xs font-medium rounded-lg hover:bg-[#2A5A8F] disabled:opacity-40 flex-shrink-0">+ Foto</button>
       </div>
     </div>
   );
@@ -148,7 +148,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             placeholder="Descreva o contexto das fotos..." />
         </div>
         <ImageManager {...imgProps} />
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 Adicione quantas fotos desejar. Elas aparecerão como galeria na revista.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 Adicione quantas fotos desejar. Elas aparecerão como galeria na revista.</p>
       </div>
     );
   }
@@ -167,7 +167,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             placeholder="🔹 Hall de entrada — Novo piso e iluminação&#10;🔹 Jardim — Paisagismo completo" />
         </div>
         <ImageManager {...imgProps} />
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 Adicione fotos de antes e depois em pares para comparação visual.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 Adicione fotos de antes e depois em pares para comparação visual.</p>
       </div>
     );
   }
@@ -204,9 +204,9 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Conheça Nossa Equipe" />
         </div>
         {members.map((member, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#1E3A5F]">Funcionário {idx + 1}</span>
+              <span className="text-xs font-semibold text-primary">Funcionário {idx + 1}</span>
               {members.length > 1 && (
                 <button onClick={() => removeMember(idx)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
               )}
@@ -221,7 +221,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                       className="absolute inset-0 bg-black/50 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-full">✕</button>
                   </div>
                 ) : (
-                  <div className="w-20 h-20 rounded-full bg-[#E2E8F0] flex items-center justify-center text-[#94A3B8] text-2xl">👤</div>
+                  <div className="w-20 h-20 rounded-full bg-[#E2E8F0] flex items-center justify-center text-text-muted text-2xl">👤</div>
                 )}
               </div>
               <div className="flex-1 space-y-2">
@@ -264,7 +264,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addMember} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
+        <button onClick={addMember} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#1E3A5F] hover:text-primary transition-all">
           + Adicionar funcionário
         </button>
       </div>
@@ -286,7 +286,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             placeholder={categoryId === 'obras' ? 'Reforma da piscina: 75% concluída, previsão abr/2026...' : '✨ Instalação de LED nos corredores\n✨ Impermeabilização da cobertura'} />
         </div>
         <ImageManager {...imgProps} />
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">📸 Fotos de progresso valorizam muito o conteúdo!</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">📸 Fotos de progresso valorizam muito o conteúdo!</p>
       </div>
     );
   }
@@ -413,9 +413,9 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Caronas Coletivas" />
         </div>
         {caronas.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#1E3A5F]">🚗 Carona {idx + 1}</span>
+              <span className="text-xs font-semibold text-primary">🚗 Carona {idx + 1}</span>
               {caronas.length > 1 && (
                 <button onClick={() => removeItem(idx)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
               )}
@@ -425,11 +425,11 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               <label className={labelClass}>Tipo</label>
               <div className="flex gap-2">
                 <button onClick={() => updateItem(idx, 'tipo', 'oferecer')}
-                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'oferecer' ? 'border-[#10B981] bg-[#10B981]/10 text-[#10B981]' : 'border-[#E2E8F0] text-[#94A3B8] hover:border-[#CBD5E1]'}`}>
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'oferecer' ? 'border-[#10B981] bg-[#10B981]/10 text-[#10B981]' : 'border-border text-text-muted hover:border-border-light'}`}>
                   🚗 Oferecer Carona
                 </button>
                 <button onClick={() => updateItem(idx, 'tipo', 'solicitar')}
-                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'solicitar' ? 'border-[#3B82F6] bg-[#3B82F6]/10 text-[#3B82F6]' : 'border-[#E2E8F0] text-[#94A3B8] hover:border-[#CBD5E1]'}`}>
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'solicitar' ? 'border-[#3B82F6] bg-[#3B82F6]/10 text-[#3B82F6]' : 'border-border text-text-muted hover:border-border-light'}`}>
                   🙋 Solicitar Carona
                 </button>
               </div>
@@ -440,7 +440,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               <input type="text" value={item.endereco} onChange={e => updateItem(idx, 'endereco', e.target.value)} className={inputClass}
                 placeholder="Ex: Av. Paulista, 1000 - São Paulo" />
               {item.endereco.trim() && (
-                <div className="mt-2 rounded-xl overflow-hidden border border-[#E2E8F0] h-48 bg-[#F1F5F9]">
+                <div className="mt-2 rounded-xl overflow-hidden border border-border h-48 bg-surface-hover">
                   <iframe
                     title={`Mapa carona ${idx + 1}`}
                     width="100%"
@@ -450,9 +450,9 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                     referrerPolicy="no-referrer-when-downgrade"
                     src={`https://www.openstreetmap.org/export/embed.html?bbox=-46.7,-23.6,-46.6,-23.5&layer=mapnik&marker=-23.55,-46.65`}
                   />
-                  <div className="bg-white px-3 py-2 flex items-center gap-2 border-t border-[#E2E8F0]">
+                  <div className="bg-white px-3 py-2 flex items-center gap-2 border-t border-border">
                     <span className="text-red-500 text-lg">📍</span>
-                    <span className="text-xs text-[#1E293B] font-medium">{item.endereco}</span>
+                    <span className="text-xs text-text font-medium">{item.endereco}</span>
                   </div>
                 </div>
               )}
@@ -478,7 +478,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                 className={`w-full py-3 px-4 rounded-xl border-2 text-sm font-semibold flex items-center justify-center gap-2 transition-all ${
                   item.dividirGas
                     ? 'border-[#F59E0B] bg-[#F59E0B]/10 text-[#D97706]'
-                    : 'border-[#E2E8F0] text-[#94A3B8] hover:border-[#CBD5E1]'
+                    : 'border-border text-text-muted hover:border-border-light'
                 }`}>
                 <span className="text-lg">⛽</span>
                 Vamos dividir a gasolina?
@@ -486,8 +486,8 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               </button>
             </div>
             {/* Contato */}
-            <div className="pt-2 border-t border-[#E2E8F0]">
-              <p className="text-xs font-semibold text-[#64748B] mb-2">📞 Contato</p>
+            <div className="pt-2 border-t border-border">
+              <p className="text-xs font-semibold text-text-light mb-2">📞 Contato</p>
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelClass}>Bloco</label>
@@ -509,10 +509,10 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#1E3A5F] hover:text-primary transition-all">
           + Adicionar carona
         </button>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 Moradores podem oferecer ou solicitar caronas. O endereço aparece no mapa e os vizinhos entram em contato.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 Moradores podem oferecer ou solicitar caronas. O endereço aparece no mapa e os vizinhos entram em contato.</p>
       </div>
     );
   }
@@ -586,7 +586,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             }} />
         </div>
         <ImageManager {...imgProps} />
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">📸 Adicione uma foto do síndico para humanizar a comunicação!</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">📸 Adicione uma foto do síndico para humanizar a comunicação!</p>
       </div>
     );
   }
@@ -697,9 +697,9 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Achados e Perdidos" />
         </div>
         {itens.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#1E3A5F]">🔍 Item {idx + 1}</span>
+              <span className="text-xs font-semibold text-primary">🔍 Item {idx + 1}</span>
               {itens.length > 1 && (
                 <button onClick={() => removeItem(idx)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
               )}
@@ -709,11 +709,11 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               <label className={labelClass}>Tipo</label>
               <div className="flex gap-2">
                 <button onClick={() => updateItem(idx, 'tipo', 'achado')}
-                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'achado' ? 'border-[#10B981] bg-[#10B981]/10 text-[#10B981]' : 'border-[#E2E8F0] text-[#94A3B8] hover:border-[#CBD5E1]'}`}>
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'achado' ? 'border-[#10B981] bg-[#10B981]/10 text-[#10B981]' : 'border-border text-text-muted hover:border-border-light'}`}>
                   ✅ Achado
                 </button>
                 <button onClick={() => updateItem(idx, 'tipo', 'perdido')}
-                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'perdido' ? 'border-[#EF4444] bg-[#EF4444]/10 text-[#EF4444]' : 'border-[#E2E8F0] text-[#94A3B8] hover:border-[#CBD5E1]'}`}>
+                  className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium border-2 transition-all ${item.tipo === 'perdido' ? 'border-[#EF4444] bg-[#EF4444]/10 text-[#EF4444]' : 'border-border text-text-muted hover:border-border-light'}`}>
                   ❌ Perdido
                 </button>
               </div>
@@ -728,7 +728,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                       className="absolute inset-0 bg-black/50 text-white text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">✕</button>
                   </div>
                 ) : (
-                  <div className="w-24 h-24 rounded-xl bg-[#E2E8F0] flex items-center justify-center text-[#94A3B8] text-2xl">📷</div>
+                  <div className="w-24 h-24 rounded-xl bg-[#E2E8F0] flex items-center justify-center text-text-muted text-2xl">📷</div>
                 )}
               </div>
               <div className="flex-1 space-y-2">
@@ -758,7 +758,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#1E3A5F] hover:text-primary transition-all">
           + Adicionar item
         </button>
       </div>
@@ -869,9 +869,9 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Links Úteis" />
         </div>
         {links.map((link, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#1E3A5F]">Link {idx + 1}</span>
+              <span className="text-xs font-semibold text-primary">Link {idx + 1}</span>
               {links.length > 1 && (
                 <button onClick={() => removeLink(idx)} className="text-xs text-red-500 hover:text-red-700">Remover</button>
               )}
@@ -892,14 +892,14 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               <label className={labelClass}>Imagem (opcional)</label>
               <input type="url" value={link.imagem} onChange={e => updateLink(idx, 'imagem', e.target.value)} className={inputClass} placeholder="URL da imagem de capa..." />
               {link.imagem && (
-                <div className="mt-2 h-20 rounded-lg overflow-hidden bg-[#F1F5F9] w-32">
+                <div className="mt-2 h-20 rounded-lg overflow-hidden bg-surface-hover w-32">
                   <img src={link.imagem} alt="Preview" className="w-full h-full object-cover" />
                 </div>
               )}
             </div>
           </div>
         ))}
-        <button onClick={addLink} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#1E3A5F] hover:text-[#1E3A5F] transition-all">
+        <button onClick={addLink} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#1E3A5F] hover:text-primary transition-all">
           + Adicionar outro link
         </button>
       </div>
@@ -922,7 +922,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
         <div>
           <label className={labelClass}>Foto de Capa</label>
           {section.images.length > 0 ? (
-            <div className="relative group rounded-xl overflow-hidden h-56 bg-[#F1F5F9] mb-3">
+            <div className="relative group rounded-xl overflow-hidden h-56 bg-surface-hover mb-3">
               <img src={section.images[0]} alt="Capa" className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-5">
                 <h4 className="text-white text-xl font-bold drop-shadow-lg">{section.title || 'Título da Capa'}</h4>
@@ -934,7 +934,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               >✕</button>
             </div>
           ) : (
-            <div className="h-40 border-2 border-dashed border-[#CBD5E1] rounded-xl flex items-center justify-center text-[#94A3B8] text-sm mb-3">
+            <div className="h-40 border-2 border-dashed border-border-light rounded-xl flex items-center justify-center text-text-muted text-sm mb-3">
               📷 Adicione a foto de capa abaixo
             </div>
           )}
@@ -943,10 +943,10 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               onKeyDown={e => { if (e.key === 'Enter') { e.preventDefault(); onAddImage(); } }}
               placeholder="Cole a URL da foto de capa..." className={`flex-1 ${inputClass}`} />
             <button onClick={() => { onAddImage(); }} disabled={!newImageUrl.trim()}
-              className="px-3 py-2 bg-[#1E3A5F] text-white text-xs font-medium rounded-lg hover:bg-[#2A5A8F] disabled:opacity-40 flex-shrink-0">📷 Capa</button>
+              className="px-3 py-2 bg-primary text-white text-xs font-medium rounded-lg hover:bg-[#2A5A8F] disabled:opacity-40 flex-shrink-0">📷 Capa</button>
           </div>
         </div>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 A foto será exibida como capa da revista com o título e descrição sobrepostos.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 A foto será exibida como capa da revista com o título e descrição sobrepostos.</p>
       </div>
     );
   }
@@ -982,7 +982,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Avaliações do Condomínio" />
         </div>
         {avaliacoes.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#F59E0B]">⭐ Avaliação {idx + 1}</span>
               {avaliacoes.length > 1 && (
@@ -1012,14 +1012,14 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                   }`}>{n}</div>
                 ))}
               </div>
-              <p className="text-[10px] text-[#94A3B8] mt-1">Preview — moradores escolhem de 0 a 10</p>
+              <p className="text-[10px] text-text-muted mt-1">Preview — moradores escolhem de 0 a 10</p>
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#F59E0B] hover:text-[#F59E0B] transition-all">
           + Adicionar avaliação
         </button>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 Os moradores verão cada pergunta na revista e poderão dar notas de 0 a 10.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 Os moradores verão cada pergunta na revista e poderão dar notas de 0 a 10.</p>
       </div>
     );
   }
@@ -1058,7 +1058,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Telefones Úteis" />
         </div>
         {telefones.map((item, idx) => (
-          <div key={idx} className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-2">
+          <div key={idx} className="p-3 bg-surface-alt rounded-xl border border-border space-y-2">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#0EA5E9]">📞 Contato {idx + 1}</span>
               {telefones.length > 1 && (
@@ -1085,7 +1085,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#0EA5E9] hover:text-[#0EA5E9] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#0EA5E9] hover:text-[#0EA5E9] transition-all">
           + Adicionar telefone
         </button>
       </div>
@@ -1138,16 +1138,16 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <div className="grid grid-cols-2 gap-2">
             {presets.map((p, i) => (
               <button key={i} onClick={() => addPreset(p)}
-                className="p-2 rounded-lg border border-[#E2E8F0] text-left hover:border-[#7C3AED] hover:bg-[#7C3AED]/5 transition-all">
-                <span className="text-sm font-medium text-[#1E293B]">{p.label}</span>
-                <p className="text-[10px] text-[#94A3B8] mt-0.5">{p.desc}</p>
+                className="p-2 rounded-lg border border-border text-left hover:border-[#7C3AED] hover:bg-[#7C3AED]/5 transition-all">
+                <span className="text-sm font-medium text-text">{p.label}</span>
+                <p className="text-[10px] text-text-muted mt-0.5">{p.desc}</p>
               </button>
             ))}
           </div>
         </div>
         {/* QR Codes criados */}
         {qrs.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#7C3AED]">📱 QR Code {idx + 1}</span>
               {qrs.length > 1 && (
@@ -1158,11 +1158,11 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               {/* Preview do QR */}
               <div className="flex-shrink-0">
                 {item.url.trim() ? (
-                  <div className="bg-white p-3 rounded-xl border border-[#E2E8F0] shadow-sm">
+                  <div className="bg-white p-3 rounded-xl border border-border shadow-sm">
                     <QRCodeSVG value={item.url} size={120} bgColor="#ffffff" fgColor="#1E293B" level="M" />
                   </div>
                 ) : (
-                  <div className="w-[144px] h-[144px] bg-[#E2E8F0] rounded-xl flex items-center justify-center text-[#94A3B8] text-3xl">
+                  <div className="w-[144px] h-[144px] bg-[#E2E8F0] rounded-xl flex items-center justify-center text-text-muted text-3xl">
                     📱
                   </div>
                 )}
@@ -1188,10 +1188,10 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#7C3AED] hover:text-[#7C3AED] transition-all">
           + Adicionar QR Code personalizado
         </button>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">💡 Os QR Codes aparecerão na revista. Moradores podem escanear com a câmera do celular para acessar o conteúdo.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">💡 Os QR Codes aparecerão na revista. Moradores podem escanear com a câmera do celular para acessar o conteúdo.</p>
       </div>
     );
   }
@@ -1232,7 +1232,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-semibold text-[#6D28D9]">📱 Página Pública dos QR Codes</p>
-              <p className="text-xs text-[#64748B] mt-0.5">Os moradores acessam essa página para ver todos os QR Codes</p>
+              <p className="text-xs text-text-light mt-0.5">Os moradores acessam essa página para ver todos os QR Codes</p>
             </div>
             <a href="/demo/qrcodes" target="_blank" rel="noopener noreferrer"
               className="px-4 py-2 bg-[#6D28D9] text-white text-xs font-medium rounded-lg hover:bg-[#7C3AED] transition-all flex items-center gap-1 flex-shrink-0">
@@ -1242,7 +1242,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
         </div>
         {/* QR Codes */}
         {qrs.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#6D28D9]">📱 QR Code {idx + 1}</span>
               {qrs.length > 1 && (
@@ -1253,11 +1253,11 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
               {/* Preview QR */}
               <div className="flex-shrink-0">
                 {item.url.trim() ? (
-                  <div className="bg-white p-2 rounded-xl border border-[#E2E8F0] shadow-sm">
+                  <div className="bg-white p-2 rounded-xl border border-border shadow-sm">
                     <QRCodeSVG value={item.url} size={96} bgColor="#ffffff" fgColor="#1E293B" level="M" />
                   </div>
                 ) : (
-                  <div className="w-[112px] h-[112px] bg-[#E2E8F0] rounded-xl flex items-center justify-center text-[#94A3B8] text-2xl">📱</div>
+                  <div className="w-[112px] h-[112px] bg-[#E2E8F0] rounded-xl flex items-center justify-center text-text-muted text-2xl">📱</div>
                 )}
               </div>
               <div className="flex-1 space-y-2">
@@ -1266,7 +1266,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
                   <div className="flex gap-1 flex-wrap">
                     {icones.map(ic => (
                       <button key={ic} onClick={() => updateItem(idx, 'icone', ic)}
-                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm transition-all ${item.icone === ic ? 'bg-[#6D28D9]/10 border-2 border-[#6D28D9] scale-110' : 'bg-white border border-[#E2E8F0] hover:border-[#CBD5E1]'}`}>
+                        className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm transition-all ${item.icone === ic ? 'bg-[#6D28D9]/10 border-2 border-[#6D28D9] scale-110' : 'bg-white border border-border hover:border-border-light'}`}>
                         {ic}
                       </button>
                     ))}
@@ -1291,7 +1291,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             </div>
           </div>
         ))}
-        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#6D28D9] hover:text-[#6D28D9] transition-all">
+        <button onClick={addItem} className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#6D28D9] hover:text-[#6D28D9] transition-all">
           + Adicionar QR Code ao mural
         </button>
       </div>
@@ -1321,7 +1321,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           <input type="text" value={section.title} onChange={e => update({ title: e.target.value })} className={inputClass} placeholder="Boas-Vindas aos Novos Moradores" />
         </div>
         {items.map((item, idx) => (
-          <div key={idx} className="p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] space-y-3">
+          <div key={idx} className="p-4 bg-surface-alt rounded-xl border border-border space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-[#E879F9]">🎉 Morador {idx + 1}</span>
               {items.length > 1 && (
@@ -1344,11 +1344,11 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
           </div>
         ))}
         <button onClick={() => updateItems([...items, { nome: '', unidade: '', mensagem: '' }])}
-          className="w-full py-2 border-2 border-dashed border-[#CBD5E1] rounded-xl text-sm font-medium text-[#64748B] hover:border-[#E879F9] hover:text-[#E879F9] transition-all">
+          className="w-full py-2 border-2 border-dashed border-border-light rounded-xl text-sm font-medium text-text-light hover:border-[#E879F9] hover:text-[#E879F9] transition-all">
           + Adicionar Morador
         </button>
         <ImageManager {...imgProps} />
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">📸 Adicione fotos dos novos moradores (com autorização) para deixar a seção mais pessoal!</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">📸 Adicione fotos dos novos moradores (com autorização) para deixar a seção mais pessoal!</p>
       </div>
     );
   }
@@ -1387,7 +1387,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             update({ content: [parts[0] || '', parts[1] || '', e.target.value].join('\n---\n') });
           }} className={inputClass} placeholder="Portaria: (11) 3333-4444 ou WhatsApp" />
         </div>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">🚚 Mantenha esta seção atualizada para evitar conflitos de horários entre moradores!</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">🚚 Mantenha esta seção atualizada para evitar conflitos de horários entre moradores!</p>
       </div>
     );
   }
@@ -1426,7 +1426,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
             update({ content: [parts[0] || '', parts[1] || '', e.target.value].join('\n---\n') });
           }} className={inputClass} placeholder="Enviar pedido por e-mail para sindico@condominio.com" />
         </div>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">🔨 Inclua regras claras sobre documentação necessária (ART/RRT) para reformas estruturais!</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">🔨 Inclua regras claras sobre documentação necessária (ART/RRT) para reformas estruturais!</p>
       </div>
     );
   }
@@ -1437,7 +1437,7 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
       <div className="space-y-4">
         <div className="bg-gradient-to-r from-[#0D9488]/10 to-[#10B981]/10 p-4 rounded-xl border border-[#0D9488]/20">
           <h3 className="font-semibold text-[#0D9488] text-sm mb-2">👷 Gestão de Funcionários</h3>
-          <p className="text-xs text-[#64748B]">Gerencie tarefas, checklists, vistorias e acompanhe funcionários em tempo real com QR Code e GPS.</p>
+          <p className="text-xs text-text-light">Gerencie tarefas, checklists, vistorias e acompanhe funcionários em tempo real com QR Code e GPS.</p>
           <a href="/demo/funcionarios" className="inline-block mt-3 px-4 py-2 bg-[#0D9488] text-white text-sm font-medium rounded-lg hover:bg-[#0F766E] transition-all">
             Abrir Painel de Funcionários →
           </a>
@@ -1452,13 +1452,13 @@ export default function CategoryForm({ categoryId, section, onChange, newImageUr
         </div>
         <div className="grid grid-cols-2 gap-3">
           {['📸 Antes e Depois', '✅ Checklist', '📋 Tarefas', '🔍 Vistorias'].map(t => (
-            <div key={t} className="p-3 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] text-center">
-              <span className="text-sm font-medium text-[#1E293B]">{t}</span>
-              <p className="text-[10px] text-[#94A3B8] mt-0.5">QR Code automático</p>
+            <div key={t} className="p-3 bg-surface-alt rounded-xl border border-border text-center">
+              <span className="text-sm font-medium text-text">{t}</span>
+              <p className="text-[10px] text-text-muted mt-0.5">QR Code automático</p>
             </div>
           ))}
         </div>
-        <p className="text-xs text-[#94A3B8] bg-[#F8FAFC] p-3 rounded-lg">📍 Todas as tarefas registram geolocalização, data/hora de início e término automaticamente quando o funcionário escaneia o QR Code.</p>
+        <p className="text-xs text-text-muted bg-surface-alt p-3 rounded-lg">📍 Todas as tarefas registram geolocalização, data/hora de início e término automaticamente quando o funcionário escaneia o QR Code.</p>
       </div>
     );
   }

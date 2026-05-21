@@ -1,0 +1,51 @@
+services:
+  apprevista-web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: apprevista-web
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_AUTH_URL: https://auth.appgroupbrasil.com.br/api/v1
+      NEXT_PUBLIC_API_URL: https://api.apprevista.com.br/api/v1
+    networks: [coolify]
+    labels:
+      traefik.enable: 'true'
+      traefik.docker.network: coolify
+      traefik.http.routers.apprevista-http.rule: 'Host(`apprevista.com.br`) || Host(`www.apprevista.com.br`)'
+      traefik.http.routers.apprevista-http.entrypoints: http
+      traefik.http.routers.apprevista-http.middlewares: redirect-to-https
+      traefik.http.routers.apprevista-https.rule: 'Host(`apprevista.com.br`) || Host(`www.apprevista.com.br`)'
+      traefik.http.routers.apprevista-https.entrypoints: https
+      traefik.http.routers.apprevista-https.tls: 'true'
+      traefik.http.routers.apprevista-https.tls.certresolver: letsencrypt
+      traefik.http.services.apprevista.loadbalancer.server.port: '3000'
+      traefik.http.middlewares.apprevista-redirect-www.redirectregex.regex: '^https://www\.apprevista\.com\.br/(.*)'
+      traefik.http.middlewares.apprevista-redirect-www.redirectregex.replacement: 'https://apprevista.com.br/$${1}'
+
+  apprevista-api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: apprevista-api
+    restart: unless-stopped
+    env_file: ./api/.env
+    networks: [coolify, supabase_default]
+    labels:
+      traefik.enable: 'true'
+      traefik.docker.network: coolify
+      traefik.http.routers.apprevista-api-http.rule: 'Host(`api.apprevista.com.br`)'
+      traefik.http.routers.apprevista-api-http.entrypoints: http
+      traefik.http.routers.apprevista-api-http.middlewares: redirect-to-https
+      traefik.http.routers.apprevista-api-https.rule: 'Host(`api.apprevista.com.br`)'
+      traefik.http.routers.apprevista-api-https.entrypoints: https
+      traefik.http.routers.apprevista-api-https.tls: 'true'
+      traefik.http.routers.apprevista-api-https.tls.certresolver: letsencrypt
+      traefik.http.services.apprevista-api.loadbalancer.server.port: '3200'
+
+networks:
+  coolify:
+    external: true
+  supabase_default:
+    external: true

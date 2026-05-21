@@ -111,9 +111,9 @@ export default function PainelSindicoPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-surface-alt">
       {/* Sidebar Header */}
-      <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-[#E2E8F0]">
+      <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <div className="flex items-center gap-3">
@@ -121,16 +121,16 @@ export default function PainelSindicoPage() {
                 <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-lg" />
                 <div className="hidden sm:flex flex-col">
                   <span className="text-lg font-bold gradient-text leading-none">APP REVISTA</span>
-                  <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-[#1E3A5F] leading-none">Condominio</span>
+                  <span className="mt-1 block text-[12px] font-bold uppercase tracking-[0.22em] text-primary leading-none">Condominio</span>
                 </div>
               </Link>
               <span className="text-[#CBD5E1] hidden sm:inline">|</span>
-              <span className="text-sm text-[#64748B] hidden sm:inline">Painel do Síndico</span>
+              <span className="text-sm text-text-light hidden sm:inline">Painel do Síndico</span>
             </div>
             <div className="flex items-center gap-3">
               <Link
                 href="/demo/revista"
-                className="px-3 py-1.5 text-xs font-medium text-[#1E3A5F] bg-[#1E3A5F]/5 rounded-lg hover:bg-[#1E3A5F]/10 transition-all"
+                className="px-3 py-1.5 text-xs font-medium text-primary bg-primary/5 rounded-lg hover:bg-primary/10 transition-all"
               >
                 👁 Visão Morador
               </Link>
@@ -178,7 +178,7 @@ export default function PainelSindicoPage() {
       </div>
 
       {/* Tabs */}
-      <div className="bg-white border-b border-[#E2E8F0] sticky top-16 z-30">
+      <div className="bg-white border-b border-border sticky top-16 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex gap-1 overflow-x-auto py-2">
             {tabs.map(tab => (
@@ -187,8 +187,8 @@ export default function PainelSindicoPage() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium whitespace-nowrap transition-all ${
                   activeTab === tab.id
-                    ? 'bg-[#1E3A5F] text-white'
-                    : 'text-[#64748B] hover:bg-[#F1F5F9]'
+                    ? 'bg-primary text-white'
+                    : 'text-text-light hover:bg-surface-hover'
                 }`}
               >
                 <span>{tab.icon}</span>
@@ -206,10 +206,10 @@ export default function PainelSindicoPage() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-[#1E293B]">Categorias da Revista</h2>
-                <p className="text-sm text-[#64748B]">Selecione os cards que deseja incluir na sua revista</p>
+                <h2 className="text-xl font-bold text-text">Categorias da Revista</h2>
+                <p className="text-sm text-text-light">Selecione os cards que deseja incluir na sua revista</p>
               </div>
-              <span className="text-sm text-[#64748B]">
+              <span className="text-sm text-text-light">
                 {activeCats.length} de {categories.length} ativas
               </span>
             </div>
@@ -279,8 +279,8 @@ export default function PainelSindicoPage() {
                     onClick={() => toggleCategory(cat.id)}
                     className={`relative p-4 rounded-xl border-2 text-center transition-all cursor-pointer ${
                       isActive
-                        ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 shadow-md'
-                        : 'border-[#E2E8F0] bg-white hover:border-[#CBD5E1]'
+                        ? 'border-[#1E3A5F] bg-primary/5 shadow-md'
+                        : 'border-border bg-white hover:border-border-light'
                     }`}
                   >
                     {isActive && (
@@ -298,7 +298,7 @@ export default function PainelSindicoPage() {
                       >
                         {cat.name.charAt(0)}
                       </div>
-                      <div className={`text-sm font-semibold ${isActive ? 'text-[#1E293B]' : 'text-[#94A3B8]'}`}>
+                      <div className={`text-sm font-semibold ${isActive ? 'text-text' : 'text-text-muted'}`}>
                         {cat.name}
                       </div>
                     </div>
@@ -308,14 +308,14 @@ export default function PainelSindicoPage() {
                         className={`px-2 py-1 rounded-md text-[10px] font-medium transition-all ${
                           isActive
                             ? 'bg-[#10B981]/10 text-[#10B981] hover:bg-[#10B981]/20'
-                            : 'bg-[#F1F5F9] text-[#94A3B8] hover:bg-[#E2E8F0]'
+                            : 'bg-surface-hover text-text-muted hover:bg-[#E2E8F0]'
                         }`}
                       >
                         {isActive ? '✓ Ativo' : 'Ativar'}
                       </button>
                       <button
                         onClick={e => { e.stopPropagation(); openCategoryForm(cat.id); }}
-                        className="px-2 py-1 rounded-md text-[10px] font-medium bg-[#1E3A5F]/10 text-[#1E3A5F] hover:bg-[#1E3A5F]/20 transition-all"
+                        className="px-2 py-1 rounded-md text-[10px] font-medium bg-primary/10 text-primary hover:bg-primary/20 transition-all"
                       >
                         ✏ Editar
                       </button>
@@ -339,12 +339,12 @@ export default function PainelSindicoPage() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-[#1E293B]">Seções da Edição</h2>
-                <p className="text-sm text-[#64748B]">Gerencie o conteúdo de cada seção da revista</p>
+                <h2 className="text-xl font-bold text-text">Seções da Edição</h2>
+                <p className="text-sm text-text-light">Gerencie o conteúdo de cada seção da revista</p>
               </div>
               <button
                 onClick={() => openEditor()}
-                className="px-4 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all flex items-center gap-2"
+                className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
                 Nova Seção
@@ -360,7 +360,7 @@ export default function PainelSindicoPage() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: idx * 0.03 }}
-                    className="bg-white rounded-xl border border-[#E2E8F0] p-4 flex items-center gap-4 group hover:shadow-md transition-all"
+                    className="bg-white rounded-xl border border-border p-4 flex items-center gap-4 group hover:shadow-md transition-all"
                   >
                     <div
                       className="w-10 h-10 rounded-lg flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
@@ -369,20 +369,20 @@ export default function PainelSindicoPage() {
                       {idx + 1}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="font-semibold text-[#1E293B] text-sm truncate">{section.title}</div>
-                      <div className="text-xs text-[#94A3B8]">{cat?.name}</div>
+                      <div className="font-semibold text-text text-sm truncate">{section.title}</div>
+                      <div className="text-xs text-text-muted">{cat?.name}</div>
                     </div>
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                       <button
                         onClick={() => openEditor(section)}
-                        className="p-2 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#1E3A5F] transition-all"
+                        className="p-2 rounded-lg hover:bg-surface-hover text-text-light hover:text-primary transition-all"
                         title="Editar"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                       </button>
                       <button
                         onClick={() => duplicateSection(section)}
-                        className="p-2 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#8B5CF6] transition-all"
+                        className="p-2 rounded-lg hover:bg-surface-hover text-text-light hover:text-[#8B5CF6] transition-all"
                         title="Duplicar"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
@@ -393,7 +393,7 @@ export default function PainelSindicoPage() {
                             s.id === section.id ? { ...s, visible: !s.visible } : s
                           ));
                         }}
-                        className={`p-2 rounded-lg hover:bg-[#F1F5F9] transition-all ${section.visible ? 'text-[#10B981]' : 'text-[#CBD5E1]'}`}
+                        className={`p-2 rounded-lg hover:bg-surface-hover transition-all ${section.visible ? 'text-[#10B981]' : 'text-[#CBD5E1]'}`}
                         title={section.visible ? 'Ocultar' : 'Mostrar'}
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -405,7 +405,7 @@ export default function PainelSindicoPage() {
                       </button>
                       <button
                         onClick={() => deleteSection(section.id)}
-                        className="p-2 rounded-lg hover:bg-red-50 text-[#64748B] hover:text-red-500 transition-all"
+                        className="p-2 rounded-lg hover:bg-red-50 text-text-light hover:text-red-500 transition-all"
                         title="Excluir"
                       >
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
@@ -423,8 +423,8 @@ export default function PainelSindicoPage() {
           <div>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-xl font-bold text-[#1E293B]">Chamados dos Moradores</h2>
-                <p className="text-sm text-[#64748B]">{demoRequests.length} chamados registrados</p>
+                <h2 className="text-xl font-bold text-text">Chamados dos Moradores</h2>
+                <p className="text-sm text-text-light">{demoRequests.length} chamados registrados</p>
               </div>
             </div>
 
@@ -435,7 +435,7 @@ export default function PainelSindicoPage() {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: idx * 0.05 }}
-                  className="bg-white rounded-xl border border-[#E2E8F0] p-5 hover:shadow-md transition-all"
+                  className="bg-white rounded-xl border border-border p-5 hover:shadow-md transition-all"
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
@@ -450,40 +450,40 @@ export default function PainelSindicoPage() {
                            req.status === 'em-andamento' ? '🟡 Em andamento' :
                            req.status === 'resolvido' ? '🟢 Resolvido' : '⚫ Fechado'}
                         </span>
-                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-[#F1F5F9] text-[#64748B]">
+                        <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-surface-hover text-text-light">
                           {req.type === 'reclamacao' ? '📢 Reclamação' :
                            req.type === 'manutencao' ? '🔧 Manutenção' :
                            req.type === 'ocorrencia' ? '⚠️ Ocorrência' : '💡 Sugestão'}
                         </span>
                       </div>
-                      <h3 className="font-semibold text-[#1E293B] mb-1">{req.title}</h3>
-                      <p className="text-sm text-[#64748B] mb-2">{req.description}</p>
-                      <div className="flex items-center gap-4 text-xs text-[#94A3B8]">
+                      <h3 className="font-semibold text-text mb-1">{req.title}</h3>
+                      <p className="text-sm text-text-light mb-2">{req.description}</p>
+                      <div className="flex items-center gap-4 text-xs text-text-muted">
                         <span>👤 {req.residentName} · Apto {req.residentUnit}</span>
                         <span>🔗 {req.trackingCode}</span>
                         <span>{new Date(req.createdAt).toLocaleDateString('pt-BR')}</span>
                       </div>
                     </div>
                     <div className="flex items-center gap-1">
-                      <button className="p-2 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#1E3A5F]" title="Responder">
+                      <button className="p-2 rounded-lg hover:bg-surface-hover text-text-light hover:text-primary" title="Responder">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" /></svg>
                       </button>
-                      <button className="p-2 rounded-lg hover:bg-[#F1F5F9] text-[#64748B] hover:text-[#10B981]" title="Marcar resolvido">
+                      <button className="p-2 rounded-lg hover:bg-surface-hover text-text-light hover:text-[#10B981]" title="Marcar resolvido">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                       </button>
-                      <button className="p-2 rounded-lg hover:bg-red-50 text-[#64748B] hover:text-red-500" title="Excluir">
+                      <button className="p-2 rounded-lg hover:bg-red-50 text-text-light hover:text-red-500" title="Excluir">
                         <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                       </button>
                     </div>
                   </div>
                   {req.messages.length > 0 && (
-                    <div className="mt-3 pt-3 border-t border-[#E2E8F0]">
+                    <div className="mt-3 pt-3 border-t border-border">
                       {req.messages.map(msg => (
                         <div key={msg.id} className="flex items-start gap-2 text-sm">
                           <div className="w-6 h-6 rounded-full bg-[#10B981] flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0 mt-0.5">S</div>
                           <div>
-                            <span className="font-medium text-[#1E293B]">{msg.author}: </span>
-                            <span className="text-[#64748B]">{msg.content}</span>
+                            <span className="font-medium text-text">{msg.author}: </span>
+                            <span className="text-text-light">{msg.content}</span>
                           </div>
                         </div>
                       ))}
@@ -498,38 +498,38 @@ export default function PainelSindicoPage() {
         {/* CONFIG TAB */}
         {activeTab === 'config' && (
           <div className="max-w-2xl">
-            <h2 className="text-xl font-bold text-[#1E293B] mb-6">Configurações do Condomínio</h2>
+            <h2 className="text-xl font-bold text-text mb-6">Configurações do Condomínio</h2>
 
             <div className="space-y-6">
               {/* Identidade */}
-              <div className="bg-white rounded-xl border border-[#E2E8F0] p-6">
-                <h3 className="text-sm font-semibold text-[#1E293B] mb-4 uppercase tracking-wider">Cabeçalho Premium</h3>
+              <div className="bg-white rounded-xl border border-border p-6">
+                <h3 className="text-sm font-semibold text-text mb-4 uppercase tracking-wider">Cabeçalho Premium</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Nome do Condomínio</label>
-                    <input type="text" defaultValue={demoCondominium.name} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
+                    <label className="block text-xs font-medium text-text-light mb-1">Nome do Condomínio</label>
+                    <input type="text" defaultValue={demoCondominium.name} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Telefone</label>
-                    <input type="text" defaultValue={demoCondominium.phone} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
+                    <label className="block text-xs font-medium text-text-light mb-1">Telefone</label>
+                    <input type="text" defaultValue={demoCondominium.phone} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">E-mail</label>
-                    <input type="text" defaultValue={demoCondominium.email} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
+                    <label className="block text-xs font-medium text-text-light mb-1">E-mail</label>
+                    <input type="text" defaultValue={demoCondominium.email} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Endereço</label>
-                    <input type="text" defaultValue={demoCondominium.address} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
+                    <label className="block text-xs font-medium text-text-light mb-1">Endereço</label>
+                    <input type="text" defaultValue={demoCondominium.address} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent" />
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Foto do Síndico</label>
-                    <div className="w-full h-24 border-2 border-dashed border-[#E2E8F0] rounded-lg flex items-center justify-center text-[#94A3B8] text-sm cursor-pointer hover:border-[#1E3A5F] transition-colors">
+                    <label className="block text-xs font-medium text-text-light mb-1">Foto do Síndico</label>
+                    <div className="w-full h-24 border-2 border-dashed border-border rounded-lg flex items-center justify-center text-text-muted text-sm cursor-pointer hover:border-[#1E3A5F] transition-colors">
                       📷 Carregar foto
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Logo da Administradora</label>
-                    <div className="w-full h-24 border-2 border-dashed border-[#E2E8F0] rounded-lg flex items-center justify-center text-[#94A3B8] text-sm cursor-pointer hover:border-[#1E3A5F] transition-colors">
+                    <label className="block text-xs font-medium text-text-light mb-1">Logo da Administradora</label>
+                    <div className="w-full h-24 border-2 border-dashed border-border rounded-lg flex items-center justify-center text-text-muted text-sm cursor-pointer hover:border-[#1E3A5F] transition-colors">
                       🏢 Carregar logo
                     </div>
                   </div>
@@ -537,33 +537,33 @@ export default function PainelSindicoPage() {
               </div>
 
               {/* Personalização Visual */}
-              <div className="bg-white rounded-xl border border-[#E2E8F0] p-6">
-                <h3 className="text-sm font-semibold text-[#1E293B] mb-4 uppercase tracking-wider">Personalização Visual</h3>
+              <div className="bg-white rounded-xl border border-border p-6">
+                <h3 className="text-sm font-semibold text-text mb-4 uppercase tracking-wider">Personalização Visual</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Cor Principal</label>
+                    <label className="block text-xs font-medium text-text-light mb-1">Cor Principal</label>
                     <div className="flex items-center gap-2">
                       <input type="color" defaultValue={demoCondominium.themeColor} className="w-10 h-10 border-0 rounded cursor-pointer" />
-                      <input type="text" defaultValue={demoCondominium.themeColor} className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm font-mono" />
+                      <input type="text" defaultValue={demoCondominium.themeColor} className="flex-1 px-3 py-2 border border-border rounded-lg text-sm font-mono" />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Cor de Destaque</label>
+                    <label className="block text-xs font-medium text-text-light mb-1">Cor de Destaque</label>
                     <div className="flex items-center gap-2">
                       <input type="color" defaultValue={demoCondominium.accentColor} className="w-10 h-10 border-0 rounded cursor-pointer" />
-                      <input type="text" defaultValue={demoCondominium.accentColor} className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm font-mono" />
+                      <input type="text" defaultValue={demoCondominium.accentColor} className="flex-1 px-3 py-2 border border-border rounded-lg text-sm font-mono" />
                     </div>
                   </div>
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-medium text-[#64748B] mb-2">Layout da Revista</label>
+                    <label className="block text-xs font-medium text-text-light mb-2">Layout da Revista</label>
                     <div className="grid grid-cols-3 gap-3">
                       {['classico', 'moderno', 'minimalista'].map(layout => (
                         <button
                           key={layout}
                           className={`p-3 rounded-lg border-2 text-sm font-medium capitalize ${
                             demoCondominium.layout === layout
-                              ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 text-[#1E3A5F]'
-                              : 'border-[#E2E8F0] text-[#64748B] hover:border-[#CBD5E1]'
+                              ? 'border-[#1E3A5F] bg-primary/5 text-primary'
+                              : 'border-border text-text-light hover:border-border-light'
                           }`}
                         >
                           {layout}
@@ -575,17 +575,17 @@ export default function PainelSindicoPage() {
               </div>
 
               {/* QR Code */}
-              <div className="bg-white rounded-xl border border-[#E2E8F0] p-6">
-                <h3 className="text-sm font-semibold text-[#1E293B] mb-4 uppercase tracking-wider">QR Code do Condomínio</h3>
+              <div className="bg-white rounded-xl border border-border p-6">
+                <h3 className="text-sm font-semibold text-text mb-4 uppercase tracking-wider">QR Code do Condomínio</h3>
                 <div className="flex items-center gap-6">
-                  <div className="w-32 h-32 bg-[#F8FAFC] rounded-xl border-2 border-dashed border-[#E2E8F0] flex items-center justify-center text-4xl">
+                  <div className="w-32 h-32 bg-surface-alt rounded-xl border-2 border-dashed border-border flex items-center justify-center text-4xl">
                     📱
                   </div>
                   <div>
-                    <p className="text-sm text-[#64748B] mb-3">
+                    <p className="text-sm text-text-light mb-3">
                       O QR Code dá acesso aos moradores para ler a revista, abrir chamados, classificados e caronas.
                     </p>
-                    <button className="px-4 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all">
+                    <button className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all">
                       Gerar QR Code
                     </button>
                   </div>
@@ -633,7 +633,7 @@ export default function PainelSindicoPage() {
               className="bg-white rounded-2xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto"
               onClick={e => e.stopPropagation()}
             >
-              <div className="p-6 border-b border-[#E2E8F0] flex items-center justify-between">
+              <div className="p-6 border-b border-border flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   {(() => {
                     const cat = categories.find(c => c.id === editingSection.categoryId);
@@ -644,27 +644,27 @@ export default function PainelSindicoPage() {
                     ) : null;
                   })()}
                   <div>
-                    <h3 className="text-lg font-bold text-[#1E293B]">
+                    <h3 className="text-lg font-bold text-text">
                       {categories.find(c => c.id === editingSection.categoryId)?.name || 'Nova Seção'}
                     </h3>
-                    <p className="text-xs text-[#94A3B8]">
+                    <p className="text-xs text-text-muted">
                       {sections.find(s => s.id === editingSection.id) ? 'Editando conteúdo' : 'Novo conteúdo'}
                     </p>
                   </div>
                 </div>
-                <button onClick={() => setShowEditor(false)} className="p-2 rounded-lg hover:bg-[#F1F5F9]">
-                  <svg className="w-5 h-5 text-[#64748B]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                <button onClick={() => setShowEditor(false)} className="p-2 rounded-lg hover:bg-surface-hover">
+                  <svg className="w-5 h-5 text-text-light" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                 </button>
               </div>
               <div className="p-6 space-y-4">
                 {/* Category selector (only when creating new section from Edição tab) */}
                 {!sections.find(s => s.id === editingSection.id) && (
                   <div>
-                    <label className="block text-xs font-medium text-[#64748B] mb-1">Categoria</label>
+                    <label className="block text-xs font-medium text-text-light mb-1">Categoria</label>
                     <select
                       value={editingSection.categoryId}
                       onChange={e => setEditingSection({ ...editingSection, categoryId: e.target.value, title: categories.find(c => c.id === e.target.value)?.name || editingSection.title })}
-                      className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
+                      className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]"
                     >
                       {categories.filter(c => activeCats.includes(c.id)).map(c => (
                         <option key={c.id} value={c.id}>{c.name}</option>
@@ -683,16 +683,16 @@ export default function PainelSindicoPage() {
                   onRemoveImage={removeImageFromSection}
                 />
               </div>
-              <div className="p-6 border-t border-[#E2E8F0] flex items-center justify-end gap-3">
+              <div className="p-6 border-t border-border flex items-center justify-end gap-3">
                 <button
                   onClick={() => setShowEditor(false)}
-                  className="px-4 py-2 text-sm font-medium text-[#64748B] hover:text-[#1E293B] transition-colors"
+                  className="px-4 py-2 text-sm font-medium text-text-light hover:text-text transition-colors"
                 >
                   Cancelar
                 </button>
                 <button
                   onClick={saveSection}
-                  className="px-6 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
+                  className="px-6 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-[#2A5A8F] transition-all"
                 >
                   Salvar
                 </button>

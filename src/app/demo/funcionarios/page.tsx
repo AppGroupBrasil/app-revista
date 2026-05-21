@@ -106,6 +106,7 @@ export default function FuncionariosPage() {
   const [checklistItems, setChecklistItems] = useState<string[]>(['']);
   const [inspectionItems, setInspectionItems] = useState<string[]>(['']);
   const [taskCreated, setTaskCreated] = useState(false);
+  const [generatedCode, setGeneratedCode] = useState('');
 
   const handleSaveEmployee = () => {
     if (!empForm.name.trim() || !empForm.role.trim()) return;
@@ -167,6 +168,8 @@ export default function FuncionariosPage() {
 
   const handleCreateTask = (e: React.FormEvent) => {
     e.preventDefault();
+    const code = `FUNC-${newTask.type.toUpperCase().slice(0, 3)}-${String(Math.floor(Math.random() * 900) + 100)}`;
+    setGeneratedCode(code);
     setTaskCreated(true);
   };
 
@@ -174,18 +177,18 @@ export default function FuncionariosPage() {
     const emp = employees.find(e => e.id === task.assignedTo);
 
     return (
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden">
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl border border-border overflow-hidden">
         {/* Header */}
-        <div className="p-5 border-b border-[#E2E8F0]">
-          <button onClick={() => setSelectedTask(null)} className="flex items-center gap-1 text-sm text-[#64748B] mb-3 hover:text-[#1E3A5F]">
+        <div className="p-5 border-b border-border">
+          <button onClick={() => setSelectedTask(null)} className="flex items-center gap-1 text-sm text-text-light mb-3 hover:text-primary">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
             Voltar
           </button>
           <div className="flex items-start justify-between">
             <div>
               <span className="text-lg mr-2">{typeIcons[task.type]}</span>
-              <h2 className="inline text-lg font-bold text-[#1E293B]">{task.title}</h2>
-              <p className="text-sm text-[#64748B] mt-1">{task.description}</p>
+              <h2 className="inline text-lg font-bold text-text">{task.title}</h2>
+              <p className="text-sm text-text-light mt-1">{task.description}</p>
             </div>
             <div className="flex gap-2">
               <span className={`px-2 py-1 rounded-full text-xs font-semibold ${priorityColors[task.priority]}`}>{task.priority.charAt(0).toUpperCase() + task.priority.slice(1)}</span>
@@ -195,31 +198,31 @@ export default function FuncionariosPage() {
         </div>
 
         {/* Info */}
-        <div className="p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 border-b border-[#E2E8F0] text-sm">
+        <div className="p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 border-b border-border text-sm">
           <div>
-            <span className="text-[#94A3B8] text-xs">Funcionário</span>
-            <p className="font-medium text-[#1E293B]">{emp?.name ?? '—'}</p>
-            <p className="text-xs text-[#64748B]">{emp?.role}</p>
+            <span className="text-text-muted text-xs">Funcionário</span>
+            <p className="font-medium text-text">{emp?.name ?? '—'}</p>
+            <p className="text-xs text-text-light">{emp?.role}</p>
           </div>
           <div>
-            <span className="text-[#94A3B8] text-xs">QR Code</span>
-            <p className="font-mono font-medium text-[#1E3A5F]">{task.qrCode}</p>
+            <span className="text-text-muted text-xs">QR Code</span>
+            <p className="font-mono font-medium text-primary">{task.qrCode}</p>
           </div>
           <div>
-            <span className="text-[#94A3B8] text-xs">Início</span>
-            <p className="font-medium text-[#1E293B]">{task.startedAt ? formatDateTime(task.startedAt) : 'Aguardando'}</p>
+            <span className="text-text-muted text-xs">Início</span>
+            <p className="font-medium text-text">{task.startedAt ? formatDateTime(task.startedAt) : 'Aguardando'}</p>
           </div>
           <div>
-            <span className="text-[#94A3B8] text-xs">Tempo</span>
-            <p className="font-medium text-[#1E293B]">{executionTime(task.startedAt, task.finishedAt)}</p>
+            <span className="text-text-muted text-xs">Tempo</span>
+            <p className="font-medium text-text">{executionTime(task.startedAt, task.finishedAt)}</p>
           </div>
         </div>
 
         {/* Map + Geolocation */}
         {task.location && (
-          <div className="p-5 border-b border-[#E2E8F0]">
-            <h3 className="text-sm font-semibold text-[#1E293B] mb-2">📍 Geolocalização do Funcionário</h3>
-            <div className="rounded-xl overflow-hidden border border-[#E2E8F0] shadow-sm" style={{ height: 200 }}>
+          <div className="p-5 border-b border-border">
+            <h3 className="text-sm font-semibold text-text mb-2">📍 Geolocalização do Funcionário</h3>
+            <div className="rounded-xl overflow-hidden border border-border shadow-sm" style={{ height: 200 }}>
               <iframe
                 title="Localização do funcionário"
                 width="100%" height="100%"
@@ -229,7 +232,7 @@ export default function FuncionariosPage() {
                 src={`https://www.openstreetmap.org/export/embed.html?bbox=${task.location.lon - 0.005},${task.location.lat - 0.004},${task.location.lon + 0.005},${task.location.lat + 0.004}&layer=mapnik&marker=${task.location.lat},${task.location.lon}`}
               />
             </div>
-            <p className="text-xs text-[#94A3B8] mt-1">Última atualização: {formatDateTime(task.location.timestamp)}</p>
+            <p className="text-xs text-text-muted mt-1">Última atualização: {formatDateTime(task.location.timestamp)}</p>
           </div>
         )}
 
@@ -245,25 +248,25 @@ export default function FuncionariosPage() {
 
   const renderBeforeAfter = (task: BeforeAfterTask) => (
     <div className="p-5">
-      <h3 className="text-sm font-semibold text-[#1E293B] mb-3">📸 Comparativo Antes e Depois</h3>
+      <h3 className="text-sm font-semibold text-text mb-3">📸 Comparativo Antes e Depois</h3>
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
           <span className="inline-block px-2 py-0.5 bg-red-50 text-red-600 text-xs font-semibold rounded-full">ANTES</span>
           {task.photoBefore ? (
-            <img src={task.photoBefore} alt="Antes" className="w-full h-40 object-cover rounded-xl border border-[#E2E8F0]" />
+            <img src={task.photoBefore} alt="Antes" className="w-full h-40 object-cover rounded-xl border border-border" />
           ) : (
-            <div className="w-full h-40 bg-gray-100 rounded-xl flex items-center justify-center text-[#94A3B8] text-sm">Aguardando foto</div>
+            <div className="w-full h-40 bg-gray-100 rounded-xl flex items-center justify-center text-text-muted text-sm">Aguardando foto</div>
           )}
-          <p className="text-xs text-[#64748B]">{task.descriptionBefore || 'Sem descrição'}</p>
+          <p className="text-xs text-text-light">{task.descriptionBefore || 'Sem descrição'}</p>
         </div>
         <div className="space-y-2">
           <span className="inline-block px-2 py-0.5 bg-green-50 text-green-600 text-xs font-semibold rounded-full">DEPOIS</span>
           {task.photoAfter ? (
-            <img src={task.photoAfter} alt="Depois" className="w-full h-40 object-cover rounded-xl border border-[#E2E8F0]" />
+            <img src={task.photoAfter} alt="Depois" className="w-full h-40 object-cover rounded-xl border border-border" />
           ) : (
-            <div className="w-full h-40 bg-gray-100 rounded-xl flex items-center justify-center text-[#94A3B8] text-sm">Aguardando foto</div>
+            <div className="w-full h-40 bg-gray-100 rounded-xl flex items-center justify-center text-text-muted text-sm">Aguardando foto</div>
           )}
-          <p className="text-xs text-[#64748B]">{task.descriptionAfter || 'Sem descrição'}</p>
+          <p className="text-xs text-text-light">{task.descriptionAfter || 'Sem descrição'}</p>
         </div>
       </div>
     </div>
@@ -271,10 +274,10 @@ export default function FuncionariosPage() {
 
   const renderChecklist = (task: ChecklistTask) => (
     <div className="p-5">
-      <h3 className="text-sm font-semibold text-[#1E293B] mb-3">✅ Itens do Checklist</h3>
+      <h3 className="text-sm font-semibold text-text mb-3">✅ Itens do Checklist</h3>
       <div className="space-y-2">
         {task.items.map((item: ChecklistItem) => (
-          <div key={item.id} className={`p-3 rounded-xl border ${item.problemReported ? 'border-red-200 bg-red-50' : item.checked ? 'border-green-200 bg-green-50' : 'border-[#E2E8F0]'}`}>
+          <div key={item.id} className={`p-3 rounded-xl border ${item.problemReported ? 'border-red-200 bg-red-50' : item.checked ? 'border-green-200 bg-green-50' : 'border-border'}`}>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {item.checked ? (
@@ -282,9 +285,9 @@ export default function FuncionariosPage() {
                 ) : item.problemReported ? (
                   <span className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white text-xs">!</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border-2 border-[#CBD5E1]" />
+                  <span className="w-5 h-5 rounded-full border-2 border-border-light" />
                 )}
-                <span className={`text-sm ${item.checked ? 'text-green-700' : item.problemReported ? 'text-red-700' : 'text-[#1E293B]'}`}>{item.text}</span>
+                <span className={`text-sm ${item.checked ? 'text-green-700' : item.problemReported ? 'text-red-700' : 'text-text'}`}>{item.text}</span>
               </div>
               {item.problemReported && <span className="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-semibold rounded-full">Problema</span>}
             </div>
@@ -297,7 +300,7 @@ export default function FuncionariosPage() {
           </div>
         ))}
       </div>
-      <div className="mt-3 flex gap-4 text-xs text-[#64748B]">
+      <div className="mt-3 flex gap-4 text-xs text-text-light">
         <span>✅ {task.items.filter((i: ChecklistItem) => i.checked).length}/{task.items.length} concluídos</span>
         <span>⚠️ {task.items.filter((i: ChecklistItem) => i.problemReported).length} problemas</span>
       </div>
@@ -306,10 +309,10 @@ export default function FuncionariosPage() {
 
   const renderTaskList = (task: TaskListTask) => (
     <div className="p-5">
-      <h3 className="text-sm font-semibold text-[#1E293B] mb-3">📋 Detalhes da Tarefa</h3>
+      <h3 className="text-sm font-semibold text-text mb-3">📋 Detalhes da Tarefa</h3>
       <div className="flex flex-wrap gap-2 mb-4">
         {(['aberto', 'em-execucao', 'finalizado', 'problema'] as EmployeeTaskStatus[]).map(s => (
-          <span key={s} className={`px-3 py-1.5 rounded-lg text-xs font-semibold border-2 ${task.status === s ? statusColors[s] + ' border-current' : 'border-[#E2E8F0] text-[#94A3B8]'}`}>
+          <span key={s} className={`px-3 py-1.5 rounded-lg text-xs font-semibold border-2 ${task.status === s ? statusColors[s] + ' border-current' : 'border-border text-text-muted'}`}>
             {statusLabels[s]}
           </span>
         ))}
@@ -317,7 +320,7 @@ export default function FuncionariosPage() {
       {task.photos.length > 0 && (
         <div className="grid grid-cols-3 gap-2 mb-3">
           {task.photos.map((p: string, i: number) => (
-            <img key={i} src={p} alt={`Foto ${i + 1}`} className="w-full h-24 object-cover rounded-lg border border-[#E2E8F0]" />
+            <img key={i} src={p} alt={`Foto ${i + 1}`} className="w-full h-24 object-cover rounded-lg border border-border" />
           ))}
         </div>
       )}
@@ -333,10 +336,10 @@ export default function FuncionariosPage() {
 
   const renderInspection = (task: InspectionTask) => (
     <div className="p-5">
-      <h3 className="text-sm font-semibold text-[#1E293B] mb-3">🔍 Itens da Vistoria</h3>
+      <h3 className="text-sm font-semibold text-text mb-3">🔍 Itens da Vistoria</h3>
       <div className="space-y-3">
         {task.items.map((item: InspectionItem) => (
-          <div key={item.id} className={`p-3 rounded-xl border ${item.status === 'problema' ? 'border-red-200 bg-red-50' : item.status === 'ok' ? 'border-green-200 bg-green-50' : 'border-[#E2E8F0]'}`}>
+          <div key={item.id} className={`p-3 rounded-xl border ${item.status === 'problema' ? 'border-red-200 bg-red-50' : item.status === 'ok' ? 'border-green-200 bg-green-50' : 'border-border'}`}>
             <div className="flex items-center justify-between mb-1">
               <div className="flex items-center gap-2">
                 {item.status === 'ok' ? (
@@ -344,9 +347,9 @@ export default function FuncionariosPage() {
                 ) : item.status === 'problema' ? (
                   <span className="w-5 h-5 rounded-full bg-red-500 flex items-center justify-center text-white text-xs">!</span>
                 ) : (
-                  <span className="w-5 h-5 rounded-full border-2 border-[#CBD5E1]" />
+                  <span className="w-5 h-5 rounded-full border-2 border-border-light" />
                 )}
-                <span className="text-sm font-medium text-[#1E293B]">{item.label}</span>
+                <span className="text-sm font-medium text-text">{item.label}</span>
               </div>
               <div className="flex gap-1">
                 {!item.preset && <span className="px-1.5 py-0.5 bg-purple-100 text-purple-600 text-[10px] font-semibold rounded-full">Livre</span>}
@@ -355,12 +358,12 @@ export default function FuncionariosPage() {
                 </span>
               </div>
             </div>
-            {item.photo && <img src={item.photo} alt={item.label} className="w-full h-28 object-cover rounded-lg mt-2 border border-[#E2E8F0]" />}
-            {item.description && <p className="text-xs text-[#64748B] mt-1">{item.description}</p>}
+            {item.photo && <img src={item.photo} alt={item.label} className="w-full h-28 object-cover rounded-lg mt-2 border border-border" />}
+            {item.description && <p className="text-xs text-text-light mt-1">{item.description}</p>}
           </div>
         ))}
       </div>
-      <div className="mt-3 flex gap-4 text-xs text-[#64748B]">
+      <div className="mt-3 flex gap-4 text-xs text-text-light">
         <span>✅ {task.items.filter((i: InspectionItem) => i.status === 'ok').length} OK</span>
         <span>⚠️ {task.items.filter((i: InspectionItem) => i.status === 'problema').length} Problemas</span>
         <span>⏳ {task.items.filter((i: InspectionItem) => i.status === 'pendente').length} Pendentes</span>
@@ -376,23 +379,23 @@ export default function FuncionariosPage() {
 
   const renderMaintenance = (task: MaintenanceTask) => (
     <div className="p-5">
-      <h3 className="text-sm font-semibold text-[#1E293B] mb-3">🔧 Detalhes da Manutenção</h3>
+      <h3 className="text-sm font-semibold text-text mb-3">🔧 Detalhes da Manutenção</h3>
       <div className="grid grid-cols-2 gap-3 mb-3">
-        <div className="bg-[#F8FAFC] rounded-xl p-3 border border-[#E2E8F0]">
-          <p className="text-[10px] uppercase tracking-wider text-[#94A3B8] mb-1">Equipamento</p>
-          <p className="text-sm font-medium text-[#1E293B]">{task.equipment}</p>
+        <div className="bg-surface-alt rounded-xl p-3 border border-border">
+          <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Equipamento</p>
+          <p className="text-sm font-medium text-text">{task.equipment}</p>
         </div>
-        <div className="bg-[#F8FAFC] rounded-xl p-3 border border-[#E2E8F0]">
-          <p className="text-[10px] uppercase tracking-wider text-[#94A3B8] mb-1">Área</p>
-          <p className="text-sm font-medium text-[#1E293B]">{task.area}</p>
+        <div className="bg-surface-alt rounded-xl p-3 border border-border">
+          <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Área</p>
+          <p className="text-sm font-medium text-text">{task.area}</p>
         </div>
-        <div className="bg-[#F8FAFC] rounded-xl p-3 border border-[#E2E8F0]">
-          <p className="text-[10px] uppercase tracking-wider text-[#94A3B8] mb-1">Tipo</p>
-          <p className="text-sm font-medium text-[#1E293B]">{maintenanceTypeLabels[task.maintenanceType] || task.maintenanceType}</p>
+        <div className="bg-surface-alt rounded-xl p-3 border border-border">
+          <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Tipo</p>
+          <p className="text-sm font-medium text-text">{maintenanceTypeLabels[task.maintenanceType] || task.maintenanceType}</p>
         </div>
-        <div className="bg-[#F8FAFC] rounded-xl p-3 border border-[#E2E8F0]">
-          <p className="text-[10px] uppercase tracking-wider text-[#94A3B8] mb-1">Funcionário</p>
-          <p className="text-sm font-medium text-[#1E293B]">{demoEmployees.find(e => e.id === task.assignedTo)?.name || '—'}</p>
+        <div className="bg-surface-alt rounded-xl p-3 border border-border">
+          <p className="text-[10px] uppercase tracking-wider text-text-muted mb-1">Funcionário</p>
+          <p className="text-sm font-medium text-text">{demoEmployees.find(e => e.id === task.assignedTo)?.name || '—'}</p>
         </div>
       </div>
       {task.problemDescription && (
@@ -410,10 +413,10 @@ export default function FuncionariosPage() {
       )}
       {task.photos.length > 0 && (
         <div>
-          <p className="text-[10px] uppercase tracking-wider text-[#94A3B8] mb-2">Fotos</p>
+          <p className="text-[10px] uppercase tracking-wider text-text-muted mb-2">Fotos</p>
           <div className="flex gap-2 overflow-x-auto">
             {task.photos.map((photo, i) => (
-              <img key={i} src={photo} alt={`Foto ${i + 1}`} className="w-24 h-24 object-cover rounded-lg border border-[#E2E8F0] flex-shrink-0" />
+              <img key={i} src={photo} alt={`Foto ${i + 1}`} className="w-24 h-24 object-cover rounded-lg border border-border flex-shrink-0" />
             ))}
           </div>
         </div>
@@ -422,7 +425,7 @@ export default function FuncionariosPage() {
   );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+    <div className="min-h-screen bg-app-soft">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] text-white">
         <div className="max-w-5xl mx-auto px-4 py-6">
@@ -461,14 +464,14 @@ export default function FuncionariosPage() {
 
       {/* Tabs */}
       <div className="max-w-5xl mx-auto px-4">
-        <div className="flex gap-1 bg-white rounded-xl p-1 shadow-sm -mt-4 border border-[#E2E8F0]">
+        <div className="flex gap-1 bg-white rounded-xl p-1 shadow-sm -mt-4 border border-border">
           {([
             { key: 'painel' as Tab, label: '📋 Painel de Tarefas' },
             { key: 'criar' as Tab, label: '➕ Criar Tarefa' },
             { key: 'relatorios' as Tab, label: '📊 Relatórios' },
             { key: 'equipe' as Tab, label: '👷 Equipe' },
           ]).map(t => (
-            <button key={t.key} onClick={() => { setTab(t.key); setSelectedTask(null); setTaskCreated(false); }} className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${tab === t.key ? 'bg-[#1E3A5F] text-white shadow-md' : 'text-[#64748B] hover:bg-[#F1F5F9]'}`}>
+            <button key={t.key} onClick={() => { setTab(t.key); setSelectedTask(null); setTaskCreated(false); }} className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all ${tab === t.key ? 'bg-primary text-white shadow-md' : 'text-text-light hover:bg-surface-hover'}`}>
               {t.label}
             </button>
           ))}
@@ -486,18 +489,18 @@ export default function FuncionariosPage() {
                     {/* Filters */}
                     <div className="flex flex-wrap gap-3 mb-5">
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-[#64748B]">Status:</span>
+                        <span className="text-xs text-text-light">Status:</span>
                         <div className="flex gap-1">
                           {([['todos', 'Todos'], ['aberto', 'Em Aberto'], ['em-execucao', 'Em Execução'], ['finalizado', 'Finalizado'], ['problema', 'Problema']] as const).map(([v, l]) => (
-                            <button key={v} onClick={() => setFilterStatus(v)} className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${filterStatus === v ? 'bg-[#1E3A5F] text-white' : 'bg-white text-[#64748B] border border-[#E2E8F0]'}`}>{l}</button>
+                            <button key={v} onClick={() => setFilterStatus(v)} className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${filterStatus === v ? 'bg-primary text-white' : 'bg-white text-text-light border border-border'}`}>{l}</button>
                           ))}
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs text-[#64748B]">Tipo:</span>
+                        <span className="text-xs text-text-light">Tipo:</span>
                         <div className="flex gap-1">
                           {([['todos', '🗂 Todos'], ['antes-depois', '📸'], ['checklist', '✅'], ['tarefa', '📋'], ['vistoria', '🔍'], ['manutencao', '🔧']] as const).map(([v, l]) => (
-                            <button key={v} onClick={() => setFilterType(v)} className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${filterType === v ? 'bg-[#1E3A5F] text-white' : 'bg-white text-[#64748B] border border-[#E2E8F0]'}`}>{l}</button>
+                            <button key={v} onClick={() => setFilterType(v)} className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-all ${filterType === v ? 'bg-primary text-white' : 'bg-white text-text-light border border-border'}`}>{l}</button>
                           ))}
                         </div>
                       </div>
@@ -506,7 +509,7 @@ export default function FuncionariosPage() {
                     {/* Task Cards */}
                     <div className="space-y-3">
                       {filteredTasks.length === 0 ? (
-                        <div className="text-center py-12 text-[#94A3B8]">
+                        <div className="text-center py-12 text-text-muted">
                           <p className="text-4xl mb-2">📭</p>
                           <p className="text-sm">Nenhuma tarefa encontrada com esses filtros</p>
                         </div>
@@ -516,17 +519,17 @@ export default function FuncionariosPage() {
                           layout
                           initial={{ opacity: 0, y: 5 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className="bg-white rounded-xl border border-[#E2E8F0] p-4 hover:shadow-md transition-all cursor-pointer"
+                          className="bg-white rounded-xl border border-border p-4 hover:shadow-md transition-all cursor-pointer"
                           onClick={() => setSelectedTask(task.id)}
                         >
                           <div className="flex items-start justify-between">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
                                 <span>{typeIcons[task.type]}</span>
-                                <h3 className="font-semibold text-[#1E293B] text-sm truncate">{task.title}</h3>
+                                <h3 className="font-semibold text-text text-sm truncate">{task.title}</h3>
                               </div>
-                              <p className="text-xs text-[#64748B] truncate">{task.description}</p>
-                              <div className="flex items-center gap-3 mt-2 text-xs text-[#94A3B8]">
+                              <p className="text-xs text-text-light truncate">{task.description}</p>
+                              <div className="flex items-center gap-3 mt-2 text-xs text-text-muted">
                                 <span>👤 {getEmployeeName(task.assignedTo)}</span>
                                 <span>🕐 {task.startedAt ? formatDateTime(task.startedAt) : 'Aguardando'}</span>
                                 {task.location && <span className="text-green-500">📍 GPS ativo</span>}
@@ -537,7 +540,7 @@ export default function FuncionariosPage() {
                               <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${priorityColors[task.priority]}`}>{task.priority}</span>
                               <button
                                 onClick={(e) => { e.stopPropagation(); setShowQR(showQR === task.id ? null : task.id); }}
-                                className="mt-1 px-2 py-0.5 rounded-md bg-[#F1F5F9] text-[10px] text-[#1E3A5F] font-mono hover:bg-[#E2E8F0]"
+                                className="mt-1 px-2 py-0.5 rounded-md bg-surface-hover text-[10px] text-primary font-mono hover:bg-[#E2E8F0]"
                               >
                                 QR: {task.qrCode}
                               </button>
@@ -547,17 +550,17 @@ export default function FuncionariosPage() {
                           <AnimatePresence>
                             {showQR === task.id && (
                               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                                <div className="mt-3 pt-3 border-t border-[#E2E8F0] flex items-center gap-4">
-                                  <div className="w-24 h-24 bg-[#F1F5F9] rounded-xl flex items-center justify-center border-2 border-dashed border-[#CBD5E1]">
+                                <div className="mt-3 pt-3 border-t border-border flex items-center gap-4">
+                                  <div className="w-24 h-24 bg-surface-hover rounded-xl flex items-center justify-center border-2 border-dashed border-border-light">
                                     <div className="text-center">
                                       <p className="text-3xl">📱</p>
-                                      <p className="text-[8px] text-[#94A3B8] mt-0.5">QR Code</p>
+                                      <p className="text-[8px] text-text-muted mt-0.5">QR Code</p>
                                     </div>
                                   </div>
-                                  <div className="text-xs text-[#64748B] space-y-1">
-                                    <p className="font-mono font-semibold text-[#1E3A5F]">{task.qrCode}</p>
+                                  <div className="text-xs text-text-light space-y-1">
+                                    <p className="font-mono font-semibold text-primary">{task.qrCode}</p>
                                     <p>Funcionário escaneia este código para iniciar a tarefa</p>
-                                    <p className="text-[#94A3B8]">URL: /demo/funcionarios/tarefa/{task.qrCode}</p>
+                                    <p className="text-text-muted">URL: /demo/funcionarios/tarefa/{task.qrCode}</p>
                                   </div>
                                 </div>
                               </motion.div>
@@ -579,28 +582,28 @@ export default function FuncionariosPage() {
                     <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                       <span className="text-3xl">✅</span>
                     </div>
-                    <h2 className="text-xl font-bold text-[#1E293B] mb-2">Tarefa Criada com Sucesso!</h2>
-                    <p className="text-sm text-[#64748B] mb-4">QR Code gerado: <span className="font-mono font-semibold text-[#1E3A5F]">FUNC-{newTask.type.toUpperCase().slice(0, 3)}-{String(Math.floor(Math.random() * 900) + 100)}</span></p>
-                    <div className="w-32 h-32 bg-[#F1F5F9] rounded-xl flex items-center justify-center border-2 border-dashed border-[#CBD5E1] mx-auto mb-4">
+                    <h2 className="text-xl font-bold text-text mb-2">Tarefa Criada com Sucesso!</h2>
+                    <p className="text-sm text-text-light mb-4">QR Code gerado: <span className="font-mono font-semibold text-primary">{generatedCode}</span></p>
+                    <div className="w-32 h-32 bg-surface-hover rounded-xl flex items-center justify-center border-2 border-dashed border-border-light mx-auto mb-4">
                       <div className="text-center">
                         <p className="text-5xl">📱</p>
-                        <p className="text-xs text-[#94A3B8] mt-1">QR Code</p>
+                        <p className="text-xs text-text-muted mt-1">QR Code</p>
                       </div>
                     </div>
-                    <p className="text-xs text-[#94A3B8] mb-5">Imprima ou compartilhe o QR Code com o funcionário</p>
-                    <button onClick={() => { setTaskCreated(false); setNewTask({ title: '', description: '', priority: 'media', assignedTo: 'emp-001', type: 'tarefa' }); setChecklistItems(['']); setInspectionItems(['']); }} className="px-6 py-2.5 bg-[#1E3A5F] text-white rounded-xl font-medium hover:bg-[#2A5A8F] transition-all">
+                    <p className="text-xs text-text-muted mb-5">Imprima ou compartilhe o QR Code com o funcionário</p>
+                    <button onClick={() => { setTaskCreated(false); setNewTask({ title: '', description: '', priority: 'media', assignedTo: 'emp-001', type: 'tarefa' }); setChecklistItems(['']); setInspectionItems(['']); }} className="px-6 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-[#2A5A8F] transition-all">
                       Criar Nova Tarefa
                     </button>
                   </motion.div>
                 ) : (
-                  <div className="bg-white rounded-2xl border border-[#E2E8F0] p-6">
-                    <h2 className="text-lg font-bold text-[#1E293B] mb-1">Nova Tarefa para Funcionário</h2>
-                    <p className="text-xs text-[#94A3B8] mb-6">Crie a tarefa e um QR Code será gerado automaticamente</p>
+                  <div className="bg-white rounded-2xl border border-border p-6">
+                    <h2 className="text-lg font-bold text-text mb-1">Nova Tarefa para Funcionário</h2>
+                    <p className="text-xs text-text-muted mb-6">Crie a tarefa e um QR Code será gerado automaticamente</p>
 
                     <form onSubmit={handleCreateTask} className="space-y-5">
                       {/* Task Type */}
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-2">Tipo de Tarefa</label>
+                        <label className="block text-xs font-medium text-text-light mb-2">Tipo de Tarefa</label>
                         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                           {([
                             { type: 'antes-depois' as EmployeeTaskType, icon: '📸', label: 'Antes e Depois', desc: 'Comparativo com fotos' },
@@ -612,11 +615,11 @@ export default function FuncionariosPage() {
                             <button
                               key={t.type} type="button"
                               onClick={() => setNewTask(p => ({ ...p, type: t.type }))}
-                              className={`p-3 rounded-xl border-2 text-left transition-all ${newTask.type === t.type ? 'border-[#1E3A5F] bg-[#1E3A5F]/5' : 'border-[#E2E8F0] hover:border-[#CBD5E1]'}`}
+                              className={`p-3 rounded-xl border-2 text-left transition-all ${newTask.type === t.type ? 'border-[#1E3A5F] bg-primary/5' : 'border-border hover:border-border-light'}`}
                             >
                               <span className="text-2xl">{t.icon}</span>
-                              <p className="text-sm font-semibold text-[#1E293B] mt-1">{t.label}</p>
-                              <p className="text-[10px] text-[#94A3B8]">{t.desc}</p>
+                              <p className="text-sm font-semibold text-text mt-1">{t.label}</p>
+                              <p className="text-[10px] text-text-muted">{t.desc}</p>
                             </button>
                           ))}
                         </div>
@@ -624,19 +627,19 @@ export default function FuncionariosPage() {
 
                       {/* Title + Description */}
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Título</label>
-                        <input type="text" required value={newTask.title} onChange={e => setNewTask(p => ({ ...p, title: e.target.value }))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Limpeza da piscina" />
+                        <label className="block text-xs font-medium text-text-light mb-1">Título</label>
+                        <input type="text" required value={newTask.title} onChange={e => setNewTask(p => ({ ...p, title: e.target.value }))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder="Ex: Limpeza da piscina" />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Descrição / Instruções</label>
-                        <textarea required value={newTask.description} onChange={e => setNewTask(p => ({ ...p, description: e.target.value }))} rows={3} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Descreva em detalhes o que deve ser feito..." />
+                        <label className="block text-xs font-medium text-text-light mb-1">Descrição / Instruções</label>
+                        <textarea required value={newTask.description} onChange={e => setNewTask(p => ({ ...p, description: e.target.value }))} rows={3} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F] resize-none" placeholder="Descreva em detalhes o que deve ser feito..." />
                       </div>
 
                       {/* Priority + Employee */}
                       <div className="grid grid-cols-2 gap-3">
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Prioridade</label>
-                          <select value={newTask.priority} onChange={e => setNewTask(p => ({ ...p, priority: e.target.value as EmployeeTaskPriority }))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
+                          <label className="block text-xs font-medium text-text-light mb-1">Prioridade</label>
+                          <select value={newTask.priority} onChange={e => setNewTask(p => ({ ...p, priority: e.target.value as EmployeeTaskPriority }))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
                             <option value="baixa">🟢 Baixa</option>
                             <option value="media">🔵 Média</option>
                             <option value="alta">🟠 Alta</option>
@@ -644,8 +647,8 @@ export default function FuncionariosPage() {
                           </select>
                         </div>
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-1">Funcionário Responsável</label>
-                          <select value={newTask.assignedTo} onChange={e => setNewTask(p => ({ ...p, assignedTo: e.target.value }))} className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
+                          <label className="block text-xs font-medium text-text-light mb-1">Funcionário Responsável</label>
+                          <select value={newTask.assignedTo} onChange={e => setNewTask(p => ({ ...p, assignedTo: e.target.value }))} className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]">
                             {employees.filter(e => e.active).map(emp => (
                               <option key={emp.id} value={emp.id}>{emp.name} — {emp.role}</option>
                             ))}
@@ -656,17 +659,17 @@ export default function FuncionariosPage() {
                       {/* Checklist items */}
                       {newTask.type === 'checklist' && (
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-2">Itens do Checklist</label>
+                          <label className="block text-xs font-medium text-text-light mb-2">Itens do Checklist</label>
                           <div className="space-y-2">
                             {checklistItems.map((item, i) => (
                               <div key={i} className="flex gap-2">
-                                <input type="text" value={item} onChange={e => { const arr = [...checklistItems]; arr[i] = e.target.value; setChecklistItems(arr); }} className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder={`Item ${i + 1}`} />
+                                <input type="text" value={item} onChange={e => { const arr = [...checklistItems]; arr[i] = e.target.value; setChecklistItems(arr); }} className="flex-1 px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder={`Item ${i + 1}`} />
                                 {checklistItems.length > 1 && (
                                   <button type="button" onClick={() => setChecklistItems(checklistItems.filter((_, j) => j !== i))} className="px-2 text-red-400 hover:text-red-600">✕</button>
                                 )}
                               </div>
                             ))}
-                            <button type="button" onClick={() => setChecklistItems([...checklistItems, ''])} className="text-xs text-[#1E3A5F] font-medium hover:underline">+ Adicionar item</button>
+                            <button type="button" onClick={() => setChecklistItems([...checklistItems, ''])} className="text-xs text-primary font-medium hover:underline">+ Adicionar item</button>
                           </div>
                         </div>
                       )}
@@ -674,19 +677,19 @@ export default function FuncionariosPage() {
                       {/* Inspection items */}
                       {newTask.type === 'vistoria' && (
                         <div>
-                          <label className="block text-xs font-medium text-[#64748B] mb-2">Itens Pré-determinados da Vistoria</label>
+                          <label className="block text-xs font-medium text-text-light mb-2">Itens Pré-determinados da Vistoria</label>
                           <div className="space-y-2">
                             {inspectionItems.map((item, i) => (
                               <div key={i} className="flex gap-2">
-                                <input type="text" value={item} onChange={e => { const arr = [...inspectionItems]; arr[i] = e.target.value; setInspectionItems(arr); }} className="flex-1 px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder={`Item ${i + 1} (ex: Piscina — estado da água)`} />
+                                <input type="text" value={item} onChange={e => { const arr = [...inspectionItems]; arr[i] = e.target.value; setInspectionItems(arr); }} className="flex-1 px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#1E3A5F]" placeholder={`Item ${i + 1} (ex: Piscina — estado da água)`} />
                                 {inspectionItems.length > 1 && (
                                   <button type="button" onClick={() => setInspectionItems(inspectionItems.filter((_, j) => j !== i))} className="px-2 text-red-400 hover:text-red-600">✕</button>
                                 )}
                               </div>
                             ))}
-                            <button type="button" onClick={() => setInspectionItems([...inspectionItems, ''])} className="text-xs text-[#1E3A5F] font-medium hover:underline">+ Adicionar item</button>
+                            <button type="button" onClick={() => setInspectionItems([...inspectionItems, ''])} className="text-xs text-primary font-medium hover:underline">+ Adicionar item</button>
                           </div>
-                          <p className="text-[10px] text-[#94A3B8] mt-2">💡 O funcionário também poderá adicionar itens livre durante a vistoria</p>
+                          <p className="text-[10px] text-text-muted mt-2">💡 O funcionário também poderá adicionar itens livre durante a vistoria</p>
                         </div>
                       )}
 
@@ -720,48 +723,48 @@ export default function FuncionariosPage() {
                 </div>
 
                 {/* Detailed Reports */}
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden">
-                  <div className="p-5 border-b border-[#E2E8F0]">
-                    <h2 className="text-lg font-bold text-[#1E293B]">📊 Relatório Detalhado de Tarefas</h2>
-                    <p className="text-xs text-[#94A3B8]">Histórico completo de execução</p>
+                <div className="bg-white rounded-2xl border border-border overflow-hidden">
+                  <div className="p-5 border-b border-border">
+                    <h2 className="text-lg font-bold text-text">📊 Relatório Detalhado de Tarefas</h2>
+                    <p className="text-xs text-text-muted">Histórico completo de execução</p>
                   </div>
 
                   <div className="divide-y divide-[#E2E8F0]">
                     {allTasks.map(task => {
                       const emp = employees.find(e => e.id === task.assignedTo);
                       return (
-                        <div key={task.id} className="p-4 hover:bg-[#F8FAFC] transition-colors">
+                        <div key={task.id} className="p-4 hover:bg-surface-alt transition-colors">
                           <div className="flex items-start justify-between">
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
                                 <span>{typeIcons[task.type]}</span>
-                                <h3 className="font-semibold text-sm text-[#1E293B] truncate">{task.title}</h3>
+                                <h3 className="font-semibold text-sm text-text truncate">{task.title}</h3>
                                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold ${statusColors[task.status]}`}>{statusLabels[task.status]}</span>
                               </div>
 
                               <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-6 gap-y-1 mt-2 text-xs">
                                 <div>
-                                  <span className="text-[#94A3B8]">Funcionário:</span>
-                                  <p className="font-medium text-[#1E293B]">{emp?.name} <span className="text-[#94A3B8]">({emp?.role})</span></p>
+                                  <span className="text-text-muted">Funcionário:</span>
+                                  <p className="font-medium text-text">{emp?.name} <span className="text-text-muted">({emp?.role})</span></p>
                                 </div>
                                 <div>
-                                  <span className="text-[#94A3B8]">Prioridade:</span>
+                                  <span className="text-text-muted">Prioridade:</span>
                                   <p><span className={`px-1.5 py-0.5 rounded-full text-[10px] font-semibold ${priorityColors[task.priority]}`}>{task.priority}</span></p>
                                 </div>
                                 <div>
-                                  <span className="text-[#94A3B8]">Início:</span>
-                                  <p className="font-medium text-[#1E293B]">{task.startedAt ? formatDateTime(task.startedAt) : '—'}</p>
+                                  <span className="text-text-muted">Início:</span>
+                                  <p className="font-medium text-text">{task.startedAt ? formatDateTime(task.startedAt) : '—'}</p>
                                 </div>
                                 <div>
-                                  <span className="text-[#94A3B8]">Conclusão:</span>
-                                  <p className="font-medium text-[#1E293B]">{task.finishedAt ? formatDateTime(task.finishedAt) : '—'}</p>
+                                  <span className="text-text-muted">Conclusão:</span>
+                                  <p className="font-medium text-text">{task.finishedAt ? formatDateTime(task.finishedAt) : '—'}</p>
                                 </div>
                               </div>
 
-                              <div className="flex items-center gap-4 mt-2 text-xs text-[#64748B]">
+                              <div className="flex items-center gap-4 mt-2 text-xs text-text-light">
                                 <span>⏱ Tempo: <strong>{executionTime(task.startedAt, task.finishedAt)}</strong></span>
-                                <span>📍 GPS: {task.location ? <span className="text-green-600">Registrado</span> : <span className="text-[#94A3B8]">N/A</span>}</span>
-                                <span className="font-mono text-[#94A3B8]">QR: {task.qrCode}</span>
+                                <span>📍 GPS: {task.location ? <span className="text-green-600">Registrado</span> : <span className="text-text-muted">N/A</span>}</span>
+                                <span className="font-mono text-text-muted">QR: {task.qrCode}</span>
                               </div>
 
                               {/* Checklist progress */}
@@ -775,7 +778,7 @@ export default function FuncionariosPage() {
                                       <div className="flex-1 h-1.5 bg-[#E2E8F0] rounded-full overflow-hidden">
                                         <div className="h-full bg-green-500 rounded-full" style={{ width: `${(done / t.items.length) * 100}%` }} />
                                       </div>
-                                      <span className="text-[#64748B]">{done}/{t.items.length}</span>
+                                      <span className="text-text-light">{done}/{t.items.length}</span>
                                       {problems > 0 && <span className="text-red-500">⚠️ {problems}</span>}
                                     </div>
                                   </div>
@@ -791,13 +794,13 @@ export default function FuncionariosPage() {
                                   <div className="mt-2 text-xs">
                                     <span className="text-green-600">✅ {ok} OK</span>
                                     {problems > 0 && <span className="text-red-500 ml-3">⚠️ {problems} Problemas</span>}
-                                    <span className="text-[#94A3B8] ml-3">Total: {t.items.length} itens</span>
+                                    <span className="text-text-muted ml-3">Total: {t.items.length} itens</span>
                                   </div>
                                 );
                               })()}
                             </div>
 
-                            <button onClick={() => { setTab('painel'); setSelectedTask(task.id); }} className="ml-3 px-3 py-1.5 bg-[#F1F5F9] text-[#1E3A5F] text-xs font-medium rounded-lg hover:bg-[#E2E8F0] transition-all whitespace-nowrap">
+                            <button onClick={() => { setTab('painel'); setSelectedTask(task.id); }} className="ml-3 px-3 py-1.5 bg-surface-hover text-primary text-xs font-medium rounded-lg hover:bg-[#E2E8F0] transition-all whitespace-nowrap">
                               Ver detalhes →
                             </button>
                           </div>
@@ -808,9 +811,9 @@ export default function FuncionariosPage() {
                 </div>
 
                 {/* Employee performance */}
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden">
-                  <div className="p-5 border-b border-[#E2E8F0]">
-                    <h2 className="text-lg font-bold text-[#1E293B]">👷 Desempenho por Funcionário</h2>
+                <div className="bg-white rounded-2xl border border-border overflow-hidden">
+                  <div className="p-5 border-b border-border">
+                    <h2 className="text-lg font-bold text-text">👷 Desempenho por Funcionário</h2>
                   </div>
                   <div className="divide-y divide-[#E2E8F0]">
                     {employees.map(emp => {
@@ -824,26 +827,26 @@ export default function FuncionariosPage() {
                             {emp.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                           </div>
                           <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-sm text-[#1E293B]">{emp.name}</p>
-                            <p className="text-xs text-[#64748B]">{emp.role} · {emp.phone}</p>
+                            <p className="font-semibold text-sm text-text">{emp.name}</p>
+                            <p className="text-xs text-text-light">{emp.role} · {emp.phone}</p>
                           </div>
                           <div className="flex gap-3 text-xs">
                             <div className="text-center">
-                              <p className="font-bold text-[#1E293B]">{empTasks.length}</p>
-                              <p className="text-[#94A3B8]">Total</p>
+                              <p className="font-bold text-text">{empTasks.length}</p>
+                              <p className="text-text-muted">Total</p>
                             </div>
                             <div className="text-center">
                               <p className="font-bold text-green-600">{done}</p>
-                              <p className="text-[#94A3B8]">Feitas</p>
+                              <p className="text-text-muted">Feitas</p>
                             </div>
                             <div className="text-center">
                               <p className="font-bold text-blue-600">{inProgress}</p>
-                              <p className="text-[#94A3B8]">Em and.</p>
+                              <p className="text-text-muted">Em and.</p>
                             </div>
                             {problems > 0 && (
                               <div className="text-center">
                                 <p className="font-bold text-red-500">{problems}</p>
-                                <p className="text-[#94A3B8]">Probl.</p>
+                                <p className="text-text-muted">Probl.</p>
                               </div>
                             )}
                           </div>
@@ -861,12 +864,12 @@ export default function FuncionariosPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-lg font-bold text-[#1E293B]">👷 Equipe de Funcionários</h2>
-                    <p className="text-xs text-[#94A3B8]">{employees.length} funcionário(s) cadastrado(s)</p>
+                    <h2 className="text-lg font-bold text-text">👷 Equipe de Funcionários</h2>
+                    <p className="text-xs text-text-muted">{employees.length} funcionário(s) cadastrado(s)</p>
                   </div>
                   <button
                     onClick={() => { setEditingEmployee(null); setEmpForm({ name: '', role: '', phone: '' }); setShowEmployeeForm(true); }}
-                    className="px-4 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-xl hover:bg-[#2A5A8F] transition-all shadow-md"
+                    className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-xl hover:bg-[#2A5A8F] transition-all shadow-md"
                   >
                     ➕ Novo Funcionário
                   </button>
@@ -874,50 +877,50 @@ export default function FuncionariosPage() {
 
                 {/* Form modal */}
                 {showEmployeeForm && (
-                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl border border-[#E2E8F0] p-5 shadow-lg">
-                    <h3 className="text-base font-bold text-[#1E293B] mb-4">{editingEmployee ? '✏️ Editar Funcionário' : '➕ Cadastrar Funcionário'}</h3>
+                  <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="bg-white rounded-2xl border border-border p-5 shadow-lg">
+                    <h3 className="text-base font-bold text-text mb-4">{editingEmployee ? '✏️ Editar Funcionário' : '➕ Cadastrar Funcionário'}</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Nome *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Nome *</label>
                         <input
                           type="text"
                           value={empForm.name}
                           onChange={e => setEmpForm(p => ({ ...p, name: e.target.value }))}
                           placeholder="Nome completo"
-                          className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Cargo *</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Cargo *</label>
                         <input
                           type="text"
                           value={empForm.role}
                           onChange={e => setEmpForm(p => ({ ...p, role: e.target.value }))}
                           placeholder="Ex: Zelador, Porteiro"
-                          className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-[#64748B] mb-1">Telefone</label>
+                        <label className="block text-xs font-medium text-text-light mb-1">Telefone</label>
                         <input
                           type="text"
                           value={empForm.phone}
                           onChange={e => setEmpForm(p => ({ ...p, phone: e.target.value }))}
                           placeholder="(11) 99999-9999"
-                          className="w-full px-3 py-2 border border-[#E2E8F0] rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
+                          className="w-full px-3 py-2 border border-border rounded-lg text-sm focus:ring-2 focus:ring-[#1E3A5F] focus:border-transparent outline-none"
                         />
                       </div>
                     </div>
                     <div className="flex gap-2 mt-4">
                       <button
                         onClick={handleSaveEmployee}
-                        className="px-5 py-2 bg-[#1E3A5F] text-white text-sm font-medium rounded-xl hover:bg-[#2A5A8F] transition-all"
+                        className="px-5 py-2 bg-primary text-white text-sm font-medium rounded-xl hover:bg-[#2A5A8F] transition-all"
                       >
                         {editingEmployee ? 'Salvar Alterações' : 'Cadastrar'}
                       </button>
                       <button
                         onClick={() => { setShowEmployeeForm(false); setEditingEmployee(null); setEmpForm({ name: '', role: '', phone: '' }); }}
-                        className="px-5 py-2 bg-[#F1F5F9] text-[#64748B] text-sm font-medium rounded-xl hover:bg-[#E2E8F0] transition-all"
+                        className="px-5 py-2 bg-surface-hover text-text-light text-sm font-medium rounded-xl hover:bg-[#E2E8F0] transition-all"
                       >
                         Cancelar
                       </button>
@@ -926,16 +929,16 @@ export default function FuncionariosPage() {
                 )}
 
                 {/* Employee list */}
-                <div className="bg-white rounded-2xl border border-[#E2E8F0] overflow-hidden">
+                <div className="bg-white rounded-2xl border border-border overflow-hidden">
                   <div className="divide-y divide-[#E2E8F0]">
                     {employees.map(emp => (
-                      <div key={emp.id} className={`p-4 flex items-center gap-4 transition-colors ${!emp.active ? 'opacity-50 bg-gray-50' : 'hover:bg-[#F8FAFC]'}`}>
+                      <div key={emp.id} className={`p-4 flex items-center gap-4 transition-colors ${!emp.active ? 'opacity-50 bg-gray-50' : 'hover:bg-surface-alt'}`}>
                         <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-base ${emp.active ? 'bg-gradient-to-br from-[#1E3A5F] to-[#2A5A8F]' : 'bg-gray-400'}`}>
                           {emp.name.split(' ').map(n => n[0]).join('').slice(0, 2)}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-sm text-[#1E293B]">{emp.name}</p>
-                          <p className="text-xs text-[#64748B]">{emp.role} · {emp.phone}</p>
+                          <p className="font-semibold text-sm text-text">{emp.name}</p>
+                          <p className="text-xs text-text-light">{emp.role} · {emp.phone}</p>
                           <span className={`inline-block mt-1 px-2 py-0.5 rounded-full text-[10px] font-semibold ${emp.active ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>
                             {emp.active ? '✅ Ativo' : '⏸ Inativo'}
                           </span>
@@ -949,7 +952,7 @@ export default function FuncionariosPage() {
                           </button>
                           <button
                             onClick={() => handleEditEmployee(emp)}
-                            className="px-3 py-1.5 bg-[#F1F5F9] text-[#1E3A5F] rounded-lg text-xs font-medium hover:bg-[#E2E8F0] transition-all"
+                            className="px-3 py-1.5 bg-surface-hover text-primary rounded-lg text-xs font-medium hover:bg-[#E2E8F0] transition-all"
                           >
                             ✏️ Editar
                           </button>
@@ -964,7 +967,7 @@ export default function FuncionariosPage() {
                     ))}
 
                     {employees.length === 0 && (
-                      <div className="p-8 text-center text-[#94A3B8]">
+                      <div className="p-8 text-center text-text-muted">
                         <p className="text-3xl mb-2">👷</p>
                         <p className="text-sm">Nenhum funcionário cadastrado</p>
                         <p className="text-xs mt-1">Clique em &quot;Novo Funcionário&quot; para começar</p>

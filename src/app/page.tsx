@@ -48,19 +48,19 @@ export default function HomePage() {
               <Image src="/images/logo.png" alt="App Revista" width={36} height={36} className="rounded-lg" />
               <div className="flex flex-col">
                 <span className="text-xl font-bold gradient-text leading-none">APP REVISTA</span>
-                <span className="mt-1 block text-[14px] font-bold uppercase tracking-[0.3em] text-[#1E3A5F] leading-none">Condominio</span>
+                <span className="mt-1 block text-[14px] font-bold uppercase tracking-[0.3em] text-primary leading-none">Condominio</span>
               </div>
             </div>
             <nav className="hidden md:flex items-center gap-8">
-              <a href="#funcionalidades" className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors">Funcionalidades</a>
-              <a href="#categorias" className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors">Categorias</a>
-              <a href="#planos" className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors">Planos</a>
-              <Link href="/demo" className="text-sm text-[#64748B] hover:text-[#1E3A5F] transition-colors">Demo</Link>
+              <a href="#funcionalidades" className="text-sm text-text-light hover:text-primary transition-colors">Funcionalidades</a>
+              <a href="#categorias" className="text-sm text-text-light hover:text-primary transition-colors">Categorias</a>
+              <a href="#planos" className="text-sm text-text-light hover:text-primary transition-colors">Planos</a>
+              <Link href="/demo" className="text-sm text-text-light hover:text-primary transition-colors">Demo</Link>
             </nav>
             <div className="flex items-center gap-3">
               <Link
                 href="/demo"
-                className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-[#1E3A5F] border border-[#1E3A5F] rounded-lg hover:bg-[#1E3A5F] hover:text-white transition-all"
+                className="hidden sm:inline-flex px-4 py-2 text-sm font-medium text-primary border border-[#1E3A5F] rounded-lg hover:bg-primary hover:text-white transition-all"
               >
                 Ver Demo
               </Link>
@@ -79,7 +79,7 @@ export default function HomePage() {
       <section className="relative pt-36 pb-20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-[#F8FAFC] via-white to-[#EEF2FF]" />
         <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-[#D4AF37]/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#1E3A5F]/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -92,15 +92,15 @@ export default function HomePage() {
                 <span className="w-1.5 h-1.5 bg-[#D4AF37] rounded-full animate-pulse" />
                 Plataforma de Revistas Digitais
               </div>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#1E293B] leading-tight mb-6">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-text leading-tight mb-6">
                 Sua administração em uma{' '}
                 <span className="gradient-text">revista digital</span>{' '}
                 profissional
               </h1>
-              <p className="text-lg text-[#64748B] leading-relaxed mb-4 max-w-lg">
+              <p className="text-lg text-text-light leading-relaxed mb-4 max-w-lg">
                 Os moradores sabem o que você faz pelo condomínio? Não basta fazer — mostre tudo o que você realiza!
               </p>
-              <p className="text-base text-[#94A3B8] leading-relaxed mb-8 max-w-lg">
+              <p className="text-base text-text-muted leading-relaxed mb-8 max-w-lg">
                 Crie revistas digitais personalizadas para o seu condomínio. Mostre o trabalho da sua gestão com elegância e transparência.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
@@ -113,25 +113,25 @@ export default function HomePage() {
                 </Link>
                 <Link
                   href="/demo/painel"
-                  className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-[#1E3A5F] bg-white border-2 border-[#E2E8F0] rounded-xl hover:border-[#1E3A5F] transition-all"
+                  className="inline-flex items-center justify-center px-6 py-3 text-base font-semibold text-primary bg-white border-2 border-border rounded-xl hover:border-[#1E3A5F] transition-all"
                 >
                   Painel Administrativo
                 </Link>
               </div>
-              <div className="flex items-center gap-6 mt-10 pt-8 border-t border-[#E2E8F0]">
+              <div className="flex items-center gap-6 mt-10 pt-8 border-t border-border">
                 <div>
-                  <div className="text-2xl font-bold text-[#1E293B]">38+</div>
-                  <div className="text-xs text-[#64748B]">Categorias</div>
+                  <div className="text-2xl font-bold text-text">38+</div>
+                  <div className="text-xs text-text-light">Categorias</div>
                 </div>
                 <div className="w-px h-10 bg-[#E2E8F0]" />
                 <div>
-                  <div className="text-2xl font-bold text-[#1E293B]">4</div>
-                  <div className="text-xs text-[#64748B]">Perfis de acesso</div>
+                  <div className="text-2xl font-bold text-text">4</div>
+                  <div className="text-xs text-text-light">Perfis de acesso</div>
                 </div>
                 <div className="w-px h-10 bg-[#E2E8F0]" />
                 <div>
-                  <div className="text-2xl font-bold text-[#1E293B]">∞</div>
-                  <div className="text-xs text-[#64748B]">Edições</div>
+                  <div className="text-2xl font-bold text-text">∞</div>
+                  <div className="text-xs text-text-light">Edições</div>
                 </div>
               </div>
             </motion.div>
@@ -144,7 +144,7 @@ export default function HomePage() {
             >
               <div className="relative">
                 <div className="absolute -inset-4 bg-gradient-to-r from-[#1E3A5F]/10 to-[#D4AF37]/10 rounded-3xl blur-xl" />
-                <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border border-[#E2E8F0]">
+                <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border border-border">
                   <div className="bg-gradient-to-r from-[#1E3A5F] to-[#2A5A8F] p-6 text-white">
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -161,12 +161,12 @@ export default function HomePage() {
                   </div>
                   <div className="p-6 space-y-4">
                     {['Prestação de Contas', 'Obras em Andamento', 'Eventos do Mês', 'Classificados'].map((item, i) => (
-                      <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-[#F8FAFC] border border-[#E2E8F0]">
+                      <div key={i} className="flex items-center gap-3 p-3 rounded-lg bg-surface-alt border border-border">
                         <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#1E3A5F] to-[#D4AF37] flex items-center justify-center">
                           <span className="text-white text-xs font-bold">{i + 1}</span>
                         </div>
-                        <span className="text-sm font-medium text-[#1E293B]">{item}</span>
-                        <svg className="ml-auto w-4 h-4 text-[#94A3B8]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                        <span className="text-sm font-medium text-text">{item}</span>
+                        <svg className="ml-auto w-4 h-4 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
                       </div>
                     ))}
                   </div>
@@ -178,7 +178,7 @@ export default function HomePage() {
       </section>
 
       {/* Funcionalidades */}
-      <section id="funcionalidades" className="py-20 bg-[#F8FAFC]">
+      <section id="funcionalidades" className="py-20 bg-surface-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -186,10 +186,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               Tudo que você precisa em um só lugar
             </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
+            <p className="text-text-light max-w-2xl mx-auto">
               Funcionalidades pensadas para facilitar a comunicação entre administração e moradores
             </p>
           </motion.div>
@@ -214,11 +214,11 @@ export default function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white p-6 rounded-xl border border-[#E2E8F0] card-hover"
+                className="bg-white p-6 rounded-xl border border-border card-hover"
               >
                 <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="text-lg font-semibold text-[#1E293B] mb-2">{item.title}</h3>
-                <p className="text-sm text-[#64748B] leading-relaxed">{item.desc}</p>
+                <h3 className="text-lg font-semibold text-text mb-2">{item.title}</h3>
+                <p className="text-sm text-text-light leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -234,10 +234,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               38 Categorias Prontas
             </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
+            <p className="text-text-light max-w-2xl mx-auto">
               O síndico ou administradora seleciona os cards que deseja e alimenta com suas informações
             </p>
           </motion.div>
@@ -251,7 +251,7 @@ export default function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="group relative bg-white p-4 rounded-xl border border-[#E2E8F0] card-hover cursor-pointer text-center"
+                className="group relative bg-white p-4 rounded-xl border border-border card-hover cursor-pointer text-center"
               >
                 <div
                   className="w-12 h-12 rounded-xl mx-auto mb-3 flex items-center justify-center text-white text-lg font-bold transition-transform group-hover:scale-110"
@@ -259,8 +259,8 @@ export default function HomePage() {
                 >
                   {cat.name.charAt(0)}
                 </div>
-                <h3 className="text-sm font-semibold text-[#1E293B] mb-1">{cat.name}</h3>
-                <p className="text-xs text-[#94A3B8] line-clamp-2">{cat.description}</p>
+                <h3 className="text-sm font-semibold text-text mb-1">{cat.name}</h3>
+                <p className="text-xs text-text-muted line-clamp-2">{cat.description}</p>
               </motion.div>
             ))}
           </div>
@@ -268,7 +268,7 @@ export default function HomePage() {
       </section>
 
       {/* Perfis */}
-      <section className="py-20 bg-[#F8FAFC]">
+      <section className="py-20 bg-surface-alt">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -276,10 +276,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               4 Perfis de Acesso
             </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
+            <p className="text-text-light max-w-2xl mx-auto">
               Cada perfil tem seu nível de acesso e funcionalidades específicas
             </p>
           </motion.div>
@@ -298,17 +298,17 @@ export default function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="bg-white rounded-xl border border-[#E2E8F0] overflow-hidden card-hover"
+                className="bg-white rounded-xl border border-border overflow-hidden card-hover"
               >
                 <div className="p-1.5" style={{ backgroundColor: item.color }}>
                   <div className="text-center text-white text-xs font-medium py-1">{item.role}</div>
                 </div>
                 <div className="p-6">
                   <div className="text-4xl mb-4">{item.icon}</div>
-                  <h3 className="text-lg font-bold text-[#1E293B] mb-4">{item.role}</h3>
+                  <h3 className="text-lg font-bold text-text mb-4">{item.role}</h3>
                   <ul className="space-y-2">
                     {item.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-2 text-sm text-[#64748B]">
+                      <li key={j} className="flex items-center gap-2 text-sm text-text-light">
                         <svg className="w-4 h-4 flex-shrink-0" style={{ color: item.color }} fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
@@ -330,10 +330,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               Planos Simples e Transparentes
             </h2>
-            <p className="text-[#64748B] max-w-2xl mx-auto">
+            <p className="text-text-light max-w-2xl mx-auto">
               Escolha o plano ideal para o seu perfil
             </p>
           </motion.div>
@@ -350,20 +350,20 @@ export default function HomePage() {
                 className={`relative bg-white rounded-2xl border-2 overflow-hidden card-hover ${
                   plan.type === 'administradora'
                     ? 'border-[#D4AF37] shadow-xl shadow-[#D4AF37]/10'
-                    : 'border-[#E2E8F0]'
+                    : 'border-border'
                 }`}
               >
 
                 <div className="p-8">
-                  <h3 className="text-xl font-bold text-[#1E293B] mb-2">{plan.name}</h3>
+                  <h3 className="text-xl font-bold text-text mb-2">{plan.name}</h3>
                   <div className="flex items-baseline gap-1 mb-6">
-                    <span className="text-sm text-[#64748B]">R$</span>
-                    <span className="text-5xl font-bold text-[#1E293B]">{plan.price}</span>
-                    <span className="text-sm text-[#64748B]">/mês</span>
+                    <span className="text-sm text-text-light">R$</span>
+                    <span className="text-5xl font-bold text-text">{plan.price}</span>
+                    <span className="text-sm text-text-light">/mês</span>
                   </div>
                   <ul className="space-y-3 mb-8">
                     {plan.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-3 text-sm text-[#475569]">
+                      <li key={j} className="flex items-center gap-3 text-sm text-text-light">
                         <svg className="w-5 h-5 flex-shrink-0 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         {f}
                       </li>
@@ -395,10 +395,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               Conheça o ecossistema APP REVISTA
             </h2>
-            <p className="text-[#64748B] max-w-3xl mx-auto">
+            <p className="text-text-light max-w-3xl mx-auto">
               No final da sua jornada na home, mostramos outros sistemas da rede e a proposta comercial para parceiros que querem escalar conosco.
             </p>
           </motion.div>
@@ -412,7 +412,7 @@ export default function HomePage() {
                 whileInView="visible"
                 viewport={{ once: true }}
                 variants={fadeUp}
-                className="group rounded-[28px] border border-[#E2E8F0] bg-white px-6 py-7 text-center shadow-[0_18px_45px_rgba(15,23,42,0.06)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+                className="group rounded-[28px] border border-border bg-white px-6 py-7 text-center shadow-[0_18px_45px_rgba(15,23,42,0.06)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
               >
                 <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-[28px] bg-[linear-gradient(180deg,#F8FAFC_0%,#FFFFFF_100%)] p-2 shadow-[inset_0_2px_0_rgba(255,255,255,0.85),0_12px_30px_rgba(15,23,42,0.12)]">
                   <div className="relative h-full w-full overflow-hidden rounded-[24px]">
@@ -425,10 +425,10 @@ export default function HomePage() {
                     />
                   </div>
                 </div>
-                <h3 className="text-[28px] font-bold tracking-[-0.03em] text-[#0F3F84] group-hover:text-[#1E3A5F]">
+                <h3 className="text-[28px] font-bold tracking-[-0.03em] text-[#0F3F84] group-hover:text-primary">
                   {app.name}
                 </h3>
-                <p className="mt-2 text-lg text-[#64748B]">{app.domain}</p>
+                <p className="mt-2 text-lg text-text-light">{app.domain}</p>
               </motion.div>
             ))}
           </div>
@@ -452,7 +452,7 @@ export default function HomePage() {
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Conheça o sistema <span className="text-[#D4AF37]">completo</span>
             </h2>
-            <p className="text-lg text-[#94A3B8] mb-8">
+            <p className="text-lg text-text-muted mb-8">
               Veja nossa apresentação comercial com todas as funcionalidades, categorias, perfis de acesso e planos. Ideal para compartilhar com a diretoria ou gerar um PDF profissional.
             </p>
             <div className="inline-flex flex-col sm:flex-row items-center gap-4">
@@ -463,7 +463,7 @@ export default function HomePage() {
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" /></svg>
                 Ver Apresentação
               </Link>
-              <div className="flex items-center gap-6 text-sm text-[#94A3B8]">
+              <div className="flex items-center gap-6 text-sm text-text-muted">
                 <div className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-[#D4AF37]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   10 slides
@@ -483,7 +483,7 @@ export default function HomePage() {
       </section>
 
       {/* Conheça Nosso Contrato */}
-      <section className="py-20 bg-gradient-to-br from-[#F8FAFC] to-[#EEF2FF]">
+      <section className="py-20 bg-app-soft">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial="hidden"
@@ -492,10 +492,10 @@ export default function HomePage() {
             variants={fadeUp}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-[#1E293B] mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
               Conheça nosso <span className="gradient-text">contrato</span>
             </h2>
-            <p className="text-lg text-[#64748B] mb-8">
+            <p className="text-lg text-text-light mb-8">
               Transparência total. Sem fidelidade, sem multa, sem letra miúda.
               Leia nosso contrato completo antes de contratar.
             </p>
@@ -507,7 +507,7 @@ export default function HomePage() {
                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
                 Ler Contrato Completo
               </Link>
-              <div className="flex items-center gap-6 text-sm text-[#64748B]">
+              <div className="flex items-center gap-6 text-sm text-text-light">
                 <div className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-[#10B981]" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                   Sem fidelidade
@@ -535,17 +535,17 @@ export default function HomePage() {
                 <Image src="/images/logo.png" alt="App Revista" width={36} height={36} className="rounded-lg" />
                 <div className="flex flex-col">
                   <span className="text-xl font-bold">APP REVISTA</span>
-                  <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-[#94A3B8] leading-none">Condomínio</span>
+                  <span className="text-[12px] font-bold uppercase tracking-[0.22em] text-text-muted leading-none">Condomínio</span>
                 </div>
               </div>
-              <p className="text-sm text-[#94A3B8] max-w-sm">
+              <p className="text-sm text-text-muted max-w-sm">
                 Plataforma de revistas digitais para condomínios, escolas, hospitais e empresas.
                 Mostre o trabalho da sua gestão com elegância e profissionalismo.
               </p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Produto</h4>
-              <ul className="space-y-2 text-sm text-[#94A3B8]">
+              <ul className="space-y-2 text-sm text-text-muted">
                 <li><a href="#funcionalidades" className="hover:text-white transition-colors">Funcionalidades</a></li>
                 <li><a href="#categorias" className="hover:text-white transition-colors">Categorias</a></li>
                 <li><a href="#planos" className="hover:text-white transition-colors">Planos</a></li>
@@ -555,13 +555,13 @@ export default function HomePage() {
             </div>
             <div>
               <h4 className="font-semibold mb-4">Contato</h4>
-              <ul className="space-y-2 text-sm text-[#94A3B8]">
+              <ul className="space-y-2 text-sm text-text-muted">
                 <li>www.apprevista.com.br</li>
                 <li>contato@apprevista.com.br</li>
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-[#64748B]">
+          <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-text-light">
             © 2026 APP REVISTA. Todos os direitos reservados.
           </div>
         </div>

@@ -47,23 +47,23 @@ export default function ContratoPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]">
+    <div className="min-h-screen bg-surface-alt">
       {/* Header */}
-      <header className="bg-white border-b border-[#E2E8F0] sticky top-0 z-50">
+      <header className="bg-white border-b border-border sticky top-0 z-50">
         <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <Image src="/images/logo.png" alt="App Revista" width={32} height={32} className="rounded-lg" />
             <div className="flex flex-col">
               <span className="text-lg font-bold bg-gradient-to-r from-[#1E3A5F] to-[#D4AF37] bg-clip-text text-transparent leading-none">APP REVISTA</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#64748B] leading-none">Condomínio</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-text-light leading-none">Condomínio</span>
             </div>
           </Link>
           <div className="flex items-center gap-2">
-            <button onClick={() => window.print()} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] bg-[#F1F5F9] rounded-lg hover:bg-[#E2E8F0] transition-colors">
+            <button onClick={() => window.print()} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-light bg-surface-hover rounded-lg hover:bg-[#E2E8F0] transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
               Imprimir / PDF
             </button>
-            <button onClick={copiarLink} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-[#64748B] bg-[#F1F5F9] rounded-lg hover:bg-[#E2E8F0] transition-colors">
+            <button onClick={copiarLink} className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-light bg-surface-hover rounded-lg hover:bg-[#E2E8F0] transition-colors">
               <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
               Copiar Link
             </button>
@@ -77,26 +77,26 @@ export default function ContratoPage() {
 
       {/* Contract Content */}
       <main className="max-w-4xl mx-auto px-4 py-10 print:py-4 print:px-8">
-        <div className="bg-white rounded-2xl shadow-sm border border-[#E2E8F0] p-8 sm:p-12 print:shadow-none print:border-none print:p-0">
+        <div className="bg-white rounded-2xl shadow-sm border border-border p-8 sm:p-12 print:shadow-none print:border-none print:p-0">
 
           {/* Title */}
-          <div className="text-center mb-10 pb-8 border-b border-[#E2E8F0]">
+          <div className="text-center mb-10 pb-8 border-b border-border">
             <div className="flex justify-center mb-4">
               <Image src="/images/logo.png" alt="App Revista" width={64} height={64} className="rounded-xl" />
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-[#1E293B] mb-2">CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE SOFTWARE</h1>
-            <p className="text-sm text-[#64748B]">App Revista</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-text mb-2">CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE SOFTWARE</h1>
+            <p className="text-sm text-text-light">App Revista</p>
           </div>
 
           {/* Cláusula 1 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">1</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">1</span>
               DAS PARTES
             </h2>
             <div className="space-y-4 text-sm text-[#334155] leading-relaxed">
               <div>
-                <p className="font-semibold text-[#1E293B] mb-1">CONTRATADA:</p>
+                <p className="font-semibold text-text mb-1">CONTRATADA:</p>
                 <p>
                   <strong>APP GROUP LTDA - ME</strong> (Nome Fantasia: APP GROUP), pessoa jurídica de direito privado, inscrita no
                   CNPJ sob nº 51.797.070/0001-53, com sede na Av. Paulista, 1106, Sala 01, Bairro Bela Vista, CEP 01310-914, São
@@ -105,7 +105,7 @@ export default function ContratoPage() {
                 </p>
               </div>
               <div>
-                <p className="font-semibold text-[#1E293B] mb-2">CONTRATANTE:</p>
+                <p className="font-semibold text-text mb-2">CONTRATANTE:</p>
                 <div className="grid grid-cols-2 gap-2">
                   {([
                     { label: 'CONDOMÍNIO / RAZÃO SOCIAL', key: 'razaoSocial', full: true },
@@ -118,27 +118,27 @@ export default function ContratoPage() {
                     { label: 'SÍNDICO(A) / REPRESENTANTE LEGAL', key: 'sindico', full: true },
                     { label: 'CPF DO REPRESENTANTE', key: 'cpfRepresentante', full: false },
                   ] as const).map(field => (
-                    <div key={field.key} className={`border border-[#E2E8F0] rounded-lg p-2 ${field.full ? 'col-span-2' : ''}`}>
-                      <span className="text-[10px] uppercase tracking-wider text-[#94A3B8] block">{field.label}</span>
+                    <div key={field.key} className={`border border-border rounded-lg p-2 ${field.full ? 'col-span-2' : ''}`}>
+                      <span className="text-[10px] uppercase tracking-wider text-text-muted block">{field.label}</span>
                       <input
                         type="text"
                         value={campos[field.key]}
                         onChange={e => setCampos(prev => ({ ...prev, [field.key]: e.target.value }))}
-                        className="w-full h-6 text-sm text-[#1E293B] border-b border-dashed border-[#CBD5E1] mt-1 bg-transparent outline-none focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
+                        className="w-full h-6 text-sm text-text border-b border-dashed border-border-light mt-1 bg-transparent outline-none focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
                         placeholder={`Digite ${field.label.toLowerCase()}`}
                       />
                     </div>
                   ))}
                 </div>
-                <p className="mt-2 text-xs text-[#64748B]">Doravante denominado(a) simplesmente <strong>CONTRATANTE</strong>.</p>
+                <p className="mt-2 text-xs text-text-light">Doravante denominado(a) simplesmente <strong>CONTRATANTE</strong>.</p>
               </div>
             </div>
           </section>
 
           {/* Cláusula 2 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">2</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">2</span>
               DO OBJETO
             </h2>
             <div className="space-y-4 text-sm text-[#334155] leading-relaxed">
@@ -148,7 +148,7 @@ export default function ContratoPage() {
                 e dispositivos móveis, compreendendo:
               </p>
               <div>
-                <p className="font-semibold text-[#1E293B] mb-2">Funcionalidades Incluídas no Plano:</p>
+                <p className="font-semibold text-text mb-2">Funcionalidades Incluídas no Plano:</p>
                 <ul className="space-y-1.5">
                   {[
                     'Revista Digital com 8 layouts interativos (Flip, Scroll, Grid, Stories, Jornal, Slides, Timeline, Editorial)',
@@ -177,8 +177,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 3 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">3</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">3</span>
               DOS PLANOS E VALORES
             </h2>
             <div className="space-y-4 text-sm text-[#334155] leading-relaxed">
@@ -190,15 +190,15 @@ export default function ContratoPage() {
                     onClick={() => setPlanoSelecionado(plano.id)}
                     className={`p-5 rounded-xl border-2 text-left transition-all ${
                       planoSelecionado === plano.id
-                        ? 'border-[#1E3A5F] bg-[#1E3A5F]/5 shadow-md'
-                        : 'border-[#E2E8F0] hover:border-[#CBD5E1]'
+                        ? 'border-[#1E3A5F] bg-primary/5 shadow-md'
+                        : 'border-border hover:border-border-light'
                     }`}
                   >
-                    <div className="text-xs uppercase tracking-wider text-[#64748B] mb-1">Plano</div>
-                    <div className="text-lg font-bold text-[#1E293B]">{plano.nome}</div>
-                    <div className="text-2xl font-bold text-[#1E3A5F] mt-1">{plano.valor}<span className="text-sm font-normal text-[#64748B]">/mês</span></div>
+                    <div className="text-xs uppercase tracking-wider text-text-light mb-1">Plano</div>
+                    <div className="text-lg font-bold text-text">{plano.nome}</div>
+                    <div className="text-2xl font-bold text-primary mt-1">{plano.valor}<span className="text-sm font-normal text-text-light">/mês</span></div>
                     {planoSelecionado === plano.id && (
-                      <div className="mt-2 flex items-center gap-1 text-xs text-[#1E3A5F] font-semibold">
+                      <div className="mt-2 flex items-center gap-1 text-xs text-primary font-semibold">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
                         Selecionado
                       </div>
@@ -216,8 +216,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 4 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">4</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">4</span>
               DO PERÍODO DE TESTE
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
@@ -228,21 +228,21 @@ export default function ContratoPage() {
 
           {/* Cláusula 5 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">5</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">5</span>
               DA VIGÊNCIA
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
               <p><strong>5.1.</strong> O presente contrato terá vigência por prazo indeterminado, iniciando-se na data de sua assinatura.</p>
-              <p><strong>5.2.</strong> <strong className="text-[#1E293B]">NÃO HÁ FIDELIDADE.</strong> Qualquer das partes poderá rescindir o presente contrato a qualquer tempo, mediante comunicação prévia de 30 (trinta) dias.</p>
+              <p><strong>5.2.</strong> <strong className="text-text">NÃO HÁ FIDELIDADE.</strong> Qualquer das partes poderá rescindir o presente contrato a qualquer tempo, mediante comunicação prévia de 30 (trinta) dias.</p>
               <p><strong>5.3.</strong> Não haverá multa por rescisão antecipada.</p>
             </div>
           </section>
 
           {/* Cláusula 6 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">6</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">6</span>
               DAS OBRIGAÇÕES DA CONTRATADA
             </h2>
             <div className="text-sm text-[#334155] leading-relaxed">
@@ -256,7 +256,7 @@ export default function ContratoPage() {
                   'Garantir a segurança e confidencialidade dos dados armazenados, em conformidade com a LGPD (Lei nº 13.709/2018).',
                 ].map(item => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="text-[#1E3A5F] mt-1">•</span>
+                    <span className="text-primary mt-1">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -266,8 +266,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 7 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">7</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">7</span>
               DAS OBRIGAÇÕES DA CONTRATANTE
             </h2>
             <div className="text-sm text-[#334155] leading-relaxed">
@@ -281,7 +281,7 @@ export default function ContratoPage() {
                   'Comunicar imediatamente qualquer irregularidade ou falha detectada no sistema.',
                 ].map(item => (
                   <li key={item} className="flex items-start gap-2">
-                    <span className="text-[#1E3A5F] mt-1">•</span>
+                    <span className="text-primary mt-1">•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -291,8 +291,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 8 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">8</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">8</span>
               DA PROTEÇÃO DE DADOS (LGPD)
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
@@ -304,8 +304,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 9 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">9</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">9</span>
               DA PROPRIEDADE INTELECTUAL
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
@@ -316,8 +316,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 10 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">10</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">10</span>
               DO REAJUSTE
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
@@ -328,23 +328,23 @@ export default function ContratoPage() {
 
           {/* Cláusula 11 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">11</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">11</span>
               DA RESCISÃO
             </h2>
             <div className="space-y-2 text-sm text-[#334155] leading-relaxed">
               <p><strong>11.1.</strong> O presente contrato poderá ser rescindido:</p>
               <ul className="space-y-2 ml-4">
                 <li className="flex items-start gap-2">
-                  <span className="text-[#1E3A5F] mt-1">•</span>
+                  <span className="text-primary mt-1">•</span>
                   <span>Por qualquer das partes, a qualquer tempo, <strong>sem multa</strong>, mediante aviso prévio de 30 dias;</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#1E3A5F] mt-1">•</span>
+                  <span className="text-primary mt-1">•</span>
                   <span>Por inadimplência da CONTRATANTE superior a 60 (sessenta) dias;</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="text-[#1E3A5F] mt-1">•</span>
+                  <span className="text-primary mt-1">•</span>
                   <span>Por descumprimento de qualquer cláusula contratual, após notificação e prazo de 15 dias para regularização.</span>
                 </li>
               </ul>
@@ -353,8 +353,8 @@ export default function ContratoPage() {
 
           {/* Cláusula 12 */}
           <section className="mb-8">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E3A5F] text-white text-sm flex items-center justify-center font-bold">12</span>
+            <h2 className="text-lg font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="w-8 h-8 rounded-lg bg-primary text-white text-sm flex items-center justify-center font-bold">12</span>
               DO FORO
             </h2>
             <div className="text-sm text-[#334155] leading-relaxed">
@@ -363,26 +363,26 @@ export default function ContratoPage() {
           </section>
 
           {/* Resumo */}
-          <section className="mb-8 p-6 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0]">
-            <h2 className="text-lg font-bold text-[#1E3A5F] mb-4">RESUMO DOS SERVIÇOS CONTRATADOS</h2>
-            <div className="rounded-lg border border-[#E2E8F0] bg-white overflow-hidden">
+          <section className="mb-8 p-6 bg-surface-alt rounded-xl border border-border">
+            <h2 className="text-lg font-bold text-primary mb-4">RESUMO DOS SERVIÇOS CONTRATADOS</h2>
+            <div className="rounded-lg border border-border bg-white overflow-hidden">
               {planoSelecionado ? (
                 <div className="p-4">
                   <div className="flex items-center justify-between">
                     <div>
-                      <div className="font-bold text-[#1E293B]">{planos.find(p => p.id === planoSelecionado)?.nome}</div>
-                      <div className="text-sm text-[#64748B]">Todas as funcionalidades incluídas</div>
+                      <div className="font-bold text-text">{planos.find(p => p.id === planoSelecionado)?.nome}</div>
+                      <div className="text-sm text-text-light">Todas as funcionalidades incluídas</div>
                     </div>
-                    <div className="text-xl font-bold text-[#1E3A5F]">{planos.find(p => p.id === planoSelecionado)?.valor}/mês</div>
+                    <div className="text-xl font-bold text-primary">{planos.find(p => p.id === planoSelecionado)?.valor}/mês</div>
                   </div>
                 </div>
               ) : (
-                <div className="p-4 text-center text-sm text-[#94A3B8]">
+                <div className="p-4 text-center text-sm text-text-muted">
                   Nenhum plano selecionado — selecione na Cláusula 3ª
                 </div>
               )}
             </div>
-            <div className="mt-4 space-y-1 text-xs text-[#64748B]">
+            <div className="mt-4 space-y-1 text-xs text-text-light">
               <p><strong>DATA DE INÍCIO DA VIGÊNCIA</strong></p>
               <p>A partir de: {hoje}</p>
               <p>Vencimento mensal: dia 10 de cada mês • Forma de pagamento: boleto, PIX ou cartão</p>
@@ -390,42 +390,42 @@ export default function ContratoPage() {
           </section>
 
           {/* Assinaturas */}
-          <section className="mt-10 pt-8 border-t border-[#E2E8F0]">
+          <section className="mt-10 pt-8 border-t border-border">
             <p className="text-sm text-[#334155] leading-relaxed mb-8">
               E por estarem assim justas e contratadas, as partes assinam o presente
               instrumento em 2 (duas) vias de igual teor e forma, na presença de 2 (duas) testemunhas.
             </p>
-            <p className="text-sm text-[#64748B] text-center mb-10">
+            <p className="text-sm text-text-light text-center mb-10">
               São Paulo,{' '}
               <input
                 type="text"
                 value={assinaturas.dataAssinatura}
                 onChange={e => setAssinaturas(prev => ({ ...prev, dataAssinatura: e.target.value }))}
-                className="w-32 text-sm text-[#1E293B] border-b border-dashed border-[#CBD5E1] bg-transparent outline-none text-center focus:border-[#1E3A5F] transition-colors"
+                className="w-32 text-sm text-text border-b border-dashed border-border-light bg-transparent outline-none text-center focus:border-[#1E3A5F] transition-colors"
               />
             </p>
 
             <div className="grid sm:grid-cols-2 gap-8">
               <div className="text-center">
-                <p className="text-xs uppercase tracking-wider text-[#94A3B8] mb-6">CONTRATADA</p>
+                <p className="text-xs uppercase tracking-wider text-text-muted mb-6">CONTRATADA</p>
                 <div className="border-b border-[#1E293B] mb-2" />
-                <p className="text-sm font-bold text-[#1E293B]">APP GROUP LTDA - ME</p>
-                <p className="text-xs text-[#64748B]">CNPJ: 51.797.070/0001-53</p>
+                <p className="text-sm font-bold text-text">APP GROUP LTDA - ME</p>
+                <p className="text-xs text-text-light">CNPJ: 51.797.070/0001-53</p>
               </div>
               <div className="text-center">
-                <p className="text-xs uppercase tracking-wider text-[#94A3B8] mb-6">CONTRATANTE</p>
+                <p className="text-xs uppercase tracking-wider text-text-muted mb-6">CONTRATANTE</p>
                 <input
                   type="text"
                   value={assinaturas.contratanteNome}
                   onChange={e => setAssinaturas(prev => ({ ...prev, contratanteNome: e.target.value }))}
-                  className="w-full text-sm text-[#1E293B] border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-sm text-text border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="Nome / Razão Social"
                 />
                 <input
                   type="text"
                   value={assinaturas.contratanteCnpj}
                   onChange={e => setAssinaturas(prev => ({ ...prev, contratanteCnpj: e.target.value }))}
-                  className="w-full text-xs text-[#64748B] bg-transparent outline-none text-center focus:text-[#1E293B] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-xs text-text-light bg-transparent outline-none text-center focus:text-text transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="CNPJ: ___.___.___/____-__"
                 />
               </div>
@@ -433,36 +433,36 @@ export default function ContratoPage() {
 
             <div className="grid sm:grid-cols-2 gap-8 mt-10">
               <div className="text-center">
-                <p className="text-xs uppercase tracking-wider text-[#94A3B8] mb-6">TESTEMUNHA 1</p>
+                <p className="text-xs uppercase tracking-wider text-text-muted mb-6">TESTEMUNHA 1</p>
                 <input
                   type="text"
                   value={assinaturas.testemunha1}
                   onChange={e => setAssinaturas(prev => ({ ...prev, testemunha1: e.target.value }))}
-                  className="w-full text-sm text-[#1E293B] border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-sm text-text border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="Nome da testemunha"
                 />
                 <input
                   type="text"
                   value={assinaturas.testemunha1Cpf}
                   onChange={e => setAssinaturas(prev => ({ ...prev, testemunha1Cpf: e.target.value }))}
-                  className="w-full text-xs text-[#64748B] bg-transparent outline-none text-center focus:text-[#1E293B] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-xs text-text-light bg-transparent outline-none text-center focus:text-text transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="CPF: ___.___.___-__"
                 />
               </div>
               <div className="text-center">
-                <p className="text-xs uppercase tracking-wider text-[#94A3B8] mb-6">TESTEMUNHA 2</p>
+                <p className="text-xs uppercase tracking-wider text-text-muted mb-6">TESTEMUNHA 2</p>
                 <input
                   type="text"
                   value={assinaturas.testemunha2}
                   onChange={e => setAssinaturas(prev => ({ ...prev, testemunha2: e.target.value }))}
-                  className="w-full text-sm text-[#1E293B] border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-sm text-text border-b border-[#1E293B] bg-transparent outline-none text-center mb-2 focus:border-[#1E3A5F] transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="Nome da testemunha"
                 />
                 <input
                   type="text"
                   value={assinaturas.testemunha2Cpf}
                   onChange={e => setAssinaturas(prev => ({ ...prev, testemunha2Cpf: e.target.value }))}
-                  className="w-full text-xs text-[#64748B] bg-transparent outline-none text-center focus:text-[#1E293B] transition-colors placeholder:text-[#CBD5E1]"
+                  className="w-full text-xs text-text-light bg-transparent outline-none text-center focus:text-text transition-colors placeholder:text-[#CBD5E1]"
                   placeholder="CPF: ___.___.___-__"
                 />
               </div>
@@ -472,15 +472,15 @@ export default function ContratoPage() {
 
         {/* Bottom Actions */}
         <div className="flex flex-wrap items-center justify-center gap-3 mt-8 mb-12 print:hidden">
-          <Link href="/" className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-[#64748B] bg-white border border-[#E2E8F0] rounded-xl hover:bg-[#F8FAFC] transition-colors">
+          <Link href="/" className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-text-light bg-white border border-border rounded-xl hover:bg-surface-alt transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
             Voltar
           </Link>
-          <button onClick={() => window.print()} className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white bg-[#1E3A5F] rounded-xl hover:bg-[#2A5A8F] transition-colors">
+          <button onClick={() => window.print()} className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-white bg-primary rounded-xl hover:bg-[#2A5A8F] transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg>
             Imprimir / PDF
           </button>
-          <button onClick={copiarLink} className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-[#1E3A5F] bg-[#1E3A5F]/5 rounded-xl hover:bg-[#1E3A5F]/10 transition-colors">
+          <button onClick={copiarLink} className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-primary bg-primary/5 rounded-xl hover:bg-primary/10 transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
             Copiar Link
           </button>
