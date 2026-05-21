@@ -90,12 +90,20 @@ function Editor({ condoId, edicaoId }: { condoId: string; edicaoId: string }) {
                   <div className="text-xs text-white/60 uppercase tracking-wide mb-1">Edição #{edicao.numero} · {edicao.mes} {edicao.ano}</div>
                   <h1 className="text-2xl font-bold">{edicao.titulo}</h1>
                 </div>
-                <button onClick={togglePublicada}
-                  className={`px-5 py-2.5 text-sm font-semibold rounded-xl transition ${
-                    edicao.publicada ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-green-500 text-white hover:bg-green-600'
-                  }`}>
-                  {edicao.publicada ? '↓ Despublicar' : '✓ Publicar Edição'}
-                </button>
+                <div className="flex gap-2">
+                  {edicao.publicada && (
+                    <Link href={`/revista/${condoId}`} target="_blank"
+                      className="px-4 py-2.5 bg-white/10 border border-white/20 text-white text-sm font-medium rounded-xl hover:bg-white/20 transition">
+                      👁 Ver Revista
+                    </Link>
+                  )}
+                  <button onClick={togglePublicada}
+                    className={`px-5 py-2.5 text-sm font-semibold rounded-xl transition ${
+                      edicao.publicada ? 'bg-amber-500 text-white hover:bg-amber-600' : 'bg-green-500 text-white hover:bg-green-600'
+                    }`}>
+                    {edicao.publicada ? '↓ Despublicar' : '✓ Publicar Edição'}
+                  </button>
+                </div>
               </div>
             )}
           </div>
