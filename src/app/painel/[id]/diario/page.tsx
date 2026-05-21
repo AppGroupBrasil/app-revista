@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import RequireAuth from '@/components/RequireAuth';
 import AppHeader from '@/components/AppHeader';
 import ShareButton from '@/components/ShareButton';
+import PhotoUpload from '@/components/PhotoUpload';
 import { api } from '@/lib/api';
 
 type Categoria = 'obra' | 'manutencao' | 'evento' | 'aviso' | 'conquista';
@@ -165,16 +166,9 @@ function NovoPostModal({ condoId, onClose, onSuccess }: { condoId: string; onClo
   const [titulo, setTitulo] = useState('');
   const [descricao, setDescricao] = useState('');
   const [fotos, setFotos] = useState<string[]>([]);
-  const [novaFoto, setNovaFoto] = useState('');
   const [antesDepois, setAntesDepois] = useState(false);
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
-
-  const addFoto = () => {
-    if (!novaFoto.trim()) return;
-    setFotos(prev => [...prev, novaFoto.trim()]);
-    setNovaFoto('');
-  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -226,24 +220,8 @@ function NovoPostModal({ condoId, onClose, onSuccess }: { condoId: string; onClo
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-text mb-1.5">Fotos (URLs)</label>
-          <div className="flex gap-2">
-            <input value={novaFoto} onChange={e => setNovaFoto(e.target.value)} placeholder="https://…"
-              className="flex-1 px-3 py-2 rounded-lg border border-border focus:border-primary outline-none" />
-            <button type="button" onClick={addFoto} className="px-3 py-2 bg-surface-hover text-text-light rounded-lg hover:bg-border text-sm">+</button>
-          </div>
-          {fotos.length > 0 && (
-            <div className="grid grid-cols-3 gap-2 mt-2">
-              {fotos.map((f, i) => (
-                <div key={i} className="relative aspect-square bg-surface-alt rounded-lg overflow-hidden">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={f} alt="" className="w-full h-full object-cover" />
-                  <button type="button" onClick={() => setFotos(prev => prev.filter((_, idx) => idx !== i))}
-                    className="absolute top-1 right-1 w-6 h-6 rounded-full bg-red-500 text-white text-xs">×</button>
-                </div>
-              ))}
-            </div>
-          )}
+          <label className="block text-sm font-medium text-text mb-1.5">Fotos</label>
+          <PhotoUpload value={fotos} onChange={setFotos} max={6} />
         </div>
 
         {fotos.length >= 2 && (

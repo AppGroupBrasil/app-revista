@@ -10,6 +10,7 @@ import { MasterModule } from './master/master.module';
 import { DiarioModule } from './diario/diario.module';
 import { KpisModule } from './kpis/kpis.module';
 import { AvaliacoesModule } from './avaliacoes/avaliacoes.module';
+import { UploadsModule } from './uploads/uploads.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -24,6 +25,7 @@ import { HealthController } from './health.controller';
     DiarioModule,
     KpisModule,
     AvaliacoesModule,
+    UploadsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],
