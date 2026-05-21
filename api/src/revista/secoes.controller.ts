@@ -9,6 +9,7 @@ import { assertCondoAccess } from '../auth/condo-access';
 export const CATEGORIAS = [
   'mensagem_sindico', 'realizacoes', 'aquisicoes', 'comunicados',
   'dicas', 'telefones_uteis', 'eventos', 'galeria_imagens',
+  'ocorrencias_finalizadas', 'manutencoes_finalizadas',
 ] as const;
 type Categoria = typeof CATEGORIAS[number];
 

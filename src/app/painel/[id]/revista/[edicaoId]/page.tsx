@@ -245,5 +245,7 @@ function hintPorCategoria(c: Categoria): string {
     telefones_uteis:  'Lista de contatos úteis (zelador, portaria, emergência).',
     eventos:          'Eventos agendados ou realizados (festa, assembleia, mutirão).',
     galeria_imagens:  'Galeria livre de fotos do mês.',
+    ocorrencias_finalizadas: 'Ocorrências e chamados resolvidos no período. Mostre transparência ao morador.',
+    manutencoes_finalizadas: 'Manutenções preventivas e corretivas concluídas (jardim, elevador, hidráulica, etc.).',
   } as const)[c];
 }
