@@ -254,6 +254,7 @@ function hintAdicionar(c: Categoria): string {
     aquisicoes:              'Clique em "+ Adicionar" para cada nova aquisição (equipamento, mobiliário, etc.).',
     ocorrencias_finalizadas: 'Clique em "+ Adicionar" para finalizar e publicar cada ocorrência resolvida.',
     manutencoes_finalizadas: 'Clique em "+ Adicionar" para registrar cada manutenção concluída.',
+    sugestoes_reclamacoes_elogios: 'Clique em "+ Adicionar" para cada sugestão, reclamação ou elogio recebido.',
     comunicados:             'Clique em "+ Adicionar" para cada novo comunicado aos moradores.',
     dicas:                   'Clique em "+ Adicionar" para incluir uma nova dica (uma por seção).',
     telefones_uteis:         'Clique em "+ Adicionar" para cada contato útil (uma seção por categoria de contato).',
@@ -274,5 +275,6 @@ function hintPorCategoria(c: Categoria): string {
     galeria_imagens:  'Galeria livre de fotos do mês.',
     ocorrencias_finalizadas: 'Ocorrências e chamados resolvidos no período. Mostre transparência ao morador.',
     manutencoes_finalizadas: 'Manutenções preventivas e corretivas concluídas (jardim, elevador, hidráulica, etc.).',
+    sugestoes_reclamacoes_elogios: 'Sugestões, reclamações e elogios dos moradores publicados nesta edição.',
   } as const)[c];
 }
