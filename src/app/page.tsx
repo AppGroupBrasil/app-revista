@@ -120,7 +120,7 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-6 mt-10 pt-8 border-t border-border">
                 <div>
-                  <div className="text-2xl font-bold text-text">38+</div>
+                  <div className="text-2xl font-bold text-text">40+</div>
                   <div className="text-xs text-text-light">Categorias</div>
                 </div>
                 <div className="w-px h-10 bg-[#E2E8F0]" />
@@ -199,7 +199,7 @@ export default function HomePage() {
               { icon: '📖', title: 'Revista Digital', desc: '8 layouts elegantes com efeito flip, stories, timeline e muito mais' },
               { icon: '🎨', title: 'Personalização Total', desc: '8 temas de cores, logo e identidade visual do seu condomínio' },
               { icon: '📱', title: 'QR Code', desc: 'Moradores acessam revista e fazem solicitações via QR Code' },
-              { icon: '📋', title: '38 Categorias', desc: 'Cards pré-configurados que o síndico ativa com um clique' },
+              { icon: '📋', title: '40+ Categorias', desc: 'Cards pré-configurados que o síndico ativa com um clique' },
               { icon: '👷', title: 'Gestão de Funcionários', desc: 'Crie tarefas, checklists, vistorias e acompanhe em tempo real' },
               { icon: '🔧', title: 'Manutenções', desc: 'Preventiva, corretiva e emergencial com controle completo' },
               { icon: '🔔', title: 'Chamados', desc: 'Reclamações, manutenção e ocorrências com acompanhamento' },
@@ -235,7 +235,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
-              38 Categorias Prontas
+              40+ Categorias Prontas
             </h2>
             <p className="text-text-light max-w-2xl mx-auto">
               O síndico ou administradora seleciona os cards que deseja e alimenta com suas informações

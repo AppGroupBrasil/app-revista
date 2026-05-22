@@ -11,6 +11,7 @@ import { SQL } from '../database/database.module';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtUser } from '../auth/jwt.strategy';
 import { assertCondoAccess } from '../auth/condo-access';
+import { NotificationsService } from '../notifications/notifications.service';
 
 const STATUS = ['aberto', 'em_andamento', 'resolvido', 'problema'] as const;
 type Status = typeof STATUS[number];
@@ -43,7 +44,10 @@ class AtualizarDto {
 // ── PÚBLICO (sem JWT) ─ abertura via QR Code + tracking
 @Controller('publico')
 export class ChamadosPublicosController {
-  constructor(@Inject(SQL) private sql: postgres.Sql) {}
+  constructor(
+    @Inject(SQL) private sql: postgres.Sql,
+    private notifications: NotificationsService,
+  ) {}
 
   @Post('condominios/:condoId/chamados')
   async abrir(
@@ -68,6 +72,9 @@ export class ChamadosPublicosController {
          ${this.sql.json(dto.fotos || [])}, ${ip || null})
       RETURNING id, codigo, criado_em
     `;
+    this.notifications
+      .chamadoNovo(condoId, ch.codigo, dto.titulo, dto.prioridade || 'media')
+      .catch(() => null);
     return { ok: true, codigo: ch.codigo, id: ch.id };
   }
 

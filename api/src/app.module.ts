@@ -16,6 +16,7 @@ import { ChamadosModule } from './chamados/chamados.module';
 import { ClassificadosModule } from './classificados/classificados.module';
 import { CaronasModule } from './caronas/caronas.module';
 import { FuncionariosModule } from './funcionarios/funcionarios.module';
+import { NotificationsModule } from './notifications/notifications.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -36,6 +37,7 @@ import { HealthController } from './health.controller';
     ClassificadosModule,
     CaronasModule,
     FuncionariosModule,
+    NotificationsModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

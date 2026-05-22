@@ -4,6 +4,7 @@ import postgres from 'postgres';
 import { SQL } from '../database/database.module';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtUser } from '../auth/jwt.strategy';
+import { cacheUser } from '../auth/condo-access';
 
 class CriarCondominioDto {
   @IsEnum(['sindico', 'administradora']) perfil!: 'sindico' | 'administradora';
@@ -28,6 +29,7 @@ export class CondominiosController {
 
   @Post()
   async criar(@Req() req: { user: JwtUser }, @Body() dto: CriarCondominioDto) {
+    await cacheUser(this.sql, req.user);
     const [novo] = await this.sql`
       INSERT INTO condominios (dono_id, perfil, nome, endereco, cnpj)
       VALUES (${req.user.sub}, ${dto.perfil}, ${dto.nome}, ${dto.endereco || null}, ${dto.cnpj || null})

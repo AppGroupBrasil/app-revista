@@ -19,7 +19,7 @@ const compartilharWhatsApp = () => {
 const funcionalidades = [
   { icon: '📖', title: 'Revista Digital', items: ['8 layouts interativos (Flip, Scroll, Grid, Stories, Jornal, Slides, Timeline, Editorial)', 'Personalização total com logo e cores do condomínio', '8 temas de cores profissionais'] },
   { icon: '📱', title: 'Acesso via QR Code', items: ['Moradores acessam a revista pelo celular', 'QR Codes públicos para áreas comuns', 'PWA — instala como app no celular'] },
-  { icon: '📋', title: 'Painel do Síndico', items: ['38+ categorias prontas para ativar', 'CRUD completo: criar, editar, ativar, prévia', 'Gestão de chamados e solicitações'] },
+  { icon: '📋', title: 'Painel do Síndico', items: ['40+ categorias prontas para ativar', 'CRUD completo: criar, editar, ativar, prévia', 'Gestão de chamados e solicitações'] },
   { icon: '👷', title: 'Gestão de Funcionários', items: ['4 tipos de tarefa: antes-depois, checklist, tarefa, vistoria', 'Geolocalização GPS em tempo real', 'QR Code individual por funcionário'] },
   { icon: '🔔', title: 'Sistema de Chamados', items: ['Reclamações, manutenção e ocorrências', 'Tracking em tempo real com código', 'Histórico completo de acompanhamento'] },
   { icon: '🏠', title: 'Área do Morador', items: ['Classificados entre moradores', 'Caronas coletivas', 'Abertura e acompanhamento de chamados'] },
@@ -33,12 +33,14 @@ const categorias = [
   'Comunicados Oficiais', 'Conheça o Síndico', 'Dicas do Síndico',
   'Editorial', 'Enquetes e Pesquisas', 'Espaço do Morador',
   'Espaço Kids', 'Financeiro', 'Galeria de Imagens',
-  'Gestão de Funcionários', 'Links', 'Mural de QR Codes',
-  'Mural de Recados', 'Nossa Equipe', 'Obras e Manutenção',
+  'Gestão de Funcionários', 'Links', 'Manutenções Finalizadas',
+  'Mensagem do Síndico', 'Mural de QR Codes', 'Mural de Recados',
+  'Nossa Equipe', 'Obras e Manutenção', 'Ocorrências Finalizadas',
   'Parceiros e Convênios', 'Pets', 'Prestadores de Serviço',
   'Publicidade Local', 'QR Codes Públicos', 'Realizações',
   'Regras e Regulamento', 'Saúde e Bem-estar', 'Segurança',
-  'Semana do Condomínio', 'Sustentabilidade', 'Telefones Úteis',
+  'Semana do Condomínio', 'Sugestões, Reclamações e Elogios',
+  'Sustentabilidade', 'Telefones Úteis',
 ];
 
 const perfis = [
@@ -269,12 +271,12 @@ export default function ApresentacaoPage() {
           <PageNum n={4} />
         </Slide>
 
-        {/* ═══════════ SLIDE 5 — 38+ CATEGORIAS ═══════════ */}
+        {/* ═══════════ SLIDE 5 — 40+ CATEGORIAS ═══════════ */}
         <Slide>
           <div className="px-12 py-14 print:py-10">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-white text-sm font-bold">04</div>
-              <h2 className="text-2xl font-bold text-text">38+ Categorias Prontas</h2>
+              <h2 className="text-2xl font-bold text-text">40+ Categorias Prontas</h2>
             </div>
             <p className="text-text-light mb-6">O síndico ativa apenas os cards que precisa — cada um com formulário específico, prévia em mockup celular e botão de ativar/desativar.</p>
 
@@ -352,7 +354,7 @@ export default function ApresentacaoPage() {
                 <p className="text-sm text-[#92400E]">Disponibilidade garantida</p>
               </div>
               <div className="p-6 bg-[#EEF2FF] border border-[#C7D2FE] rounded-xl text-center">
-                <div className="text-4xl font-bold text-primary mb-1">38+</div>
+                <div className="text-4xl font-bold text-primary mb-1">40+</div>
                 <p className="text-sm text-[#3730A3]">Categorias prontas</p>
               </div>
               <div className="p-6 bg-[#F0FDF4] border border-[#BBF7D0] rounded-xl text-center">

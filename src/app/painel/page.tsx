@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import RequireAuth from '@/components/RequireAuth';
 import AppHeader from '@/components/AppHeader';
+import Onboarding from '@/components/Onboarding';
 import { useAuth } from '@/lib/AuthContext';
 import { api } from '@/lib/api';
 
@@ -161,6 +162,7 @@ function PainelContent() {
           </div>
         )}
       </div>
+      {!loading && <Onboarding primeiroCondoId={condos[0]?.id} totalCondos={condos.length} />}
     </div>
   );
 }

@@ -11,6 +11,7 @@ import { SQL } from '../database/database.module';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { JwtUser } from '../auth/jwt.strategy';
 import { assertCondoAccess } from '../auth/condo-access';
+import { NotificationsService } from '../notifications/notifications.service';
 
 const TIPOS = ['venda', 'aluguel', 'doacao', 'servico', 'outro'] as const;
 type Tipo = typeof TIPOS[number];
@@ -39,7 +40,10 @@ class AtualizarDto {
 
 @Controller('publico')
 export class ClassificadosPublicosController {
-  constructor(@Inject(SQL) private sql: postgres.Sql) {}
+  constructor(
+    @Inject(SQL) private sql: postgres.Sql,
+    private notifications: NotificationsService,
+  ) {}
 
   @Post('condominios/:condoId/classificados')
   async criar(
@@ -63,6 +67,7 @@ export class ClassificadosPublicosController {
          ${ip || null})
       RETURNING id, codigo
     `;
+    this.notifications.classificadoNovo(condoId, dto.titulo, dto.tipo).catch(() => null);
     return { ok: true, codigo: it.codigo, id: it.id, message: 'Anúncio recebido. Aguarda moderação.' };
   }
 
