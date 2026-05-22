@@ -1,6 +1,7 @@
 'use client';
 
 import { use, useEffect, useState } from 'react';
+import AutoInstallPrompt from '@/components/AutoInstallPrompt';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.apprevista.com.br/api/v1';
 
@@ -163,6 +164,7 @@ export default function Page({ params }: { params: Promise<{ token: string }> })
           </div>
         )}
       </div>
+      <AutoInstallPrompt context="tarefa" />
     </main>
   );
 }

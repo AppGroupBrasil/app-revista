@@ -561,8 +561,13 @@ export default function HomePage() {
               </ul>
             </div>
           </div>
-          <div className="mt-12 pt-8 border-t border-white/10 text-center text-sm text-text-light">
-            © 2026 APP REVISTA. Todos os direitos reservados.
+          <div className="mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-text-light">
+            <p>© 2026 APP REVISTA. Todos os direitos reservados.</p>
+            <div className="flex gap-4">
+              <Link href="/ajuda" className="hover:text-white transition-colors">Ajuda</Link>
+              <Link href="/politica-privacidade" className="hover:text-white transition-colors">Privacidade</Link>
+              <Link href="/termos" className="hover:text-white transition-colors">Termos</Link>
+            </div>
           </div>
         </div>
       </footer>

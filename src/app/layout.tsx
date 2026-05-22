@@ -92,6 +92,8 @@ export default function RootLayout({
     <html lang="pt-BR">
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://api.apprevista.com.br" crossOrigin="" />
+        <link rel="dns-prefetch" href="https://auth.appgroupbrasil.com.br" />
         <meta name="theme-color" content="#1E3A5F" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />

@@ -5,6 +5,11 @@ services:
       dockerfile: Dockerfile
     container_name: apprevista-web
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'
     environment:
       NODE_ENV: production
       NEXT_PUBLIC_AUTH_URL: https://auth.appgroupbrasil.com.br/api/v1
@@ -30,6 +35,11 @@ services:
       dockerfile: Dockerfile
     container_name: apprevista-api
     restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '5'
     env_file: ./api/.env
     networks: [coolify]
     labels:

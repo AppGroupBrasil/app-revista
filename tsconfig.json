@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "api", ".next/dev/types/validator.ts"]
+  "exclude": ["node_modules", "api", "capacitor", ".next/dev/types/validator.ts"]
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { use, useEffect, useState } from 'react';
+import AutoInstallPrompt from '@/components/AutoInstallPrompt';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.apprevista.com.br/api/v1';
 
@@ -96,6 +97,7 @@ export default function Acompanhar({ params }: { params: Promise<{ codigo: strin
           {ch.resolvido_em && <p>Resolvido em {new Date(ch.resolvido_em).toLocaleString('pt-BR')}</p>}
         </div>
       </div>
+      <AutoInstallPrompt context="chamado" />
     </main>
   );
 }
