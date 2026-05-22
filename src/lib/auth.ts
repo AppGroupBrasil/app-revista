@@ -70,11 +70,13 @@ export async function registrar(input: { email: string; senha: string; nome: str
   const r = await fetch(`${AUTH_URL}/auth/register`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(input),
+    body: JSON.stringify({ ...input, app_slug: APP_SLUG }),
   });
   if (!r.ok) {
     const e = await r.json().catch(() => ({ message: 'Erro no cadastro' }));
-    throw new Error(e.message || 'Falha ao cadastrar');
+    const err = new Error(e.message || 'Falha ao cadastrar') as Error & { status?: number };
+    err.status = r.status;
+    throw err;
   }
   return r.json();
 }

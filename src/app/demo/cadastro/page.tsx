@@ -34,12 +34,17 @@ export default function CadastroPage() {
 
     setLoading(true);
     try {
-      await registrar({
-        email: form.email,
-        senha: form.password,
-        nome: form.name,
-        telefone: form.phone || undefined,
-      });
+      try {
+        await registrar({
+          email: form.email,
+          senha: form.password,
+          nome: form.name,
+          telefone: form.phone || undefined,
+        });
+      } catch (regErr) {
+        const s = (regErr as Error & { status?: number }).status;
+        if (s !== 409) throw regErr;
+      }
       await login(form.email, form.password);
       await api.post('/condominios', {
         perfil,
