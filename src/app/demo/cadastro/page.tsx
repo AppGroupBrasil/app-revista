@@ -16,7 +16,6 @@ export default function CadastroPage() {
     email: '',
     phone: '',
     password: '',
-    confirmPassword: '',
     condoName: '',
     condoAddress: '',
     companyName: '',
@@ -31,7 +30,6 @@ export default function CadastroPage() {
     e.preventDefault();
     setErro(null);
     if (!perfil) { setErro('Selecione o perfil'); return; }
-    if (form.password !== form.confirmPassword) { setErro('Senhas não conferem'); return; }
     if (form.password.length < 6) { setErro('Senha deve ter pelo menos 6 caracteres'); return; }
 
     setLoading(true);
