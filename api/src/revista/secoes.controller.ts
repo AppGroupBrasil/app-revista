@@ -7,10 +7,22 @@ import { JwtUser } from '../auth/jwt.strategy';
 import { assertCondoAccess } from '../auth/condo-access';
 
 export const CATEGORIAS = [
+  // existentes (mantidas para compatibilidade)
   'mensagem_sindico', 'realizacoes', 'aquisicoes', 'comunicados',
   'dicas', 'telefones_uteis', 'eventos', 'galeria_imagens',
   'ocorrencias_finalizadas', 'manutencoes_finalizadas',
   'sugestoes_reclamacoes_elogios',
+  // novas (marketing)
+  'achados_perdidos', 'agendamento_mudancas', 'agendamento_reformas',
+  'antes_depois', 'avaliacoes', 'boas_vindas', 'benfeitorias',
+  'capa_revista', 'caronas_coletivas', 'classificados',
+  'conheca_sindico', 'editorial', 'enquetes_pesquisas',
+  'espaco_morador', 'espaco_kids', 'financeiro', 'gestao_funcionarios',
+  'links', 'mural_qrcodes', 'mural_recados', 'nossa_equipe',
+  'obras_manutencao', 'parceiros_convenios', 'pets',
+  'prestadores_servico', 'publicidade_local', 'qrcodes_publicos',
+  'regras_regulamento', 'saude_bemestar', 'seguranca',
+  'semana_condominio', 'sustentabilidade',
 ] as const;
 type Categoria = typeof CATEGORIAS[number];
 

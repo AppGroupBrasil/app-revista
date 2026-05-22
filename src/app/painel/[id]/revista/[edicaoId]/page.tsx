@@ -248,7 +248,7 @@ function SecaoModal({ condoId, edicaoId, categoria, secao, onClose, onSaved }: {
 }
 
 function hintAdicionar(c: Categoria): string {
-  return ({
+  const hints: Partial<Record<Categoria, string>> = {
     mensagem_sindico:        'Clique em "+ Adicionar" para incluir a mensagem do síndico desta edição.',
     realizacoes:             'Clique em "+ Adicionar" para registrar cada realização (uma por seção).',
     aquisicoes:              'Clique em "+ Adicionar" para cada nova aquisição (equipamento, mobiliário, etc.).',
@@ -260,11 +260,12 @@ function hintAdicionar(c: Categoria): string {
     telefones_uteis:         'Clique em "+ Adicionar" para cada contato útil (uma seção por categoria de contato).',
     eventos:                 'Clique em "+ Adicionar" para cada evento (festa, assembleia, mutirão, etc.).',
     galeria_imagens:         'Clique em "+ Adicionar" para criar galerias temáticas com várias fotos.',
-  } as const)[c];
+  };
+  return hints[c] ?? 'Clique em "+ Adicionar" para criar uma nova seção desta categoria.';
 }
 
 function hintPorCategoria(c: Categoria): string {
-  return ({
+  const hints: Partial<Record<Categoria, string>> = {
     mensagem_sindico: 'Escreva a mensagem mensal do síndico aos moradores.',
     realizacoes:      'Descreva o que foi realizado neste período (obras, projetos, melhorias).',
     aquisicoes:       'Equipamentos, mobiliário, serviços contratados — o que foi comprado.',
@@ -276,5 +277,38 @@ function hintPorCategoria(c: Categoria): string {
     ocorrencias_finalizadas: 'Ocorrências e chamados resolvidos no período. Mostre transparência ao morador.',
     manutencoes_finalizadas: 'Manutenções preventivas e corretivas concluídas (jardim, elevador, hidráulica, etc.).',
     sugestoes_reclamacoes_elogios: 'Sugestões, reclamações e elogios dos moradores publicados nesta edição.',
-  } as const)[c];
+    capa_revista:        'Imagem e título de capa desta edição.',
+    editorial:           'Texto editorial introdutório da edição.',
+    conheca_sindico:     'Apresente o síndico aos moradores (foto, bio, mandato).',
+    boas_vindas:         'Mensagem de boas-vindas a novos moradores.',
+    nossa_equipe:        'Funcionários do condomínio (zelador, portaria, limpeza, jardim).',
+    benfeitorias:        'Melhorias estruturais entregues à comunidade.',
+    obras_manutencao:    'Obras em andamento ou manutenção planejada.',
+    antes_depois:        'Compare estado anterior e atual (use duas fotos por seção).',
+    financeiro:          'Balanço, prestação de contas, gráficos de despesas/receitas.',
+    gestao_funcionarios: 'Tarefas, escalas e vistorias da equipe.',
+    mural_recados:       'Recados rápidos da gestão para os moradores.',
+    avaliacoes:          'Avaliações e NPS publicados nesta edição.',
+    enquetes_pesquisas:  'Resultados de enquetes ou pesquisas com moradores.',
+    semana_condominio:   'Programação da Semana do Condomínio.',
+    espaco_morador:      'Conteúdo enviado pelos moradores (poesia, foto, depoimento).',
+    espaco_kids:         'Conteúdo para as crianças do condomínio.',
+    pets:                'Dicas e regras sobre animais no condomínio.',
+    classificados:       'Anúncios moderados dos moradores.',
+    caronas_coletivas:   'Caronas oferecidas e procuradas.',
+    parceiros_convenios: 'Empresas parceiras com benefícios para moradores.',
+    prestadores_servico: 'Profissionais recomendados (eletricista, encanador, etc.).',
+    publicidade_local:   'Anúncios pagos de comércio local.',
+    links:               'Links úteis (portal, aplicativos, redes sociais).',
+    mural_qrcodes:       'QR Codes utilitários impressos pelo condomínio.',
+    qrcodes_publicos:    'QR Codes públicos (avaliar, chamado, etc.).',
+    achados_perdidos:    'Itens encontrados e itens procurados.',
+    agendamento_mudancas: 'Calendário de mudanças do mês.',
+    agendamento_reformas: 'Reformas autorizadas e em andamento.',
+    regras_regulamento:  'Trechos do regulamento interno em destaque.',
+    seguranca:           'Orientações e ocorrências de segurança.',
+    saude_bemestar:      'Dicas de saúde, atividades físicas, qualidade de vida.',
+    sustentabilidade:    'Coleta seletiva, economia de água/energia, projetos verdes.',
+  };
+  return hints[c] ?? 'Conteúdo desta categoria.';
 }
