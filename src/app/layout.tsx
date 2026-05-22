@@ -123,7 +123,7 @@ export default function RootLayout({
                 {
                   "@type": "Offer",
                   name: "Plano Administradora",
-                  price: "199.00",
+                  price: "299.00",
                   priceCurrency: "BRL",
                   description: "Condomínios ilimitados, todas as categorias, relatórios e analytics",
                 },

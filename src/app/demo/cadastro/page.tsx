@@ -220,7 +220,7 @@ export default function CadastroPage() {
                         {perfil === 'sindico' ? 'Cadastro Síndico' : 'Cadastro Administradora'}
                       </h2>
                       <p className="text-sm text-white/80">
-                        {perfil === 'sindico' ? 'Plano Síndico — R$ 199/mês' : 'Plano Administradora — R$ 199/mês'}
+                        {perfil === 'sindico' ? 'Plano Síndico — R$ 199/mês' : 'Plano Administradora — R$ 299/mês'}
                       </p>
                     </div>
                   </div>
