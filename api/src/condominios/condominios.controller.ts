@@ -20,6 +20,7 @@ export class CondominiosController {
 
   @Get()
   async listarMeus(@Req() req: { user: JwtUser }) {
+    await cacheUser(this.sql, req.user);
     return this.sql`
       SELECT id, perfil, nome, endereco, cnpj, logo_url, theme_color, accent_color,
              status_assinatura, bloqueado, criado_em
