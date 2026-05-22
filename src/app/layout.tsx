@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "APP REVISTA - Revista Digital para Condomínios",
     template: "%s | APP REVISTA",
   },
-  description: "Crie revistas digitais profissionais para condomínios. Gerencie chamados, classificados, caronas e mostre tudo o que sua gestão realiza. Planos a partir de R$99/mês.",
+  description: "Crie revistas digitais profissionais para condomínios. Gerencie chamados, classificados, caronas e mostre tudo o que sua gestão realiza. Planos a partir de R$199/mês.",
   keywords: [
     "revista digital condomínio",
     "gestão condominial",
@@ -116,7 +116,7 @@ export default function RootLayout({
                 {
                   "@type": "Offer",
                   name: "Plano Síndico",
-                  price: "99.00",
+                  price: "199.00",
                   priceCurrency: "BRL",
                   description: "1 condomínio, até 25 categorias, revista digital personalizada",
                 },

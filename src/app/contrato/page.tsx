@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const planos = [
-  { id: 'sindico', nome: 'Plano Síndico', valor: 'R$99', valorNum: '99' },
+  { id: 'sindico', nome: 'Plano Síndico', valor: 'R$199', valorNum: '199' },
   { id: 'administradora', nome: 'Plano Administradora', valor: 'R$299', valorNum: '299' },
 ];
 
