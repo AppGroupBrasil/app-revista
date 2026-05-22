@@ -25,10 +25,10 @@ const modulos: Modulo[] = [
   { titulo: 'KPIs em Destaque', desc: 'Indicadores que provam o valor entregue',   icon: '📊', cor: 'from-[#F59E0B] to-[#D97706]', href: id => `/painel/${id}/kpis` },
   { titulo: 'Avaliações & NPS', desc: 'Mural de agradecimentos e moderação',       icon: '⭐', cor: 'from-[#EC4899] to-[#DB2777]', href: id => `/painel/${id}/avaliacoes` },
   { titulo: 'Revista Digital',  desc: 'Edições, seções e conteúdo',                icon: '📖', cor: 'from-[#1E3A5F] to-[#2A5A8F]', href: id => `/painel/${id}/revista` },
-  { titulo: 'Chamados',         desc: 'Solicitações dos moradores',                icon: '🔧', cor: 'from-[#0EA5E9] to-[#0284C7]', href: () => null },
-  { titulo: 'Classificados',    desc: 'Anúncios dos moradores',                    icon: '🏷️', cor: 'from-[#F97316] to-[#EA580C]', href: () => null },
-  { titulo: 'Caronas',          desc: 'Caronas compartilhadas',                    icon: '🚗', cor: 'from-[#8B5CF6] to-[#7C3AED]', href: () => null },
-  { titulo: 'Funcionários',     desc: 'Tarefas, checklists, vistorias',            icon: '👷', cor: 'from-[#14B8A6] to-[#0D9488]', href: () => null },
+  { titulo: 'Chamados',         desc: 'Solicitações dos moradores',                icon: '🔧', cor: 'from-[#0EA5E9] to-[#0284C7]', href: id => `/painel/${id}/chamados` },
+  { titulo: 'Classificados',    desc: 'Anúncios dos moradores',                    icon: '🏷️', cor: 'from-[#F97316] to-[#EA580C]', href: id => `/painel/${id}/classificados` },
+  { titulo: 'Caronas',          desc: 'Caronas compartilhadas',                    icon: '🚗', cor: 'from-[#8B5CF6] to-[#7C3AED]', href: id => `/painel/${id}/caronas` },
+  { titulo: 'Funcionários',     desc: 'Tarefas, checklists, vistorias',            icon: '👷', cor: 'from-[#14B8A6] to-[#0D9488]', href: id => `/painel/${id}/funcionarios` },
 ];
 
 export default function CondoDetail({ params }: { params: Promise<{ id: string }> }) {

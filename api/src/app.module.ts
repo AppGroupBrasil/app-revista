@@ -12,6 +12,10 @@ import { KpisModule } from './kpis/kpis.module';
 import { AvaliacoesModule } from './avaliacoes/avaliacoes.module';
 import { UploadsModule } from './uploads/uploads.module';
 import { RevistaModule } from './revista/revista.module';
+import { ChamadosModule } from './chamados/chamados.module';
+import { ClassificadosModule } from './classificados/classificados.module';
+import { CaronasModule } from './caronas/caronas.module';
+import { FuncionariosModule } from './funcionarios/funcionarios.module';
 import { HealthController } from './health.controller';
 
 @Module({
@@ -28,6 +32,10 @@ import { HealthController } from './health.controller';
     AvaliacoesModule,
     UploadsModule,
     RevistaModule,
+    ChamadosModule,
+    ClassificadosModule,
+    CaronasModule,
+    FuncionariosModule,
   ],
   controllers: [HealthController],
   providers: [{ provide: APP_GUARD, useClass: ThrottlerGuard }],

@@ -1,4 +1,4 @@
-import { Controller, Get, Inject, NotFoundException, Param, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Header, Inject, NotFoundException, Param, ParseUUIDPipe } from '@nestjs/common';
 import postgres from 'postgres';
 import { SQL } from '../database/database.module';
 
@@ -8,6 +8,7 @@ export class RevistaPublicaController {
 
   // Última edição publicada + seções visíveis + parceiros ativos
   @Get('atual')
+  @Header('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=600')
   async atual(@Param('condoId', ParseUUIDPipe) condoId: string) {
     const [c] = await this.sql<{ nome: string; theme_color: string; accent_color: string; bloqueado: boolean }[]>`
       SELECT nome, theme_color, accent_color, bloqueado FROM condominios WHERE id = ${condoId}
