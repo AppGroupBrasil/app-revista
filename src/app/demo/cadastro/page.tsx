@@ -148,7 +148,7 @@ export default function CadastroPage() {
                   </ul>
                   <div className="mt-6 pt-4 border-t border-border flex items-baseline gap-1">
                     <span className="text-xs text-text-light">R$</span>
-                    <span className="text-3xl font-bold text-text">99</span>
+                    <span className="text-3xl font-bold text-text">199</span>
                     <span className="text-xs text-text-light">/mês</span>
                   </div>
                 </motion.button>
@@ -186,7 +186,7 @@ export default function CadastroPage() {
                   </ul>
                   <div className="mt-6 pt-4 border-t border-border flex items-baseline gap-1">
                     <span className="text-xs text-text-light">R$</span>
-                    <span className="text-3xl font-bold text-text">199</span>
+                    <span className="text-3xl font-bold text-text">350</span>
                     <span className="text-xs text-text-light">/mês</span>
                   </div>
                 </motion.button>

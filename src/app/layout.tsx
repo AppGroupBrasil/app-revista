@@ -136,6 +136,7 @@ export default function RootLayout({
         />
         <SWRegister />
         <AuthProvider>{children}</AuthProvider>
+        <script src="https://appgroupbrasil.com.br/embed/app-group-banner.js" data-color="#1E3A5F" data-routes="/" defer></script>
       </body>
     </html>
   );

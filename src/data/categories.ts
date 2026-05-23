@@ -280,7 +280,7 @@ export const plans = [
   {
     type: 'sindico' as const,
     name: 'Plano Síndico',
-    price: 99,
+    price: 199,
     features: [
       '1 condomínio',
       'Até 25 categorias',
@@ -297,7 +297,7 @@ export const plans = [
   {
     type: 'administradora' as const,
     name: 'Plano Administradora',
-    price: 299,
+    price: 350,
     features: [
       'Condomínios ilimitados',
       'Todas as 25+ categorias',

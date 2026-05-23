@@ -403,7 +403,7 @@ export default function ApresentacaoPage() {
                   <h3 className="text-xl font-bold mb-1">Plano Administradora</h3>
                   <div className="flex items-baseline gap-1">
                     <span className="text-sm opacity-80">R$</span>
-                    <span className="text-5xl font-bold">299</span>
+                    <span className="text-5xl font-bold">350</span>
                     <span className="text-sm opacity-80">/mês</span>
                   </div>
                 </div>
