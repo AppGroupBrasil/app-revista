@@ -1,13 +1,17 @@
-import { Body, Controller, Headers, Inject, Post, UnauthorizedException, BadRequestException } from '@nestjs/common';
-import { createHmac, timingSafeEqual } from 'crypto';
-import { IsString, IsUUID, IsObject, IsOptional } from 'class-validator';
+import { Body, Controller, Headers, Inject, Post, ForbiddenException, BadRequestException } from '@nestjs/common';
+import { IsString, IsUUID, IsOptional, IsEmail } from 'class-validator';
 import postgres from 'postgres';
 import { SQL } from '../database/database.module';
 
-class UsuarioEventoDto {
-  @IsString() evento!: 'licenca_criada' | 'licenca_atualizada' | 'licenca_revogada' | 'usuario_criado';
+class ProvisioningUsuarioDto {
   @IsUUID() usuario_id!: string;
-  @IsOptional() @IsObject() dados?: Record<string, any>;
+  @IsEmail() email!: string;
+  @IsString() nome!: string;
+  @IsOptional() @IsString() telefone?: string;
+  @IsOptional() @IsString() role?: string;
+  @IsOptional() @IsString() status?: string;
+  @IsOptional() expira_em?: string | null;
+  @IsOptional() metadata?: Record<string, any>;
 }
 
 @Controller('provisioning')
@@ -16,24 +20,25 @@ export class ProvisioningController {
 
   @Post('usuario')
   async receber(
-    @Body() dto: UsuarioEventoDto,
-    @Headers('x-webhook-signature') sig?: string,
+    @Body() dto: ProvisioningUsuarioDto,
+    @Headers('x-provisioning-secret') secret?: string,
   ) {
-    const secret = process.env.WEBHOOK_SECRET;
-    if (!secret) throw new BadRequestException('WEBHOOK_SECRET não configurado');
-    if (!sig) throw new UnauthorizedException('Assinatura ausente');
+    const expected = process.env.PROVISIONING_SECRET || process.env.WEBHOOK_SECRET;
+    if (!expected) throw new BadRequestException('PROVISIONING_SECRET não configurado');
+    if (!secret || secret !== expected) throw new ForbiddenException('Assinatura inválida');
 
-    const expected = createHmac('sha256', secret).update(JSON.stringify(dto)).digest('hex');
-    const a = Buffer.from(expected, 'hex');
-    const b = Buffer.from(sig, 'hex');
-    if (a.length !== b.length || !timingSafeEqual(a, b)) {
-      throw new UnauthorizedException('Assinatura inválida');
+    if (!dto.usuario_id || !dto.email || !dto.nome) {
+      throw new BadRequestException('Campos obrigatórios ausentes');
     }
-
+    await this.sql`
+      INSERT INTO usuarios_cache (id, email, nome, atualizado_em)
+      VALUES (${dto.usuario_id}, ${dto.email}, ${dto.nome}, NOW())
+      ON CONFLICT (id) DO UPDATE SET email = EXCLUDED.email, nome = EXCLUDED.nome, atualizado_em = NOW()
+    `;
     await this.sql`
       INSERT INTO provisioning_log (evento, usuario_id, payload)
-      VALUES (${dto.evento}, ${dto.usuario_id}, ${this.sql.json(dto.dados || {})})
+      VALUES (${'usuario_provisionado'}, ${dto.usuario_id}, ${this.sql.json({ ...dto })})
     `;
-    return { ok: true };
+    return { ok: true, usuario_id: dto.usuario_id };
   }
 }
