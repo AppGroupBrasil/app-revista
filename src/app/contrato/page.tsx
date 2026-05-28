@@ -6,7 +6,7 @@ import Image from 'next/image';
 
 const planos = [
   { id: 'sindico', nome: 'Plano Síndico', valor: 'R$199', valorNum: '199' },
-  { id: 'administradora', nome: 'Plano Administradora', valor: 'R$299', valorNum: '299' },
+  { id: 'administradora', nome: 'Plano Administradora', valor: 'R$350', valorNum: '350' },
 ];
 
 export default function ContratoPage() {
