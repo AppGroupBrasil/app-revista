@@ -386,55 +386,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Ecossistema */}
-      <section className="py-20 bg-[linear-gradient(180deg,#FFFFFF_0%,#F8FAFC_100%)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-text mb-4">
-              Conheça o ecossistema APP REVISTA
-            </h2>
-            <p className="text-text-light max-w-3xl mx-auto">
-              No final da sua jornada na home, mostramos outros sistemas da rede e a proposta comercial para parceiros que querem escalar conosco.
-            </p>
-          </motion.div>
-
-          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4 mb-12">
-            {ecosystemApps.map((app, index) => (
-              <motion.div
-                key={app.name}
-                custom={index}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="group rounded-[28px] border border-border bg-white px-6 py-7 text-center shadow-[0_18px_45px_rgba(15,23,42,0.06)] transition-all hover:-translate-y-1 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
-              >
-                <div className="mx-auto mb-5 flex h-28 w-28 items-center justify-center rounded-[28px] bg-[linear-gradient(180deg,#F8FAFC_0%,#FFFFFF_100%)] p-2 shadow-[inset_0_2px_0_rgba(255,255,255,0.85),0_12px_30px_rgba(15,23,42,0.12)]">
-                  <div className="relative h-full w-full overflow-hidden rounded-[24px]">
-                    <Image
-                      src={app.logoSrc}
-                      alt={app.name}
-                      fill
-                      sizes="112px"
-                      className="object-contain"
-                    />
-                  </div>
-                </div>
-                <h3 className="text-[28px] font-bold tracking-[-0.03em] text-[#0F3F84] group-hover:text-primary">
-                  {app.name}
-                </h3>
-                <p className="mt-2 text-lg text-text-light">{app.domain}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Apresentação Comercial */}
       <section className="py-20 bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
