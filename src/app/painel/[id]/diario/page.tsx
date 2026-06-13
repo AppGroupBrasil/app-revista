@@ -227,7 +227,7 @@ function NovoPostModal({ condoId, onClose, onSuccess }: { condoId: string; onClo
         {fotos.length >= 2 && (
           <label className="flex items-center gap-2 text-sm text-text-light">
             <input type="checkbox" checked={antesDepois} onChange={e => setAntesDepois(e.target.checked)} />
-            Comparativo "Antes / Depois" (primeira = antes, segunda = depois)
+            Comparativo &quot;Antes / Depois&quot; (primeira = antes, segunda = depois)
           </label>
         )}
 

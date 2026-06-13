@@ -78,8 +78,8 @@ export class SecoesController {
     const [s] = await this.sql`
       INSERT INTO secoes (edicao_id, categoria, titulo, conteudo, fotos, dados, ordem)
       VALUES (${edicaoId}, ${dto.categoria}, ${dto.titulo},
-              ${dto.conteudo || null}, ${this.sql.json((dto.fotos || []) as any)},
-              ${this.sql.json((dto.dados || {}) as any)}, ${dto.ordem ?? 0})
+              ${dto.conteudo || null}, ${this.sql.json(dto.fotos || [])},
+              ${this.sql.json((dto.dados ?? {}) as postgres.JSONValue)}, ${dto.ordem ?? 0})
       RETURNING *
     `;
     return s;
@@ -97,8 +97,8 @@ export class SecoesController {
     await this.assertEdicao(condoId, edicaoId);
     const updates: Record<string, unknown> = {};
     for (const [k, v] of Object.entries(dto)) if (v !== undefined) updates[k] = v;
-    if (dto.fotos !== undefined) updates.fotos = this.sql.json(dto.fotos as any);
-    if (dto.dados !== undefined) updates.dados = this.sql.json(dto.dados as any);
+    if (dto.fotos !== undefined) updates.fotos = this.sql.json(dto.fotos);
+    if (dto.dados !== undefined) updates.dados = this.sql.json(dto.dados as postgres.JSONValue);
     if (Object.keys(updates).length === 0) return { ok: true };
     const [s] = await this.sql`
       UPDATE secoes SET ${this.sql(updates)}

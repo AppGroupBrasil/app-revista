@@ -11,7 +11,7 @@ class ProvisioningUsuarioDto {
   @IsOptional() @IsString() role?: string;
   @IsOptional() @IsString() status?: string;
   @IsOptional() expira_em?: string | null;
-  @IsOptional() metadata?: Record<string, any>;
+  @IsOptional() metadata?: Record<string, unknown>;
 }
 
 @Controller('provisioning')
@@ -37,7 +37,7 @@ export class ProvisioningController {
     `;
     await this.sql`
       INSERT INTO provisioning_log (evento, usuario_id, payload)
-      VALUES (${'usuario_provisionado'}, ${dto.usuario_id}, ${this.sql.json({ ...dto })})
+      VALUES (${'usuario_provisionado'}, ${dto.usuario_id}, ${this.sql.json({ ...dto } as postgres.JSONValue)})
     `;
     return { ok: true, usuario_id: dto.usuario_id };
   }

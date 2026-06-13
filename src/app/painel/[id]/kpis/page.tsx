@@ -93,7 +93,7 @@ function Kpis({ condoId }: { condoId: string }) {
           <div className="bg-white border border-border rounded-2xl p-12 text-center">
             <div className="text-5xl mb-3">📊</div>
             <h2 className="text-lg font-bold text-text mb-1">Nenhum KPI ainda</h2>
-            <p className="text-sm text-text-light mb-5">Crie indicadores como "92% chamados resolvidos em 48h" ou "12 obras este ano".</p>
+            <p className="text-sm text-text-light mb-5">Crie indicadores como &quot;92% chamados resolvidos em 48h&quot; ou &quot;12 obras este ano&quot;.</p>
             <button onClick={() => { setEditing(null); setShowForm(true); }}
               className="px-5 py-2.5 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-hover">
               + Criar Primeiro KPI

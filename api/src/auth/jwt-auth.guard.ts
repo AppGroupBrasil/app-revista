@@ -14,7 +14,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
     const req = ctx.switchToHttp().getRequest();
     const user = req.user;
     if (user.role_global === 'superadmin') return true;
-    const lic = (user.apps || []).find((a: any) => a.slug === APP_SLUG);
+    const lic = (user.apps || []).find((a: { slug: string; status: string }) => a.slug === APP_SLUG);
     if (!lic || (lic.status !== 'ativa' && lic.status !== 'trial')) {
       throw new ForbiddenException('Sem licença ativa para App Revista');
     }

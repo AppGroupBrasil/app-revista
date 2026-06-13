@@ -7,6 +7,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { CondominiosModule } from './condominios/condominios.module';
 import { ProvisioningModule } from './provisioning/provisioning.module';
+import { SsoModule } from './sso/sso.module';
 import { MasterModule } from './master/master.module';
 import { DiarioModule } from './diario/diario.module';
 import { KpisModule } from './kpis/kpis.module';
@@ -40,6 +41,7 @@ import { HealthController } from './health.controller';
     AuthModule,
     CondominiosModule,
     ProvisioningModule,
+    SsoModule,
     MasterModule,
     DiarioModule,
     KpisModule,
