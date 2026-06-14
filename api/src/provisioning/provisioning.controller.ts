@@ -41,4 +41,31 @@ export class ProvisioningController {
     `;
     return { ok: true, usuario_id: dto.usuario_id };
   }
+
+  // Receiver do push de cadastro da central (Fase 2 SSO). Espelho read-only:
+  // usuarios_cache (casa por email). upsert atualiza nome; delete revoga
+  // removendo a linha. Idempotente; nunca cria usuário (entra por SSO).
+  @Post('cadastro')
+  async cadastro(
+    @Body() ev: any,
+    @Headers('x-provisioning-secret') secret?: string,
+  ) {
+    const expected = process.env.PROVISIONING_SECRET || process.env.WEBHOOK_SECRET;
+    if (!expected) throw new BadRequestException('PROVISIONING_SECRET não configurado');
+    if (!secret || secret !== expected) throw new ForbiddenException('Assinatura inválida');
+    const d = ev?.dados || {};
+    if (ev?.entidade === 'morador' || ev?.entidade === 'funcionario') {
+      const email = String(d.email || '').toLowerCase().trim();
+      if (!email) return { ok: true, ignorado: 'sem email' };
+      if (ev.acao === 'delete') {
+        await this.sql`DELETE FROM usuarios_cache WHERE lower(email) = ${email}`;
+        return { ok: true };
+      }
+      if (d.nome) {
+        await this.sql`UPDATE usuarios_cache SET nome = ${d.nome}, atualizado_em = NOW() WHERE lower(email) = ${email}`;
+      }
+      return { ok: true };
+    }
+    return { ok: true, ignorado: ev?.entidade };
+  }
 }
