@@ -1,5 +1,5 @@
 // Cliente da apprevista-api (backend próprio)
-import { tokens, refresh } from './auth';
+import { tokens, refresh, decodeJwt } from './auth';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.apprevista.com.br/api/v1';
 
@@ -13,6 +13,9 @@ async function call(path: string, init: RequestInit = {}, retry = true): Promise
   if (r.status === 401 && retry) {
     const newToken = await refresh();
     if (newToken) return call(path, init, false);
+    // Sem refresh possível (ex.: sessão SSO): se o token expirou, limpa a sessão
+    const payload = t ? decodeJwt(t) : null;
+    if (!payload || payload.exp * 1000 < Date.now()) tokens.clear();
   }
   return r;
 }

@@ -59,6 +59,7 @@ export class UploadsController {
     @Param('filename') filename: string,
     @Res() res: Response,
   ) {
+    if (bucket !== this.bucket) throw new BadRequestException('Bucket inválido');
     const path = `${userId}/${filename}`;
     const r = await fetch(`${this.storageUrl}/object/public/${bucket}/${path}`);
     if (!r.ok || !r.body) {
@@ -69,11 +70,16 @@ export class UploadsController {
     if (ct) res.setHeader('Content-Type', ct);
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
     const reader = r.body.getReader();
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      res.write(value);
+    try {
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        res.write(value);
+      }
+    } catch {
+      reader.cancel().catch(() => {});
+    } finally {
+      res.end();
     }
-    res.end();
   }
 }

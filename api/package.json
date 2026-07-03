@@ -19,7 +19,7 @@
     "@types/multer": "^2.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
-    "multer": "^1.4.5-lts.1",
+    "multer": "^2.1.2",
     "nanoid": "^5.1.11",
     "nestjs-pino": "^4.6.1",
     "passport": "^0.7.0",
@@ -37,5 +37,8 @@
     "@types/passport-jwt": "^4.0.0",
     "ts-node": "^10.9.0",
     "typescript": "^5.4.0"
+  },
+  "overrides": {
+    "multer": "^2.1.2"
   }
 }

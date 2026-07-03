@@ -6,7 +6,7 @@ import { SsoController } from './sso.controller';
   imports: [
     JwtModule.register({
       secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: (process.env.JWT_EXPIRES_IN as any) || '24h', issuer: 'auth.appgroupbrasil.com.br' },
+      signOptions: { expiresIn: (process.env.JWT_EXPIRES_IN as any) || '24h', issuer: 'apprevista-api' },
     }),
   ],
   controllers: [SsoController],

@@ -1,7 +1,15 @@
 import { Body, Controller, Headers, Inject, Post, ForbiddenException, BadRequestException } from '@nestjs/common';
 import { IsString, IsUUID, IsOptional, IsEmail } from 'class-validator';
+import { timingSafeEqual } from 'crypto';
 import postgres from 'postgres';
 import { SQL } from '../database/database.module';
+
+function secretValido(recebido: string | undefined, esperado: string): boolean {
+  if (!recebido) return false;
+  const a = Buffer.from(recebido);
+  const b = Buffer.from(esperado);
+  return a.length === b.length && timingSafeEqual(a, b);
+}
 
 class ProvisioningUsuarioDto {
   @IsUUID() usuario_id!: string;
@@ -25,7 +33,7 @@ export class ProvisioningController {
   ) {
     const expected = process.env.PROVISIONING_SECRET || process.env.WEBHOOK_SECRET;
     if (!expected) throw new BadRequestException('PROVISIONING_SECRET não configurado');
-    if (!secret || secret !== expected) throw new ForbiddenException('Assinatura inválida');
+    if (!secretValido(secret, expected)) throw new ForbiddenException('Assinatura inválida');
 
     if (!dto.usuario_id || !dto.email || !dto.nome) {
       throw new BadRequestException('Campos obrigatórios ausentes');
@@ -52,7 +60,7 @@ export class ProvisioningController {
   ) {
     const expected = process.env.PROVISIONING_SECRET || process.env.WEBHOOK_SECRET;
     if (!expected) throw new BadRequestException('PROVISIONING_SECRET não configurado');
-    if (!secret || secret !== expected) throw new ForbiddenException('Assinatura inválida');
+    if (!secretValido(secret, expected)) throw new ForbiddenException('Assinatura inválida');
     const d = ev?.dados || {};
     if (ev?.entidade === 'morador' || ev?.entidade === 'funcionario') {
       const email = String(d.email || '').toLowerCase().trim();

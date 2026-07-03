@@ -12,8 +12,13 @@ async function bootstrap() {
   app.useLogger(app.get(Logger));
 
   app.setGlobalPrefix('api/v1');
+  const corsOrigins =
+    process.env.CORS_ORIGINS ||
+    (process.env.NODE_ENV === 'production'
+      ? 'https://apprevista.com.br,https://www.apprevista.com.br'
+      : '*');
   app.enableCors({
-    origin: (process.env.CORS_ORIGINS || '*').split(',').map((s) => s.trim()),
+    origin: corsOrigins.split(',').map((s) => s.trim()),
   });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
